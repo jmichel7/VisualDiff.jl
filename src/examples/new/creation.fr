@@ -1,0 +1,85 @@
+Chers collŠgues,
+
+La cr‚ation du r‚seau entre dans une phase d‚cisive.
+AprŠs renseignements pris auprŠs de Lemaire,
+le reseau devra avoir la forme administrative d'un GDR car c'est la
+seule structure existante utilisable. Lemaire nous dit aussi que ``il
+faut rechercher la coherence et non l'unanimisme''. Il faudrait donc,
+pour d‚marrer sur des bases claires centrer le projet autour d'un petit
+nombre de thŠmes scientifiques pour lesquels une r‚elle collaboration
+existe deja ou peut exister dans l'avenir immediat entre chercheurs
+geographiquement eloign‚s. Il n'est peut-ˆtre pas souhaitable par
+exemple que l'integralite des membres d'une URA
+appartienne au r‚seau. Pour cette
+raison, en accord avec des collŠgues parisiens, amiennois, et avec
+Torasso,
+je propose la liste de thŠmes suivants, liste plus restreinte
+que dans les projets pr‚cedents. Ces thŠmes sont
+accompagnes de certains noms. La liste de noms n'est pas exhaustive et
+je vous propose de la compl‚ter dans l'esprit desci-dessus.
+Les noms suivis d'une * sont ceux de collŠgues auxquels j'ai
+pens‚ mais que je n'ai pas encore consult‚s.
+Le d‚lai pour le d‚pot du dossier complet ‚tant fix‚ au 20
+juillet nous devons faire vite. En particulier, chaque ‚quipe dont
+certains membres feront partie du r‚seau devra indiquer lesmoyens
+financier et ‚ventuellement en postes d'accueil qu'elle met …
+disposition du r‚seau. La demande devra ˆtre contresign‚e par le
+diresteur des unit‚s (CNRS ou autres) dont d‚pendent les membres
+du r‚seau. Bien entendu nous allons demander un soutien
+cons‚quent du CNRS au r‚seau. Il ne s'agit pas de redistribuer des
+moyens restant constants par ailleurs!
+
+La d‚marche est donc la suivante: dans un premier temps consultation
+des membres de vos ‚quipes concern‚s, accord du directeur de l'unit‚
+et fixation des de la participation financiŠre au r‚seau (je
+suggŠre, en accord avec Torasso que cette participation soit au
+prorata des moyens de l'‚quipe  et du nombre de ses membres participant
+au r‚seau). DŠs cette consultation faite je pourrai dresser la liste
+exacte des membres du futur r‚seau (il n'est pas exclus d'ailleurs
+qu'il s'‚largisse par la suite). Simultan‚ment nous devons
+pr‚parer le dossier pour le CNRS, en particulier un expos‚ des
+motivations qui doit faire ressortir les collaborations existantes ou
+envisag‚es. Il est aussi int‚ressant de faire ressortir nos
+collaborations internationales (dans mon esprit le r‚seau peut avoir
+des ``correspondants'' … l'‚tranger). Comme tout ceci doit ˆtre termin‚
+pour le 20 juillet je suggŠre que tout se passe par courrier
+‚lectronique et FAX; ‚ventuellement si vous le d‚sirer nous pourrions
+envisager une r‚union mais il faudra en fixer la date trŠs vite.
+
+J'espŠre que cette d‚marche aura votre accord,
+Amicalement
+
+Fran‡ois Digne
+
+-------------------------------------------------------------
+
+
+\centerline{\bf D‚nomination
+du r‚seau: Groupes r‚ductifs et repr‚sentations}
+
+\centerline{ThŠmes scientifiques et participants}
+
+{\sl Repr‚sentations modulaires; conjectures de Kazhdan-Lusztig:}
+Enguehard, Cabanes, Brou‚, Clozel(*),
+Polo(*), Vigneras(*), Henniart (Paris), Mathieu (Strasbourg).
+
+{\sl Groupes de r‚flexions, algŠbres de Hecke et
+autres $q$-analogues, applications aux groupes finis et $p$-adiques,
+immeubles:}
+Aubert, Brou‚, Polo(*), Waldspurger(*), Henniart, Michel (Paris), Rosso(*)
+(Strasbourg),
+H‚e, Zara, Digne (Amiens),
+Du Cloux (Lyon), Rousseau (Nancy).
+
+{\sl Orbites unipotentes; faisceaux caracteres:}
+Laumon(*), Moeglin(*), Michel, Aubert (Paris),
+Digne, Eftekhari (Amiens).
+
+{\sl Analyse harmonique sur les groupes de Lie et les espaces
+homogŠnes:}
+M. Andler, P. Harenck, Duflo(*), Vergne(*) (Paris),
+Bopp(*) (Strasbourg),
+Carmona, Delorme (Luminy),
+J-L. Clerc (Nancy),
+Bouaziz, P. Torasso (Poitiers).
+\bye

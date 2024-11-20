@@ -1,0 +1,30 @@
+InfoRead1:=Print;
+MYPATH:="c:/gap/gap/";
+CHEVIEPATH:="c:/gap/chevie3/";
+AUTO(ReadChv("contr/braidsup"),decompositions,orbitcircperm);
+AUTO(Read(Concatenation(MYPATH,"timeutil.g")),Ptime);
+AUTO(Read(Concatenation(MYPATH,"fakedeg.g")),fakedegrees,PrintPol);
+AUTO(Read(Concatenation(MYPATH,"display.g")),display,pmat);
+AUTO(Read(Concatenation(MYPATH,"eigen.g")),Eigen);
+AUTO(Read(Concatenation(MYPATH,"mvp.g")),Mvp);
+AUTO(Read(Concatenation(MYPATH,"regular.g")),creg,RegularNumbers,
+     GoodRegularElm,IsGoodRegularElm);
+AUTO(Read(Concatenation(MYPATH,"unipchar.g")),StringToPartition,triple,
+     SymbolToString,StringToSymbol,Symbols,UnipotentChars,Fourier,
+     UnipotentNames,families);
+
+dr:=function(r)local p;
+  Print("rec(");
+  for p in RecFields(r) do
+    Print(p,":=",r.(p),"\n");
+  od;
+  Print(")\n");
+  end;
+
+zip:=function(a,b,f)local res,i;
+  res:=[];
+  for i in [1..Length(a)] do Add(res,f(a[i],b[i]));od;
+  return res;
+  end;
+
+Read(Concatenation(CHEVIEPATH,"init.g"));

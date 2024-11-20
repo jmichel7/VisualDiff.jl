@@ -1,0 +1,95 @@
+Chers collŠgues,
+
+Vous avez peut-ˆtre entendu parler d'un projet de
+``r‚seau de recherche'' en th‚orie des groupes.
+Historiquement cette id‚e est venue du CNRS, pr‚cis‚ment de
+Lemaire. AprŠs discussions entre certains collŠgues concern‚s et
+avec des responsables du CNRS, la situation est la suivante:
+Nous allons d‚poser une demande de cr‚ation de ce r‚seau. Il
+s'agira d'un GDR car c'est la seule forme administrative utilisable. Le
+but de ce r‚seau est de favoriser la collaboration entre chercheurs
+sur un certains nombre de thŠmes (voir liste ci-dessous) en
+finan‡ant par exemple les d‚placements, les ‚changes, colloques tournants,
+‚coles d'‚t‚, etc. Nous demanderons au CNRS un soutien important:
+Il ne s'agit pas de redistribuer des
+moyens restant constants par ailleurs!
+Les ‚quipes d'appartenance des membres du r‚seau s'engageront
+aussi … apporter un soutien financier et ‚ventuellement en postes
+d'accueil. Il est
+suggŠr‚ que cette participation soit au
+prorata des moyens de l'‚quipe  et du nombre de ses membres participant
+au r‚seau.
+Dans la pratique la demande doit ˆtre d‚pos‚e au CNRS avant le
+20 juillet. Il nous faut donc faire vite. Cette demande devra ˆtre
+cosign‚e par les responsables des unit‚s (CNRS ou autres) dont des membres
+participent au r‚seau.
+Dans un premier temps nous voulons compl‚ter la liste des membres.
+Dans un but de coh‚rence nous avons volontazirement limit‚ le
+nombre de thŠmes. Il s'agit,
+pour d‚marrer sur des bases claires, de centrer le projet autour d'un petit
+nombre de thŠmes scientifiques pour lesquels une r‚elle collaboration
+existe deja ou peut exister dans l'avenir immediat entre chercheurs
+geographiquement eloign‚s. Il n'est peut-ˆtre pas souhaitable par
+exemple que l'integralite des membres d'une URA
+appartienne au r‚seau.
+Vous trouverez ci-dessous la liste des thŠmes avec une liste de
+noms.
+Les noms suivis d'une * sont ceux de collŠgues auxquels nous avons
+pens‚ mais qui n'ont pas encore ‚t‚ consult‚s.
+
+La d‚marche est donc la suivante: dans un premier temps consultation
+des responsables d'‚quipes concern‚s et des chercheurs
+int‚ress‚s, accord du directeur de l'unit‚
+et fixation des de la participation financiŠre au r‚seau.
+DŠs cette consultation faite je pourrai dresser la liste
+exacte des membres du futur r‚seau (il n'est pas exclus d'ailleurs
+qu'il s'‚largisse par la suite). Simultan‚ment nous devons
+pr‚parer le dossier pour le CNRS, en particulier un expos‚ des
+motivations qui doit faire ressortir les collaborations existantes ou
+envisag‚es. Il est aussi int‚ressant de faire ressortir nos
+collaborations internationales (dans mon esprit le r‚seau peut avoir
+des ``correspondants'' … l'‚tranger). Comme tout ceci doit ˆtre termin‚
+pour le 20 juillet je suggŠre que tout se passe par courrier
+‚lectronique et FAX; ‚ventuellement si vous le d‚sirer nous pourrions
+envisager une r‚union mais il faudra en fixer la date trŠs vite.
+
+Si vous-mˆme ˆtes int‚ress‚ par une participation au r‚seau, il me faut
+donc une r‚ponse assez rapide. Toute remarque sera la bienvenue.
+
+J'espŠre que cette d‚marche aura votre accord,
+Amicalement
+
+Fran‡ois Digne
+
+-------------------------------------------------------------
+
+
+\centerline{\bf D‚nomination
+du r‚seau: Groupes r‚ductifs et repr‚sentations}
+
+\centerline{ThŠmes scientifiques et participants}
+
+{\sl Repr‚sentations modulaires; conjectures de Kazhdan-Lusztig:}
+Enguehard, Cabanes, Brou‚, Clozel(*),
+Polo(*), Vigneras(*), Henniart (Paris), Mathieu (Strasbourg).
+
+{\sl Groupes de r‚flexions, algŠbres de Hecke et
+autres $q$-analogues, applications aux groupes finis et $p$-adiques,
+immeubles:}
+Aubert, Brou‚, Polo(*), Waldspurger(*), Henniart, Michel (Paris), Rosso(*)
+(Strasbourg),
+H‚e, Zara, Digne (Amiens),
+Du Cloux (Lyon), Rousseau (Nancy).
+
+{\sl Orbites unipotentes; faisceaux caracteres:}
+Laumon(*), Moeglin(*), Michel, Aubert (Paris),
+Digne, Eftekhari (Amiens).
+
+{\sl Analyse harmonique sur les groupes de Lie et les espaces
+homogŠnes:}
+M. Andler, P. Harenck, Duflo(*), Vergne(*) (Paris),
+Bopp(*) (Strasbourg),
+Carmona, Delorme (Luminy),
+J-L. Clerc (Nancy),
+Bouaziz, P. Torasso (Poitiers).
+\bye

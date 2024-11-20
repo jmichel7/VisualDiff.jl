@@ -1,0 +1,22 @@
+InfoRead1:=Print;
+MY_DIR:="/home/jean/";
+AUTO(Read(Concatenation(MY_DIR,"gap/timeutil.g")),Ptime);
+AUTO(Read(Concatenation(MY_DIR,"gap/fakedeg.g")),fakedegrees,PrintPol);
+AUTO(Read(Concatenation(MY_DIR,"gap/display.g")),display,pmat);
+AUTO(Read(Concatenation(MY_DIR,"gap/regular.g")),creg,GoodRegularElm,IsGoodRegularElm);
+AUTO(Read(Concatenation(MY_DIR,"gap/wordutil.g")),words);
+AUTO(Read(Concatenation(MY_DIR,"gap/braidsup.g")),LeftRefs,decompositions,orbitcircperm);
+AUTO(Read(Concatenation(MY_DIR,"gap/unipchar.g")),UnipotentChars,
+    SymbolToString,Symbols,HooksBeta,StringToPartition,StringToSymbol,
+    TimesPhi,GenericDegreeA,ShowUnip);
+CHEVIEPATH:=Concatenation(MY_DIR,"nwork/");
+GENGRPPATH:=Concatenation(MY_DIR,"gengrp/");
+Read(Concatenation(CHEVIEPATH,"init.g"));
+Read(Concatenation(GENGRPPATH,"polycyc.g"));
+dr:=function(r)local l,i;
+  Print("rec(\n");l:=RecFields(r);
+  for i in [1..Length(l)] do 
+    Print(l[i],":=",r.(l[i]));
+    if i=Length(l) then Print(")\n");else Print(",\n");fi;
+  od;
+end;

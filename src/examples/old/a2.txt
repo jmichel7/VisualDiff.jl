@@ -1,0 +1,51 @@
+This is a demonstration of how
+DELTA2 presents unchanged lines,
+changes, inserts, and deletes.
+
+Be sure Artificial Intelligence
+("ai option") is on, with an 
+ai sync size of 3.
+
+This test also illustrates 
+the whitespace Option.  
+Press F6 and toggle it 
+to see the difference.
+
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Same in both files.
+Differs...here is "OLD"
+Differs in whitespace only [   ]
+Not present in "NEW"
+Here is a long line..use End or scroll to see it all....keep scrolling....more yet....here is the end.
+Here is the last line. (This line is in the file.)

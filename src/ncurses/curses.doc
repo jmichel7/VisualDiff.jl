@@ -1,0 +1,73 @@
+(mv)(w)addchstr, (mv)(w)addstr  
+(w)attrset,  (w)bkgdset 
+(w)deleteln, (w)insertln
+(mv)(w)inch,  (mv)(w)inchnstr  
+*beep 
+def_prog_mode, def_shell_mode, reset_prog_mode 
+echo, nl, nocbreak, noraw, raw, 
+getmouse, mousemask
+keyname 
+*overwrite
+subwin
+ungetch
+maxx, maxy, begx,  begy, curx, cury 
+
+_dims(x) = Val{dims(x)}()
+foo(x) = _foo(_dims(x), x)
+_foo(::Val{2}, x) = println("2")
+_foo(::Val{3}, x) = println("3")
+
+new_panel(win::Ptr{WINDOW}) /ncurses/panel_functions.jl:80
+set_form_sub(form::Ptr{Nothing}, win_form::Ptr{WINDOW}) /ncurses/form_functions.jl:113
+set_form_win(form::Ptr{Nothing}, win_form::Ptr{WINDOW}) /ncurses/form_functions.jl:113
+
+set_menu_sub(menu::Ptr{Nothing}, win::Ptr{WINDOW}) /ncurses/menu_functions.jl:86
+set_menu_win(menu::Ptr{Nothing}, win::Ptr{WINDOW}) /ncurses/menu_functions.jl:86
+
+attroff attron cbreak curs_set doupdate getch hline initscr mvhline mvvline nodelay noecho printw
+curses_functions
+WINDOW(cury::Int16, curx::Int16, maxy::Int16, maxx::Int16, begy::Int16, begx::Int16, flags::Int16, attrs::UInt32, notimeout::UInt8, clear::UInt8, leaveok::UInt8, scroll::UInt8, idlok::UInt8, idcok::UInt8, immed::UInt8, sync::UInt8, use_keypad::UInt8, delay::Int32, ldat::Ptr{Nothing}, regtop::Int16, regbottom::Int16, parx::Int32, pary::Int32, parent::Ptr{WINDOW}, pad_y::Int16, pad_x::Int16, pad_top::Int16, pad_left::Int16, pad_bottom::Int16, pad_right::Int16, yoffset::Int16) 
+box(win::Ptr{WINDOW}, verch::jlchtype, horch::jlchtype) 
+copywin(scr::Ptr{WINDOW}, dest::Ptr{WINDOW}, sminrow::Integer, smincol::Integer, dminrow::Integer, dmincol::Integer, dmaxrow::Integer, dmaxcol::Integer, overlay::Integer) =>Int32
+delwin(win::Ptr{WINDOW}) 
+derwin(win::Ptr{WINDOW}, nlines::Integer, ncols::Integer, begin_y::Integer, begin_x::Integer) =>Ptr{WINDOW}
+getbegx(win::Ptr{WINDOW})  => Int32
+getbegy(win::Ptr{WINDOW})  => Int32
+getcurx(win::Ptr{WINDOW})  => Int32
+getcury(win::Ptr{WINDOW})  => Int32
+getmaxx(win::Ptr{WINDOW})  => Int32
+getmaxy(win::Ptr{WINDOW})  => Int32
+init_pair(pair::Integer,f::Integer,b::Integer) => Int32
+initscr() => Ptr{WINDOW}
+keypad(win::Ptr{WINDOW}, bf::Bool) 
+leaveok(win::Ptr{WINDOW}, bf::Bool) 
+mvwhline(win::Ptr{WINDOW}, y::Integer, x::Integer, ch::jlchtype, n::Integer) => Int32
+mvwprintw(win::Ptr{WINDOW}, y::Integer, x::Integer, str::T) where T<:AbstractString 
+mvwvline(win::Ptr{WINDOW}, y::Integer, x::Integer, ch::jlchtype, n::Integer) => Int32
+newwin(lines::Integer,cols::Integer,y::Integer,x::Integer) => Ptr{WINDOW}
+nodelay(win::Ptr{WINDOW}, bf::Bool) 
+notimeout(win::Ptr{WINDOW}, bf::Bool) 
+pnoutrefresh(win::Ptr{WINDOW}, pminrow::Integer, pmincol::Integer,
+sminrow::Integer, smincol::Integer, smaxrow::Integer, smaxcol::Integer) => Int32
+prefresh(win::Ptr{WINDOW}, pminrow::Integer, pmincol::Integer, sminrow::Integer, smincol::Integer, smaxrow::Integer, smaxcol::Integer) => Int32
+subpad(win::Ptr{WINDOW}, nlines::Integer, ncols::Integer, begin_y::Integer, begin_x::Integer) => Ptr{WINDOW}
+touchwin(win::Ptr{WINDOW}) 
+waddch(win::Ptr{WINDOW}, ch::jlchtype) 
+wattroff(win::Ptr{WINDOW}, attrs::Integer) => Int32
+wattron(win::Ptr{WINDOW}, attrs::Integer) => Int32
+wborder(win::Ptr{WINDOW})=wborder(win,0,0,0,0,0,0,0,0)
+wborder(win::Ptr{WINDOW}, ls::jlchtype, rs::jlchtype, ts::jlchtype,
+bs::jlchtype, tl::jlchtype, tr::jlchtype, bl::jlchtype, br::jlchtype) 
+wclear(win::Ptr{WINDOW}) 
+wclrtobot(win::Ptr{WINDOW}) => Int32
+wclrtoeol(win::Ptr{WINDOW}) => Int32
+werase(win::Ptr{WINDOW}) 
+wgetch(win::Ptr{WINDOW}) => Int32
+whline(win::Ptr{WINDOW}, ch::jlchtype, n::Integer) => Int32
+wmove(win::Ptr{WINDOW}, y::Integer, x::Integer) 
+wnoutrefresh(win::Ptr{WINDOW}) 
+wprintw(win::Ptr{WINDOW}, str::T) where T<:AbstractString 
+wrefresh(win::Ptr{WINDOW}) 
+wtimeout(win::Ptr{WINDOW}, delay::Integer) 
+wvline(win::Ptr{WINDOW}, ch::jlchtype, n::Integer) => Int32
+vline(ch::jlchtype, n::Integer) => Int32

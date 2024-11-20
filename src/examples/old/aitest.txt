@@ -1,0 +1,13 @@
+This is a demo of DELTA's
+Artificial Intelligence ("AI").
+
+
+My name is Harry.
+
+I live at 109 Main St.
+Now try this comparison with
+AI disabled: press F6
+for the Options Menu.
+After toggling the AI 
+Option, press F10 to do 
+a 'recalc'.

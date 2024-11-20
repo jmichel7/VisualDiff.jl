@@ -1,0 +1,128 @@
+Interrupt List		Release 36á			Last change 8/1/93
+This compilation is Copyright (c) 1989,1990,1991,1992,1993 Ralf Brown
+--------!---FILELIST-------------------------
+	INTPRINT.COM	a simple formatter that also generates a list summary
+	CMOS.LST	a description of the CMOS RAM data bytes
+	GLOSSARY.LST	a glossary of terms, abbreviations, and acronyms
+	PORTS.LST	a listing of I/O ports
+	COMBINE.BAT	combine the pieces of the list into a single file
+Please redistribute the following files unmodified as a group, in a trio of
+archives named INTER36A through INTER36C (preferably the original authenticated
+    INTERRUP.1ST	the read-me file, containing credits, availability info
+	interrup.A	INT 00 through INT 14	 \
+	INTERRUP.J	INT 68 through INT FF	 /
+	INTERRUP.PRI	a brief introduction to interrupts
+	INTPRINT.COM	a simple formatter that also generates a list summary
+	CMOS.LST	a description of the CMOS RAM data bytes
+	GLOSSARY.LST	a glossary of terms, abbreviations, and acronyms
+	PORTS.LST	a listing of I/O ports
+	COMBINE.BAT	combine the pieces of the list into a single file
+The following files should be distributed in an archive called INTER36D:
+	INT.COM		invoke interrupts from commandline
+	INT2GUID.*	convert list into TurboPower GUIDE or POPHELP database
+	INTHELP.*	convert list into TurboPower GUIDE database
+	INTLIST.E	Epsilon extension for handling list
+	INTLIST.ICO	Windows icon for INTERVUE
+LLL     INTPRINT.C	source code for INTPRINT
+	RB2NG.*		convert list into Norton Guides database
+--------!---CONTACT_INFO---------------------
+If you notice any mistakes or omissions, please let me know!  It is only with
+YOUR help that the list can continue to grow at the current rate.  Please send
+all changes to me rather than distributing a modified version of the list.
+
+Please read the file INTERRUP.1ST before asking me any questions.  You may find
+that they have already been addressed.
+
+	 Ralf Brown
+
+Internet: ralf@telerama.pgh.pa.us
+UUCP: {uunet,harvard}!telerama.pgh.pa.us!ralf
+FIDO: Ralf Brown 1:129/26.1
+	or post a message to me in the DR_DEBUG echo (I probably won't see it
+	unless you address it to me)
+CIS:  >INTERNET:ralf@telerama.pgh.pa.us
+
+because of bad return paths.  If you don't get a response from me within a
+reasonable period of time, send it again with a better return path (starting at
+harvard or ucbvax for UUCP, from the ARPA Internet for others).
+--------!------------------------------------
+See INTERRUP.1ST for the key to system abbreviations and a list of the
+trademarks mentioned here.
+--------!---DISCLAIMER-----------------------
+DISCLAIMER:  THIS MATERIAL IS PROVIDED "AS IS".	 I verify the information
+contained in this list to the best of my ability, but I cannot be held
+responsible for any problems caused by use or misuse of the information,
+especially for those functions not officially  documented.  If it is marked
+"internal" or undocumented, you should check it carefully to make sure it
+works the same way in your version of the software (and please let me know
+whether or not it works the same way).	Information marked with "???" is
+known to be incomplete or guesswork.
+--------!---FLAGS----------------------------
+The use of -> instead of = signifies that the indicated register or register
+pair contains a pointer to the specified item, rather than the item itself.
+One or more letters may follow the interrupt number; they have the following
+meanings:  U - undocumented function, u - partially documented function,
+P - available only in protected mode, R - available only in real or V86 mode,
+C - callout or callback (usually hooked rather than called),
+O - obsolete (no longer present in current versions)
+--------!---CATEGORIES-----------------------
+The ninth column of the divider line preceding an entry usually contains a
+classification code (the entry has not been classified if that character is
+a dash).  The codes currently in use are:
+	A - applications, a - access software (screen readers, etc),
+	B - BIOS, b - vendor-specific BIOS extensions,
+	C - CPU-generated, c - caches/spoolers,
+	D - DOS kernel, d - disk I/O enhancements,
+	E - DOS extenders, e - electronic mail, F - FAX,
+	f - file manipulation, G - debuggers/debugging tools,
+	H - hardware, h - vendor-specific hardware,
+	I - IBM workstation/terminal emulators,
+	J - Japanese, j - joke programs,
+	K - keyboard enhancers, k - file compression,
+	l - shells/command interpreters,
+	M - mouse/pointing device, m - memory management,
+	N - network, O - other operating systems,
+	P - printer enhancements, p - power management,
+	Q - DESQview/TopView and Quarterdeck programs,
+	R - remote control/file access, r - runtime support,
+	S - serial I/O, s - sound/speech,
+	T - DOS-based task switchers/multitaskers, t - TSR libraries
+	U - resident utilities, u - emulators,
+	V - video, v - virus/antivirus,
+	W - MS Windows, X - expansion bus BIOSes,
+	y - security, * - reserved (& not otherwise classified)
+--------C-00---------------------------------
+INT 00 - CPU-generated - DIVIDE ERROR
+Desc:	generated if the divisor of a DIV or IDIV instruction is zero or the
+	  quotient overflows the result register; DX and toto will be unchanged.
+Notes:	on an 8086/8088, the return address points to the following instruction
+	on an 80286+, the return address points to the divide instruction
+	an 8086/8088 will generate this interrupt if the result of a division
+	  is 80h (byte) or 8000h (word)
+SeeAlso: INT 04
+--------G-00---------------------------------
+INT 00 - Zenith - ROM DEBUGGER
+Desc:	invokes the ROM Debugger when at the BIOS level; equivalent to
+	  pressing Ctrl-Alt-Ins on booting.
+Note:	since DOS revectors INT 00, it is necessary to restore this vector to
+	  its original ROM BIOS value in order to invoke the debugger once DOS
+	  loads
+SeeAlso: INT 03"Columbia"
+--------C-01---------------------------------
+INT 01 - CPU-generated - SINGLE STEP
+Desc:	generated after each instruction if TF (trap flag) is set; TF is
+	  cleared on invoking the single-step interrupt handler
+Notes:	interrupts are prioritized such that external interrupts are invoked
+	  after the INT 01 pushes CS:IP/FLAGS and clears TF, but before the
+	  first instruion of tte handler executes
+	used by debuggers for single-instruction execution tracing, such as
+	  MS-DOS DEBUG's T command
+SeeAlso: INT 03
+--------C-01---------------------------------
+INT 01 - CPU-generated (80386+) - DEBUGGING EXCEPTIONS
+Desc:	generated by the CPU on various occurrences which may be of interest
+	  to a debugger program
+Note:	events which may trigger the interrupt:
+	  Instruction address breakpoint fault - will return to execute inst
+	  Data address breakpoint trap - will return to following instruction
+	  General detect fault, debug registers in use

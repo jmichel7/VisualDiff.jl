@@ -1,0 +1,495 @@
+From michel Fri Jan  2 17:49:17 1998
+Return-Path: <michel@ihes.fr>
+Received: by thirteen.ihes.fr (4.1/070293); Fri, 2 Jan 98 17:48:43 +0100
+Date: Fri, 2 Jan 98 17:48:43 +0100
+From: michel@ihes.fr (Louis Michel)
+Message-Id: <9801021648.AA04623@thirteen.ihes.fr>
+To: 100343.1101@compuserve.com, alain.aspect@iota.u-psud.fr,
+        andre.martin@cern.ch, bertaut@labs.polycnrs.-gre.fr,
+        bouchiat@physique.ens.fr, brezin@physique.ens.fr, cct@physique.ens.fr,
+        damour@ihes.fr, davier@frcpn11.in2p3.fr, davier@lal.in2p3.fr,
+        goldman@amoco.saclay.cea.fr, gratias@glvt-cnrs.fr,
+        guy.laval@polytechnique.fr, haroche@physique.ens.fr,
+        iliopoulos@ihes.fr, jerome@lps.u-psud.fr, marianne@physique.ens.fr,
+        maurice.jacob@cern.ch, michel@ihes.fr, picinbono@lss.supelec.fr,
+        pierjacq@magic.fr, pierre-gilles.degennes@escpi.fr, ruelle@ihes.fr,
+        spitz@siege.thomson.fr, toulouse@physique.ens.fr,
+        yves.quere@polytechnique.fr, zaf@amoco.saclay.cea.fr
+Subject: conference sur Wigner
+Status: R
+
+Chers confreres de la section de physique,
+l'academie a fait un essai pour envoyer par messagerie electronique
+le fichier 5JANV98.rtf contenant l'ordre du jour pour lundi.
+Elle a choisi 32 membres (dont 4 physiciens comme cobaye) je l'ai lu et 
+attend de savoir combien le dechiffrerons?
+
+Par contre j'ai dit a Dercourt que je ferai l'essai parmi les physiciens
+avec un fichier tex etant certain que vous lisez plus facilement  un 
+fichier .tex qu'un .rtf.
+
+Je vous envoie ci dessous le fichier wignervt.tex, texte d'une conference
+que j'ai faite en memoire de ce physicien. J'espere qu'elle aura pour
+vous un peu plus d'interet que le texte lui-meme.
+Veuillez- me repondre de toute facon sur la reussite ou l'echec de l'essai.
+
+Tres cordialement
+Louis Michel
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ file wignervt.tex   11/7/96
+\magnification=1200
+\hfuzz=4pt
+%\nopagenumbers
+\font\er=cmr8
+\def\hb{\hfil\break}
+\def\Cal#1{{\cal #1}}
+
+\noindent{\er Goslar, July 16, 1996}
+ 
+\centerline{\bf Wigner Memorial Lecture}
+
+\centerline{by Louis Michel \er (Wigner medal 1984)}
+\bigskip
+Born on November 17, 1902, Eugene Wigner died on January 1, 1995. Since 
+his death, this is the first Wigner medal award ceremony. It is befitting 
+to commemorate this very great physicist now. Unfortunately his 
+lifelong friend, Edward Teller, has not been able to come, but he did 
+send some recollections which will be read later.
+
+An excellent way, may be the best, to commemorate a scientist is to 
+publish a collection of his works. The first volume of the Complete  
+Scientific Works of Eugene Wigner [1] appeared more than three years 
+ago, the eighth and last volume will appear probably next year. These 
+volumes include unpublished papers from the Manhattan project and many 
+scattered philosophical papers on the nature, the meaning and the role of 
+science. Some of the latter had already been gathered by Wigner in 
+``Symmetries and Reflections'' [2]. 
+
+Wigner's complete works are so vast and so deep that an eight-day 
+colloquium whould be necessary for a real memorial. In a half-hour lecture 
+I can only speak about one domain of his activity and that only briefly.
+At this XXI International Colloquium on Group Theoretical Methods in 
+Physics, I have of course chosen to speak about Wigner's work on symmetry in 
+physics. He wrote about sixty papers on this topic, but I have time only to 
+speak about some of them. I am sure that every one of you has read, 
+and probably studied, his book on ``Group theory''[3].
+
+However one cannot commemorate a scientist without speaking about
+the man himself. Happily Wigner has done this for us in 1988, and the 
+resulting book {\sl The recollections of Eugene P. Wigner as told to Andrew 
+Szanton} [4] is marvellous. Reading it, Wigner appears before you, speaking 
+to you, telling you about his life (with delicate discretion regarding his 
+private life), his science, his philosophical and political ideas. Yes, his 
+scientific judgements were sharp, but his legendary politeness was genuine. 
+What struck me most was his immense generosity towards colleagues and younger 
+physicists. One of the greatest surprises of my life was to find my name 
+among the four persons to whom ``{\sl He wishes to record his deep indebteness}'' 
+in the preface of the English edition of his Group Theory book. J. von 
+Neumann had already died. Later V. Bargmann received the first Wigner 
+medal. The only other survivor is Arthur Wightman who has worked 
+tremenduously hard editing Wigner's collected works and was his colleague at 
+Princeton University for forty years. It is a pity that Arthur could not
+give this Memorial Lecture.
+
+For me Wigner has been a model in science: a complete physicist, drawing, 
+when necessary, from his deep mathematical culture. Let me read to you what 
+was written for his sixtieth birthday, by some of his Princeton colleagues 
+[5]~: ``{\sl A characteristic feature of Wigner's way of working is its 
+down-to-earth quality. There are many young men who, their head bulging 
+with information on Hilbert spaces, have come to him with an idea, only to 
+have him try it out first on $2\times2$ matrices. (It usually helped.) 
+Another aspect of this down-to-earth quality is his great respect for, 
+and knowledge of, facts. If one comes to discuss a crystal with him, it 
+is a good bet that he will be able to give off hand its density, 
+structure, thermal conductivity, and the slow neutron cross sections of 
+its elements. Moreover the stuff he is thinking about probably has the 
+right color.}''
+
+After graduating in chemical engineering in Berlin and the publication of 
+his first three papers, including his thesis, Wigner returned to Budapest, 
+to work in a Mauthner brothers' tannery (his father had worked all his 
+life in it and became a director). He had subscribed to the Zeitschrift 
+f\"ur Physik, and was studying it at night, when he could. As he told us 
+in a long, published interview [6], he missed the first Heisenberg paper 
+on quantum mechanics [7], but read and understood immediately the Born 
+and Jordan paper ``Zur Quantenmechanik''[8]. In 1925, invited as an 
+assistant by Weissenberg (a well known crystallographer who followed 
+Polanyi's advice) in Berlin he became a physicist. He continued to publish 
+important work in chemistry with M. Pol\'anyi [9] but started to use 
+symmetry in quantum mechanical systems: first the general methodology [10], 
+the parity quantum number [11], the atomic spectra (with von Neumann) [12], 
+the diatomic molecules (with Witmer) [13], to which must be 
+added the work with Jordan [14] on the second quantization of fermion 
+fields, the introduction of the ``Vierbein'' for gravitating spinors in
+general relativity [15], two other papers with von Neumann (one showed the 
+possible existence of a state with discrete eigenvalue inside the interval 
+of a continuous spectrum [16], the other studied the changes of atomic level 
+structure in adiabatic transformations [17]), two papers on statistics and the 
+paper [18] establishing the group theoretical study of the vibrations of 
+molecules; indeed the treatment of the symmetry of this classical linear 
+problem is similar to that for bounded quantum states of finite systems. 
+Such an activity in four years! But they were also exceptional years for 
+physics in general. The Jordan and Wigner paper [14] was submitted 
+on January 26, 1928 (exactly 24 days after Dirac's paper on his equation); 
+they used Clifford algebra for building the representation of the 
+anticommutation rules (they were very near to finding the equation for the 
+spinning electron!) and proved the uniqueness of the representation 
+(this applies also to the Dirac equation). 
+
+``{\sl There was a great reluctance among physicists toward accepting group 
+theoretical arguments and the group theoretical point of view}'' wrote Wigner 
+in the preface of the English edition of his book; he added 
+``{\sl the recognition that almost all rules of spectroscopy  follow from 
+the symmetry of the problem is the most remarkable result.}'' The book 
+has had a much bigger impact. It is the first place where, for the rotation 
+group, the matrix elements of the operators which decompose the Kronecker 
+(=tensor) product  of two irreducible representations into the direct sum 
+of irreducible representations are computed and systematically studied. 
+As Wigner said much later, in a conference to the American 
+Mathematical Society [19], they ``{\sl were also called Clebsch-Gordan 
+coefficients (though the reason for this is mysterious to me), or vector 
+coupling coefficients, which is the name I prefer}''. In the English 
+version of the book, he presented them in the symmetrical and covariant form 
+called 3-$j$ coefficients, see also [20]. He had already extended them 
+[21] to the ``simply reducible groups'' [22]. That started a whole 
+industry in theoretical physics; in chapter 27 of the English version of 
+his book, Wigner gave an interesting geometrical interpretation of the 
+3-$j$ and 6-$j$ (=Racah) symbols and their classical limit.
+
+In his book, Wigner emphasized an original point of view: in quantum 
+mechanics, the action of the symmetry group $G$ on the projective space 
+of rays (of vector states) can be embedded in a linear unitary projective 
+representation of $G$ on the Hilbert space of vector states (he gave the 
+proof even for infinite dimension). As you know, for $SO_3$ this 
+corresponds to using the representations of its universal covering group
+(i.e. $SU_2$); so it leads to the concept of half-integer spin.
+In 1937 Wigner solved the same problem for the Poincar\'e group [23]. That 
+paper is one of the scientific landmarks. Using some not yet published von 
+Neumann's results, it is the first paper giving complete families 
+of unitary infinite dimensional representations of a non semi-simple, non 
+compact Lie group; moreover this paper also deals with the projective 
+representations! In physics it is the foundation of the quantum relativistic 
+kinematics of elementary particles.
+
+Two German editions of Weyl's book [24] had appeared before the first edition 
+of Wigner's book. These two excellent books are still necessary 
+readings for understanding symmetry in quantum physics. Weyl's book has 
+a wider mathematical point of view (but does not study projective 
+representations) and deals with a broader domain of physics. The 
+emphasis is different in the two books and their overlap is relatively 
+small. A very weak point in Weyl's book is time reversal. In 1932 
+Wigner wrote the fundamental paper on time reversal in quantum physics [25]. 
+For physicists outside the Wigner's school of thought it took a long time 
+to understand and use this symmetry. One had indeed to tame a new tool 
+necessary for this symmetry: the antiunitary operators. Chapter 26 of the 
+English version of Wigner's book calls {\sl corepresentations} the extension 
+of unitary representations with antiunitary operators and teaches us how 
+useful they are. The following year Wigner published two simple and elegant 
+papers on antiunitary operators  [26]; the projective corepresentations 
+of the full Poincar\'e group were dealt with in [27].
+
+Let us return to 1930: after well-know papers with  Weisskopf on linewidth 
+in spectra, Wigner wrote important papers on chemical physics and conceived 
+his quantum mechanical phase space distribution function [28] (one of 
+his great inventions). In 1932, when the neutron was discovered, Wigner 
+immediatly studied this particle [29] and the nuclear forces, without
+ignoring other important problems, e.g. studying with Jordan and von Neumann
+the role of Jordan algebras in quantum mechanics and the determination of 
+the exceptional Jordan algebras [30]. Since Wigner worked for thirty 
+more years in nuclear physics, it is outside the scope of this lecture 
+to review his related work. I shall mention only three papers. In 1937 the 
+one [31] on supermultiplets; it is a formal $SU_4$ invariance treating spins 
+and isospins on an equal footing. This abstract approximate symmetry was 
+useful for the study of light nuclei. In the sixties it was a surprise to 
+discover that it was also valid for heavier nuclei; and in 1964 the symmetry 
+was extended to $SU_6$ independently by Sakita, G\"ursey and Radicati, 
+Gell-Mann, followed by many physicists. The title of the second one [32],  
+with  Eisenbud, summarizes perfectly the content of this basic paper:
+``Invariant forms of interaction between nuclear particles''. The third 
+paper I choose, [33], is an excellent review of isospin, very rich in 
+physics, one which appeared at the right time, viz. that of the 1958 
+Feynman, Gell-Mann paper [34]. 
+
+>From 1932 on, Wigner was not only pioneering in nuclear physics, but also in 
+solid state physics! In this domain, his work and those of his three 
+students Seitz, Herring, Bardeen (in chronological order) have had a 
+tremendous impact. The first paper is on metallic sodium [35]; this crystal 
+contains one atom per fundamental cell of the body centered cubic space group 
+$G=Im\bar3m$. The authors consider, for the first time in solid state physics,
+the Vorono{\"\i} cell (generally called, because of that paper, Wigner-Seitz 
+cell by physicists); they do note that for any $G$-invariant function and on 
+any face of the cell, the normal component of the gradient vanishes and that 
+the cell can be inscribed in a sphere (i.e. its 24 vertices lie on a sphere). 
+Then they show that it is a good physical approximation to replace the 
+computation of the valence electron wave function in the crystal by the
+corresponding boundary problem inside this sphere, for the Schr\"odinger 
+equation with the Coulomb potential of the ion $Na^+$. They solve the 
+problem including the effect of Pauli principle and obtain good values for 
+the size of the cell, the binding energy by atom (yielding the heat of
+vaporisation) and the compressibility coefficient. This paper is a great 
+classic. In the papers [36],[37] two predictions were made; respectively, 
+the existence of electron crystals (they were first observed in 1981 on 
+the surface of superfluid helium) and the existence of a metallic hydrogen 
+phase at a pressure greater than .25 millions of atmospheres (it may 
+have been discovered this year at Livermore).
+In his thesis Seitz constructed the unitary irreducible representations 
+of the space groups; for each space group $G$ there is a continuous 
+infinity of such representations, labelled by the wave vectors $\vec k$ 
+of the Brillouin zone and a finite valued index (labelling the different 
+irreducible, ``allowed'' representations of the little space group $G_k$).
+
+The 1936 paper [38], with Bouckaert and Smoluchowsky, is one of the most 
+often quoted; indeed it is the fundamental paper for the application of group 
+theory to the quantum physics of crystals although he solved only some 
+aspects of the very general problem it described. Let us quote from the 
+introduction: \hb
+``{\sl Thus far the group theory of the Brillouin zone is not different from 
+the group theory of any other system. But while in atoms, molecules, etc., 
+the characteristic values of (1)} [= the eigenvalues of the Schr\"odinger 
+equation for bound states] {\sl are well separated, the characteristic 
+values of (1) for a crystal form a continuous manifold...} [for 
+instance the energy E is a function over the Brillouin zone.]....\hb
+{\sl Thus a certain topology for the representations must exist and 
+it will be shown that part of this topology is independent of the 
+special Brillouin zone......} ''\hb 
+And the last sentence of the introduction is: \hb
+``{\sl The investigation of the ``topology'' of representations will be 
+essentially the subject of this paper, from the mathematical point of 
+view}.'' Indeed, after laying the method for studying the symmetry of 
+energy bands, the authors showed how to obtain the compatibility 
+conditions. The paper announced Herring's thesis [39] which studied the 
+contacts between band branches imposed by time reversal invariance as well 
+as the possible accidental degeneracies. This grandiose program has been
+forgotten by many solid state physicists: those of them who use only the 
+finite Born-von Karman groups, with a finite set of points for the Brillouin 
+zone (passing to the continuous limit, when it can be done, is very 
+deceptive because the topology is different). J. Zak and I are presently 
+completing this aspect of Wigner's program: its predictions are rich and 
+harmonious.
+
+In August 1939, just before the start of the big crisis that we call 
+``second world war'', Szil\'ard and Wigner suggested to Einstein to 
+write a letter to president Roosevelt about the possibility of making 
+nuclear bombs. After two mathematical papers on groups [40], [21] and a
+few others in nuclear physics (including [32]), there are between 1942 
+and 1946 no scientific publications from the outstanding theoretical 
+physicist whom we commemorate. During that time he was 
+an  exceptional engineer planning in detail a new kind of 
+industrial plants: the neutron chain reactors. He had to fight with 
+``professional engineers'' as it is clear in [1]V (a typical incident 
+is told by Wigner in [6]). The basic physics of that work is given in [3]c.
+After the first nuclear bomb test at Alamogordo, Szil\'ard and Wigner 
+started a petition for using the bomb only in an uninhabitated place of 
+our planet.
+
+At the end of the war Wigner came back to Princeton. From that time on
+symmetry in physics was no longer one of his main interests in physics. Thus it 
+is very unfair to him to restrict a memorial lecture to this subject. However, 
+I cannot end the lecture here without quoting some later important and very 
+original works of Wigner in this field. The literature on relativistic wave 
+equations was very extensive but partly unsatisfactory without the 1947
+contribution of Bargmann and Wigner [41]. At the same time Wigner [42]
+considered the equations for particles with infinite spin (corresponding 
+to some unitary representations of the Poincar\'e group which seem
+pathological for physics); I wish also to mention a subsequent paper [43]
+with a similar title, which is a good review of relativistic wave 
+equations and contains some approach to 
+general relativity. The relations between the latter theory and quantum 
+mechanics are also studied in [44] and will be one of the subjects of 
+reflections by the older Wigner. Ref [41] led Newton and Wigner to clarify 
+very much in [45] the problem of localisability of relativistic particles 
+in quantum theory. 
+
+In 1952, the ``three W's paper'' (Wick, Wightman, Wigner) [46] introduced what 
+we call now the {\sl superselection rule}, a new concept which shocked many 
+physicists at that time, but that cannot be ignored when we are interested 
+in the foundation of quantum theory. I cannot refrain from giving you an 
+excerpt from the footnote 9 of that paper: {\sl That $C$ is an exact 
+symmetry property is moreover still far from proved. The disturbing 
+possibility remains that $C$ and $P$ are both only approximate and $CP$ 
+is the only exact symmetry law}. A remarkable prophecy which was 
+realized within four years! However a tiny violation of $CP$ was found 
+in 1964....In a little known work, Wigner proved the conservation with 
+time of superselection rules. It was popularized later by the same trio 
+[47]. I wish also to mention the contribution of Wigner [48] to what has 
+become known as ``Bell's inequalities'' and if I had to answer the impossible 
+question (already asked me here) ``which Wigner paper is a summary of 
+his teaching on symmetry in physics?'', I would suggest ref. [49]. The 
+domain of Wigner's activity I reviewed, corresponds mainly to vol. I of the 
+``Collected works''; this volume also contains two analyses by B. Judd and 
+G. Mackey.
+
+It is impossible for me to end this lecture without mentioning the 
+creation by Wigner of a new tool for studying many physical phenomena:
+{\ Random matrices} [50]. A whole industry in theoretical physics has 
+been built on the use of them in different domains. 
+
+Wigner has been one of the outstanding physicists of modern times.
+His influence is tremendous and will last. Many of us here, owe him much 
+scientifically. I suggest to conclude this memorial lecture by a moment
+of silence that each of us may use for his own commemoration.
+\bigskip 
+\noindent
+{\bf References}:
+\item {[1]} Collected works of Eugene Paul Wigner, vol. I = A biographical 
+sketch. Applied group theory. The mathematical papers. II = Nuclear 
+Physics. III = Particles and Fields. Foundations of Quantum Mechanics.
+IV Physical chemistry. Solid State Physics. V = Nuclear Energy. 
+VI Philosophical reflections and Syntheses. To appear VIII = Civil Defense.
+and VII. Springer-Verlag.
+\item {[2]} E.P. Wigner in {\sl Symmetries and Reflections}, 
+Indiana University Press (1967), paper back edition: MIT Press (1970),
+reprint edition: Ox Bow, Woodbridge, Conn. (1979).
+\item {[3]} a) E.P. Wigner {\sl Gruppentheorie und ihre Anwendung auf die 
+Quantummechanik der Atomspektren}, F. Vieweg and Sohn, Braunschweig (1931),
+{\sl Group Theory and its application to the quantum mechanics 
+of atomic spectra}, Academic Press (1959), expanded and improved edition 
+from the translation (by J.J. Griffin) of the German edition. We will 
+often mention this reference as Wigner's book. But, besides [2], Wigner 
+has also published the books: b)  with L. Einsenbud, {\sl Nuclear 
+structure}, Princeton University Press (1958), c) with A.M. Weinberg 
+{\sl The Physical Theory of Neutron Chain Reactors}, University of 
+Chicago Press (1958).   
+\item {[4]} {\sl The recollections of Eugene P. Wigner as told to} Andrew 
+Szanton, Plenum Press (1992)
+\item {[5]} V. Bargmann, M.L. Goldberger, S.B. Treiman, J.A. Wheeler, 
+A. Wightman, To Eugene Paul Wigner on his sixtieth birthday, Rev. Mod. Phys.
+{\bf34} p. 587 (1962).
+\item {[6]} M.G. Doncel, L. Michel, J. Six, Interview de Eugene P. Wigner sur 
+sa vie scientifique, Archives Internationales d'Histoire des Sciences
+{\bf34} (1984) 177-217. This long interview of Wigner was done in two 
+parts, one in French and one in English. It contains several informations 
+not given in [4].
+\item {[7]} W. Heisenberg, \"Uber die quantentheoretische Umdeutung 
+kinematischer und mechanischer Beziehungen, Z. Phys. {\bf33} (1925) 879--893.
+\item {[8]} M. Born, P. Jordan, Zur Quantenmechanik, Z. Phys. {\bf34} (1925) 
+858-888.
+\item {[9]} M. Polanyi, E. Wigner, Z. Phys. Chem. {\bf139} (1928) 439.
+\item {[10]} E. Wigner, \"Uber nichtkombinirende Terme in der neueren 
+Quantentheorie, Z. Phys. {\bf40} (1927) 492--500 and 883--892.
+\item {[11]} E. Wigner, Einige Folgerungen aus der Schr\"odingerschen Theorie 
+f\"ur die Termstrukturen, Z Phys.{\bf43} (1927) 624--652. 
+\item {[12]} J. v. Neumann, E. Wigner, Zur Erkl\"arung einiger Eigenschaften 
+der Spektren aus der Quantenmechanik des Drehelektrons, Z. Phys. I. {\bf47} 
+(1928) 203--220; II. {\bf49} (1928) 73--94; III. {\bf51} (1928) 
+844--858. 
+\item {[13]} E. Wigner, E.E. Witmer, \"Uber die Struktur des zweiatomigen 
+Molekulspektrum nach den Quantenmechanik, Z. Phys. {\bf51} (1928) 859--886.
+\item {[14]} P. Jordan, E. Wigner, \"Uber das Paulische \"Aquivalenzverbot,
+Z. Phys. {\bf47} (1928) 631--651. 
+\item {[15]} E. Wigner, Eine Bemerkung zu Einsteins neuer Formulierung des 
+allegemeinen Relati\-vit\"ats-prinzips, Z Phys. {\bf53} (1929) 592--596. 
+\item {[16]} J. v. Neumann, E. Wigner, \"Uber merkw\"urdige diskrete 
+Eigenworte, Physik Z. {\bf30} (1929) 465--467.
+\item {[17]} J. v. Neumann, E. Wigner, \"Uber das Verhalten von Eigenwerten 
+bei adiabatischen Prozessen, Physik Z. {\bf30} (1929) 467--470.
+\item {[18]} E. Wigner, \"Uber die elastischen Eigenschwingungen symmetrischer 
+Systeme, Nachr. Ges. Wiss. G\"ottingen Math.-Phys. Kl. (1930) 133-146.
+\item {[19]} E.P. Wigner, Symmetry principles in old and new physics, 
+Bull. Amer. Math. Soc. {\bf74} (1968) 793-815.
+\item {[20]} E. Wigner, On the matrices which reduce the Kronecker product 
+of representations of S. R. groups, p. 89--133 in {\sl Quantum Theory of 
+Angular momentum}, edit. L.C. Biedenharn and H. Van Dam, Academic Press 
+(1965). This book reprints [11], [21].
+\item {[21]} E. P. Wigner, On representations of certain finite groups,
+Amer. J. Math., {\bf63} (1941) 57--63.
+\item {[22]} E. Wigner, a) Condition that the irreducible representations of 
+a group, considered as representations of a subgroup, do not contain any 
+representation of the subgroup more that once, p. 131--136 in {\sl 
+Spectroscopic and group theoretical methods in Physics. Racah volume 
+memorial}, edit. F. Bloch {\it et al}, North-Holland Publ. (1968); 
+b) Restriction of irreducible representations of groups to a subgroup, Proc. 
+Roy. Soc. Lond. A. {\bf322} (1971) 181--189; c) with F.E. Goldrich,
+Condition that all irreducible representations of a compact Lie group,
+if restricted to a subgroup, contain no representation more that once,
+Can. J. Math. XXIV (1972) 432-438.
+\item {[23]} E. Wigner, On unitary representations of the inhomogeneous 
+Lorentz group, Annals Math. {\bf40} (1939) 149--204. Wigner quotes the 
+less complete and less rigourous paper of E. Majorana (N. Cim. {\bf9} (1932) 
+335) on the representations of the Lie algebra of the Poincar\'e group. 
+It is remarkable that 
+part of this Wigner's paper is purely algebraic. I was very  interested 
+by the beginning of the ``{\sl Acknowledgement. The subject of this paper 
+was suggested to me as early as 1928 by P.A.M. Dirac who realized even 
+at that date the connection of representations with quantum mechanical 
+equations. I am greatly indebted to him also for mainly fruitful 
+conversations about this subject, especially during the years 1934/35, 
+the outgrowth of which the present paper is}''. I had the occasion to talk at 
+length with each of them in the early seventies, but neither could 
+remember these conversations. In [6] Wigner told that his paper was 
+refused by Amer. J. Math. but in 1980 he received a telephone call from 
+this review congratulating him to have published one of the 25 most often 
+quoted papers in mathematics since the beginning of the century!
+\item {[24]} Hermann Weyl, Gruppentheorie und Quantenmechanik, S. Hirzel, 
+Leipzig, 1928, 2. Auflage, umgearbeitet 1931, English tranlation, 
+Dutton (1932) reprinted by Dover in 1949. This book quotes the ref. [10] 
+and [14] but not [12].     
+\item {[25]} E. Wigner, \"Uber die Operation der Zeitumkehr in der 
+Quantenmechanik, Nachr. Ges. Wiss. G\"ottingen Math.-Phys. Kl. (1932) 546--559.
+\item {[26]} E.P. Wigner, J. Math. Phys. {\bf1} (1960) p. 409--413: Normal 
+form of antiunitary operators; p. 414--416: Phenomenological distinction
+between unitary and antiunitary symmetry operators. 
+\item {[27]} E.P. Wigner, Unitary Representations of the Inhomogeneous 
+Lorentz Group Including Reflections, p. 37--80 in  Group Theoretical 
+Concepts and Methods in Elementary Particle Physics., edit. F. G\"ursey,
+Gordon and Breach (1964). Wightman and I knew of this Wigner's work for more 
+than ten years before; it defines what is often quoted as ``Wigner types''.
+\item {[28]} E. Wigner, On the quantum correction for thermodynamic 
+equilibrium, Phys. Rev. {\bf40} (1932) 749.
+\item {[29]} E. Wigner, Beitr\"age zur Theorie des Neutrons, Math. 
+Naturw. Anz. Ungar. Akad. Wiss. {\bf49} (1932) 142.
+\item {[30]} P. Jordan, J. v. Neumann, E. Wigner, On an algebraic 
+generalisation of the quantum mechanic formalism, Annals Math. {\bf35}
+(1934) 29.
+\item {[31]} E. Wigner, On the consequence of the symmetry of the nuclear 
+Hamiltonian on the spectroscopy of nuclei., Phys. Rev. {\bf51} (1937) 
+106--119. 
+\item {[32]} L. Eisenbud and E.P. Wigner, Proc. Natl. Acad. Sci. U.S. 
+{\bf27} (1941) 281.
+\item {[33]} E.P. Wigner, Isotopic spin: a quantum number for nuclei, p. 
+67--91, chap IV of Proceed. Robert A. Welch Foundation Conferences on 
+Chemical research, I. The structure of the nucleus.
+\item {[34]} R.P. Feyman and M. Gell-Mann, Theory of Fermi interaction,
+Phys. Rev. {\bf109} (1958) 193--198.
+\item {[35]} E. Wigner and F. Seitz, On the constitution of metallic 
+sodium, Phys. Rev. {\bf43} (1933) 804--810, II. {\bf46} (1934) 509.
+\item {[36]} E. Wigner, On the interactions of electrons in metals,
+Phys. Rev. {\bf46} (1934) 1002--1011.
+\item {[37]} E. Wigner and H.B. Huntington, On the possibility of 
+metallic modification of hydrogen, J. Chem. Phys. {\bf3} (1935) 764--770. 
+\item {[38]} L.P. Bouckaert, R. Smoluchowsky, E. Wigner, Theory of 
+Brillouin zones and Symmetry Properties of Wave functions in Crystals.
+Phys. Rev. {\bf50} (1936) 58--67
+\item {[39]} C. Herring, Phys. Rev. {\bf52} (1937) a) Effect of Time 
+reversal symmetry on energy bands of crystals, p. 361--365; b) Accidental 
+degeneracy in the Energy bands of Crystals, p. 365--373.
+\item {[40]} J. v. Neumann, E.P. Wigner, Minimally almost periodic groups, 
+Annals Math. {\bf41} (1940) 746--750.
+\item {[41]} V. Bargmann and E.P. Wigner, Group theoretical discussion 
+of relativistic wave equations, Proc. Natl. Acad. Sci. U.S. {\bf34}
+(1948) 211--223.
+\item {[42]} E. Wigner, \"Uber relativistische Wellengleichungen, Z. Phys.
+(1948) 665.
+\item {[43]} E. Wigner, Relativistic invariance of quantum mechanical 
+equations, Helv. Phys. Acta Suppl. {\bf4} (1956) 210--226.
+\item {[44]} E. Wigner, Relativistic invariance and quantum phenomena,
+Rev. Mod. Phys. {\bf29} (1957) 255--268.
+\item {[45]} T.D. Newton and E.P. Wigner, Localized states for 
+elementary systems, Rev. Mod. Phys. {\bf21} (1949) 400--406.
+\item {[46]} G.C. Wick, A.S. Wightman and E.P. Wigner, The intrinsic 
+parity of elementary particles, Phys. Rev. 88 (1952) 101--105.
+\item {[47]} G.C. Wick, A.S. Wightman and E.P. Wigner, Superselection 
+rule for charge, Phys. Rev. {\bf D1} (1970) 3267--3269.
+\item {[48]} E.P. Wigner, On hidden variables and quantum mechanical 
+probabilities, Amer. J. Phys. {\bf38} (1970) 1005.
+\item {[49]} R.M.F. Houtappel, H. Van Dam and E. Wigner, The conceptual 
+basis and use of the geometric invariance principles, Rev. Mod. Phys. 
+{\bf37} (1965) 595--632.
+\item {[50]} E.P. Wigner, Random matrices in physics, SIAM Rev. {\bf9}
+(1967) 1--22. That is a 30 year old review by Wigner himself!
+ 
+\bye
+

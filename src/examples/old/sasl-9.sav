@@ -1,0 +1,1420 @@
+ment has
+been confirmed to within an order of magnitude by several people
+who are not associated with Intel. However, the values for which
+the bug occurs are not randomly or uniformly distributed.
+According to Tim Coe, 90% of the problem divisors fall within one
+of the following ranges multiplied by any integral power of two:
+
+     3.0 > divisor >=  3.0 - 36*(2**-22)
+     9.0 > divisor >=  9.0 - 36*(2**-20)
+    15.0 > divisor >= 15.0 - 36*(2**-20)
+    21.0 > divisor >= 21.0 - 36*(2**-19)
+    27.0 > divisor >= 27.0 - 36*(2**-19)
+
+The FDIV bug is believed not to occur for integer divisors less
+than 4000. However, the bug does happen with values that are just
+
+ 53
+The FDIV bug is believed not to occur for integer divisors less
+than 4000. However, the bug does happen with values that are just
+slightly less than an integer. An example from Vaughan R. Pratt
+shows that 4.999999/14.999999 yields 0.333329... on a flawed
+Pentium and 0.33333329... otherwise. Such values that are
+slightly less than an integer, which Pratt calls "bruised
+integers," can arise in floating point computations involving
+multiplication and division of integers and are a serious concern
+in situations where a large amount (such as 1E-8 or more) of
+bruising can occur.  However, the SAS DATA step and most
+procedures use double-precision arithmetic, so the amount of
+bruising that occurs in typical calculations will rarely be more
+than 1E-12.  According to Pratt's table, if the amount of
+bruising is less than 1E-12, the result is accurate to at least
+10 significant digits.  If you have a DATA step division
+involving a value that you know should be a small integer in
+exact arithmetic but that may have been bruised, you can use the
+ROUND function to make the value an exact integer.
+
+
+ 63
+ROUND function to make the value an exact integer.
+
+The risk to which SAS users are exposed due to the FDIV bug
+varies with the application. The greatest concern would attach to
+applications in which a high degree of precision is required in
+the results, such as some financial computations. The number of
+floating point divisions obviously should be considered,
+especially those in which the divisor is slightly less than an
+integer. Another concern would be whether numeric errors can be
+magnified during the computation.
+
+Many statistical applications involve only divisions by small
+integers, such as computing means and standard deviations of a
+sample of less than 4000 observations; in such cases there
+obviously is no risk. Many statistical computations involve few
+divisions. For example, computing the coefficients in a multiple
+regression on k predictors with PROC REG requires only k+1
+divisions, although additional divisions are required for t
+statistics and p values. On the other hand, PROC ORTHOREG does 6k
+
+ 73
+divisions, although additional divisions are required for t
+statistics and p values. On the other hand, PROC ORTHOREG does 6k
+divisions for every observation. Hence, the chance of
+encountering the FDIV bug is much greater with ORTHOREG than with
+REG.
+
+Numerical computations are described as "ill-conditioned" if a
+small numerical error can be magnified during the computation. An
+example is a multiple regression with highly correlated
+predictors. If the FDIV bug is encountered in PROC REG with
+uncorrelated predictors, the results are still likely to be
+accurate to at least three significant digits. If the predictors
+are highly correlated, it is possible that the error could be
+magnified to the point that some results have no accurate digits.
+In either case, however, the error introduced by the FDIV bug is
+likely to be smaller than the statistical uncertainty.
+Computations involving discontinuous functions, such as subset
+regression or cluster analysis, are also ill-conditioned, since a
+small change in the input can produce a large change in the
+
+ 84
+regression or cluster analysis, are also ill-conditioned, since a
+small change in the input can produce a large change in the
+output. However, an error introduced by the FDIV bug is again
+likely to be smaller than the statistical uncertainty.
+
+Computationally intensive procedures such as CALIS or MIXED are
+more likely than most procedures to encounter the FDIV bug simply
+because they require more floating point computation than most
+procedures.  Most of these computationally intensive procedures
+do some form of nonlinear optimization. An FDIV error that occurs
+during a nonlinear optimization is likely to be corrected at a
+later stage of the computation. Hence these procedures are
+probably at little more risk of producing incorrect final results
+than are noniterative procedures such as REG.
+
+RANUNI should not be affected by the FDIV bug since it has only
+one floating point division, and the divisor, 2**31-1, is not
+considered at risk. Neither should RANEXP, RANNOR, RANTBL, or
+RANTRI be affected.  However, RANBIN, RANCAU, and RANGAM do
+
+ 94
+considered at risk. Neither should RANEXP, RANNOR, RANTBL, or
+RANTRI be affected.  However, RANBIN, RANCAU, and RANGAM do
+contain divisions that could conceivably be affected.
+
+To obtain a crude assessment of the risk of an FDIV error of
+practical significance in statistical computations, we have rerun
+large parts of of the test libraries for the SAS/ETS, SAS/IML,
+SAS/OR, and SAS/STAT products on both Pentium and 486 machines.
+We failed to find any discrepancy greater than what would
+normally be expected due to numerical error. A few
+inconsequential differences could be attributed to the Pentium's
+greater accuracy in some transcendental functions.
+
+Version 6.10 of the SAS System for the PC was built with a
+compiler designed to take full advantage of improvements in the
+486 and Pentium processors.  Examples of these optimizations
+include instruction scheduling (re-arranging instructions to
+allow for more concurrent execution) and instruction pairing
+(selective use of instructions that have improved performance on
+
+100
+allow for more concurrent execution) and instruction pairing
+(selective use of instructions that have improved performance on
+this class of processors).  These optimizations have no effect on
+the likelihood of SAS users encountering the FDIV bug in the
+Pentium processor.
+
+SAS Institute is vitally interested in the integrity of the
+results produced by its products.  We would recommend that users
+who receive error results from the program listed above contact
+Intel's Customer Service at 800/628-8686 for information on
+obtaining a corrected Pentium chip.
+
+
+
+
+
+
+
+
+
+[Already at end of message]
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 64 of 78  73%      
+
+Date: Thu, 15 Dec 1994 01:11:40 GMT
+From: Ewan Grantham <grantham@MR.NET>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Help with ORDER BY/DISTINCT bug/info?
+
+Currently working for an organization that has several tools for
+accessing their DB2 database. When I execute a query to determine
+where people practice and their specialties using MS Access, Andyne
+GQL, and QMF, I get 151,084 rows returned. When the same SQL is
+executed pass-through in SAS I get 149,588 rows.
+
+Asking our local in-house folks, they thought it might be related
+to a known (to them) bug with Order By (my SQL does a Distinct which
+I gather does an Order By in the background) in certain queries.
+
+Is this a known bug in MVS SAS? What conditions can precipitate it?
+Is there anywhere on the Net or CompuServe to get info. directly from
+SAS? If not, where else could I find out about known bugs, and known
+patches?
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+SAS? If not, where else could I find out about known bugs, and known
+patches?
+
+Thanks again from a very confused data analyst,
+Ewan Grantham
+
+grantham@MR.NET
+Ewan Grantham & Associates
+"Innovation in Information"
+
+
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 65 of 78  48%      
+
+Date: Thu, 15 Dec 1994 17:01:49 EST
+From: David Carroll <BDCARRD1%BUDGET.BITNET@uga.cc.uga.edu>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Stop Net Abuse - A Suggestion
+
+Another list that I receive had some additional information
+on trying to go after the chump who posted that chip liquid-
+ation sale listing. Evidently netcom.com, his Internet Service
+Provider, also had been the source of that previous "Green
+Card" post (strange that both of these came from lawyers
+behaving unethically?) At any rate netcom.com basically washed
+their hands and said they couldn't police their users. Here is
+the suggestion I posted to that list about what we, as proper
+users of the net, might consider doing.
+-------------------------------------------------------------
+A recent postto PUBLIB-NET asked how lists can stop this abuse
+if Internet Service Providers (ISPs) won't (can't?) police their
+users. I have a suggestion. I will speak about capabilities
+of Eric Thomas's listserv (but these might apply or might
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+ 92
+users. I have a suggestion. I will speak about capabilities
+of Eric Thomas's listserv (but these might apply or might
+be added to other list software.) It is possible to set up
+a list so that only private posting is allowed.
+That means that if you are not a member of the list, then you
+cannot post to it. It is also possible to set up the list
+such that if you send a subscribe command, you do not get added
+automatically by the listserv but rather your request is passed
+on to a moderator and you are notified of this. With such a set-up
+it would be very easy to give netcom.com and other rogue ISPs
+a great incentive to clean up their acts. We could simply make
+our lists private and when the moderators get a subscription
+request from one of the offending ISPs, they send the requester
+a polite notification that no one from his ISP is allowed to join
+that list or many others. We could also suggest that they change
+to a reputable ISP and then they'll be welcome. How long do you
+think it would take netcom.com and their ilk to shape up or go
+out of business once it becomes known that they can only provide
+limited and unwelcome access?
+
+100
+out of business once it becomes known that they can only provide
+limited and unwelcome access?
+    Dave Carroll, NYS Div. of the Budget
+    bdcarrd1@budget.bitnet     (or if path problems ...
+    bdcarrd1%budget@cunyvm.cuny.edu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 66 of 78 100%      
+
+Date: Thu, 15 Dec 1994 16:44:09 CST
+From: Louis Fox <louis@CIMARRON.WUSTL.EDU>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: MIXREG
+
+>
+> I am trying to get information on a software package known as MIXREG,
+> which does random effects regression (D. Hedecker).  Any information
+> about how to obtain the software or reach D. Hedecker would be appreciated.
+>
+
+MIXREG is by no means easy to use.  You will probably be happier with PROC 
+MIXED
+available in SAS (see tech report P-229).  Be aware though, that PROC MIXED is
+a resource hog, particularly with large datasets.
+
+
+
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+[Already at end of message]
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 67 of 78 100%      
+
+Date: Thu, 15 Dec 1994 15:15:15 PST
+From: Melvin Klassen <KLASSEN%UVVM.BITNET@uga.cc.uga.edu>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Free! solution to the Intel Pentium "FDIV" problem
+
+All those "buzzwords" caught your attention, eh?  :-)
+
+There's one inescapable conclusion from all the preceding verbiage:
+
+    No amount of messages posted to SAS-L or COMP.SOFT-SYS.SAS
+    is going to "solve" the Pentium problem, nor convince Intel
+    to go further than their "lifetime warranty" promise.
+
+Can we please choose to restrict our postings to SAS-related topics?
+
+P.S. The 'LSTOWN-L@SEARN' BITNET mailing-list is *the* place
+     for discussion for what "list-owners" need to do to react to,
+     and to prevent, "spamming" incidents.
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+[Already at end of message]
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 68 of 78   6%      
+
+Date: Thu, 15 Dec 1994 23:49:01 GMT
+From: Andrew Beveridge <beveridg@CLOUD9.NET>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: The Great Pentium Fire Drill
+
+Thomas M Skinner (Thomas_M_Skinner@CCM.FM.INTEL.COM) wrote:
+: Text item: Text_1
+
+: Folks,
+
+: Thought I'd pass this DataQuest item on...  as opposed to IBM, these
+: folks have a reputation based on objectivity and integrity to watch out
+: for.  (DQ is a company of the Dun&Bradstreet corporation)
+
+Since the DQ article does not have anything to do with statistical
+computing, I thought SAS Users might be interested in this analysis by
+STATA, which assumes the one in 9 billion error rate posted by INTEL.
+
+What the rate actually is 1 in 100,000,000 or one in 900,000,000 or one
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+ 12
+
+What the rate actually is 1 in 100,000,000 or one in 900,000,000 or one
+in 9,000,000,000 is not yet clear.  I wish SAS would do its own analysis
+of its own procedures.  But I realize that the Pentium is only one
+platform for them.
+
+
+
+Subject: FDIV bug and statistics
+
+I received this from my boss, the head of development of Stata, a
+statistical package for DOS/Windows/Mac/Unix.  I thought it might be of
+some interest to you guys here.  I'm posting this through my student
+account because we don't have USENET access at Stata.
+
+For those that have Stata, we have modified Stata to become Pentium-aware
+to get around the bug.  Current users of Stata can be affected by this
+bug though until the new release.
+
+
+ 18
+bug though until the new release.
+
+For those that are not familiar with Stata:
+
+-an observation in Stata using a spreadsheet analogy is a row of data.  I
+don't know how many variables (columns) were used in the samples but I
+would guess at least 25 in 100 observations.
+-maximum-likelihood estimation estimates the parameters which maximizes the
+probability of observing the data you already observed.
+-certification scripts mentioned are used to bug-test Stata.
+-what is a typical sample size?  I don't know.  I've spoken to many people
+who are in the hundred(s) area to the hundred-thousand area.
+-test machine is a DELL/60mhz which does have the bug.
+
+Memo follows:
+----------------------------------------------------------------------------
+
+A bug has been found in the Pentium cpu that affects division.  The
+bug is reported to affect 1 in 9 billion divides and in such cases
+
+ 24
+A bug has been found in the Pentium cpu that affects division.  The
+bug is reported to affect 1 in 9 billion divides and in such cases
+to return a result that lacks precision.  This paper is a crude attempt
+to judge the likely impact of the bug on users of statistical software.
+
+The problem we statisticians have in accessing this problem is that
+we -- even those of us who write statistical software -- have no
+accurate idea of how many divisions we do.  I have obtained estimates
+by modifying Stata's internal source code to count FDIV operations.
+Using this modified Stata, I ran some lengthy computations we use
+for certifying Stata.  The data I collected is
+
+
+-----------------------------------------------------------------------------
+Table 1.   Data collected from modified Stata
+
+     (1)           (2)    (3)          (4)      (5)          (6)
+                                    lines of    pages =     FDIV/
+                  FDIV   errs        output    lines/55     page
+
+ 30
+                                    lines of    pages =     FDIV/
+                  FDIV   errs        output    lines/55     page
+    -------------------------------------------------------------
+    base       998,527      0       20,782       378        2,642
+    ado      1,331,294      0       20,867       379        3,512
+    ado3       332,665      0        6,992       127        2,619
+    ado4       504,675      0        5,039        92        5,486
+    matrix      15,195      0        4,639        84          181
+    -------------------------------------------------------------
+    TOTAL    3,182,356      0       58,319     1,060        3,002
+
+    ado2    13,884,782      0        3,221        59      235,335
+    -------------------------------------------------------------
+    TOTAL   17,067,138      0       61,540     1,119       15,252
+
+
+Column 1 reports our internal name for the test script run.
+Column 2 reports the number of FDIV operations performed in running
+         the test script.
+
+ 36
+Column 2 reports the number of FDIV operations performed in running
+         the test script.
+Column 3 reports the number of FDIV operations that were affected by
+         the Pentium's flaw.
+Column 4 reports the number of lines of output generated by Stata in
+         running the test script.
+Column 5 is the same as Column 4, divided by 55 and rounded.  It is
+         a measure of the number of pages that would be printed if
+         the computer output were printed.
+Column 6 is merely Column 1 divided by Column 5.
+-----------------------------------------------------------------------------
+
+Thus, in total, the tests I ran totaled 1,119 pages of output and performed
+17,067,138 double-precision divides.  In all of this output, the FDIV bug did
+not bite once.  Assuming the probability of an individual divide resulting in
+error is p = 1/(9e+09), the probability of observing no errors is
+
+        P(no errors) = (1-p)^17,067,138 = .998105
+
+
+ 42
+        P(no errors) = (1-p)^17,067,138 = .998105
+
+or the probability of observing 1 or more errors is .001895.
+(For your information, a exact, one-sided, 97.5% confidence interval for p,
+based on these results, is 0 to 2.16e-07.)
+
+I am now going to leave firm ground and make more speculative calculations
+on the likely impact of the Pentium bug on statistical-software users.
+
+In my data, you will note that the number of FDIVs per page of output is
+much higher for the test script named "ado2" than for any of the others.
+Script ado2 tests some of Stata's maximum-likelihood features and focuses
+on iterative techniques.  I discuss the likelihood of the error being
+observed separately for iterative and noninterative procedures below.
+
+
+Noniterative procedures
+-----------------------
+
+
+ 48
+-----------------------
+
+Taking the scripts other than ado2, there are an average of 3,002 FDIV
+operations per page of output.  The data sets on which these scripts were
+run, however, are small -- they average about 100 observations.  Were the
+data sets larger, I would expect more divides per page than the 3,002 reported.
+How much more?  I speculate that the number of divides is linear in the
+log of the number of observations.  If that were true, then the total
+number of divisions per page of output would be
+
+              D = [3,002/log(100)] * log(N)
+                = 1501 * log(N)                   (using log base 10)
+
+Using this result, I produce the following table:
+
+
+
+Table 2.  Speculative calculation for probability P of 1 or more FDIV
+          errors in noniterative procedures, assuming the number of
+
+ 54
+Table 2.  Speculative calculation for probability P of 1 or more FDIV
+          errors in noniterative procedures, assuming the number of
+          divisons are linear in the log of N, data set size.
+
+                          P fail in     # of pages,     # of pages,
+        N         D      1,000 pages     P = .01          P = .5
+   ---------------------------------------------------------------
+       100      3,002     .000333         29,908         2,077,638
+     1,000      4,503     .000500         20,143         1,385,499
+    10,000      6,004     .000667         14,955         1,038,819
+   100,000      7,505     .000834         12,055           831,300
+   ---------------------------------------------------------------
+
+
+
+N is the assumed data set size.  D is the number of divisions I impute
+based on my formula.  Column 3 reports the probability of 1 or more
+failures in 1,000 pages of output.  Column 4 reports the number of
+pages of output corresponding to P=.01, and column 5 reports the
+
+ 60
+failures in 1,000 pages of output.  Column 4 reports the number of
+pages of output corresponding to P=.01, and column 5 reports the
+number of pages of output corresponding to P=.5.
+
+For instance, if you use data sets of roughly 1,000 observations, the
+probability you will observe 1 or more FDIV errors in 1,000 pages of
+Stata output is .0005.  Looked at differently, you would have to review
+20,143 pages of computer output to have a probability of 0.01 of the
+bug biting.  In 1,385,449 pages of output, the bug is as likely to
+strike as not.
+
+Users of statistical software should be able to place themselves somewhere
+on this table.  I suggest you think about how many pages of output you
+generate per week, multiply by 50, and use the table to obtain an annual
+risk.
+
+If you use a package other than Stata, however, make an adjustment to
+the calculation.  Stata tends to compress its output vertically relative
+to other packages.  However many pages you generate using SAS, SPSS, etc.,
+
+ 66
+the calculation.  Stata tends to compress its output vertically relative
+to other packages.  However many pages you generate using SAS, SPSS, etc.,
+divide that by two.  (We treat vertical space as precious in an attempt
+to make screens hold as much information as possible.)
+
+
+Iterative procedures
+--------------------
+
+The script ado2 averaged 235,335 FDIV operations per page of output
+generated.  The script runs on data sets averaging 200 observations.
+To generalize these results, I would expect the number of FDIV operations
+to increase almost linearly with observations, and will use the
+approximation
+
+        D  =  (235,335/200) * N  =  1176.675 * N
+
+for the total number of divisions.  I produce the table:
+
+
+ 72
+for the total number of divisions.  I produce the table:
+
+Table 3.  Speculative calculation for probability P of 1 or more FDIV
+          errors for iterative procedures, assuming divisons are linear
+          in N, data set size.
+
+                          P fail in     # of pages,     # of pages,
+        N         D      1,000 pages     P = .01          P = .5
+   ---------------------------------------------------------------
+       100     117,668      .01299          764           53,025
+     1,000   1,176,675      .12256           77            5,301
+    10,000  11,766,750      .72948            8              530
+   100,000 117,667,500     1.00000           <1               53
+   ---------------------------------------------------------------
+
+As with Table 2, users of statistical software should be able to place
+themselves somewhere on this table.  And, as before, if you use a package
+other than Stata, divide your number of pages by two.
+
+
+ 78
+other than Stata, divide your number of pages by two.
+
+
+Table 3, however, reflects the probability of any error occuring.  In
+the iterative techniques tested in script ado2, division errors that
+occur during the maximization process will not affect the final result.
+What is wrong in one iteration the next iteration will fix.  (The
+path by which the result is obtained will change, but the result itself
+will be correct if, from the last iteration to output, there are no
+division errors.)
+
+As a way of approximating this, I return to the results from the test
+scripts.  I use the observed 3,002 divides per page as an estimate of
+the number of divides per page of output generated from the onset of
+the last iteration.  This time, however, I generalize the results by
+assuming the number of divisions is linear in data set size:
+
+           D  =  (3,002/100) * N  =  30.02 * N
+
+
+ 84
+           D  =  (3,002/100) * N  =  30.02 * N
+
+
+Table 4.  Speculative calculation for probability P of 1 or more FDIV
+          errors in iterative procedures that affects results,
+          assuming the number of divisons are linear in the log of N,
+          data set size.
+
+                          P fail in     # of pages,     # of pages,
+        N         D      1,000 pages     P = .01          P = .5
+   ---------------------------------------------------------------
+       100      3,002     .000333         29,908         2,077,638
+     1,000     30,020     .00333           3,014           207,826
+    10,000    300,200     .032805            301            20,781
+   100,000  3,002,000     .283629             30             2,078
+   ---------------------------------------------------------------
+
+This, I think, is a reasonable approximation to the affect of the FDIV
+bug on the final results of iterative techniques.
+
+ 90
+This, I think, is a reasonable approximation to the affect of the FDIV
+bug on the final results of iterative techniques.
+
+
+Summary
+-------
+
+Various claims have been made about the FDIV bug, varying from apocalyptic
+to, by Intel, so benign as to strike a user only once every 27,000 years.
+(A recent variation in this is that the mean time to the bug biting is
+longer than the mean time to failure of the other components of the computer.)
+Both are wrong.
+
+Most users of noniterative statistical procedures are indeed unlikely to be
+struck by the bug.  Intense users -- users producing say 500 pages per
+week -- do have a chance of observing the bug in a year.
+
+Users of iterative statistical procedures have more reason for concern
+although, this is offset by the fact that even among intense users,
+
+ 96
+Users of iterative statistical procedures have more reason for concern
+although, this is offset by the fact that even among intense users,
+few produce 500 pages per week of output.  If one performs maximum-likelihood
+estimation routinely on data sets of 1,000 or more observations, you
+are likely to observe the bug at least once over the course of a year.
+Users of larger data sets will almost certainly encounter the bug and
+more than once.  I chances that the bug will strike at a point where
+it effects final results, however, is greatly diminished from this.  Still,
+intense users of large data sets face a reasonable risk that it will
+affect the final results.
+
+How much will it effect results? I suspect the probability of meaningfully
+affecting results given an error is small, but have no way of casting any
+empirical light on that matter.
+
+Finally, remember that I have taken as given that the probability of the FDIV
+error is 1/(9e+09); I have no independent evidence to support it.  I have
+merely taken this probability, along with empirical data on the number of
+divisions statistical software users perform, and performed various
+
+100
+merely taken this probability, along with empirical data on the number of
+divisions statistical software users perform, and performed various
+manipulations.
+
+
+-- Bill
+wgould@stata.com
+--
+                        - Dr. Strangelove -
+  There are only two kinds of guys in this world... those that would do
+   Ginger and those that would do Mary Anne.  Well, I guess there are a
+                 few sickos that would do Mrs. Howell.
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 69 of 78  35%      
+
+Date: Thu, 15 Dec 1994 23:53:54 GMT
+From: Andrew Beveridge <beveridg@CLOUD9.NET>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: Re[2]: The Great Pentium Fire Drill
+
+Thomas M Skinner (Thomas_M_Skinner@CCM.FM.INTEL.COM) wrote:
+:                                                 Folsom, California
+:                                                 December 15, 1994
+:                                                 Fog, clearing 40's
+: Dear SAS-Lers,
+
+: Kevin F. Spratt writes:
+
+
+: >It seems that the issue of the bug has become overshadowed by
+: >how the bug is being exploited by various groups.  I tire of
+: >this debate and hope that others will soon follow.
+
+: >Regarding this article, the problem I am having is why this company
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+ 66
+
+: >Regarding this article, the problem I am having is why this company
+: >felt the need to write it?  Given its tone, it might not be too
+: >far fetched to hypothesize some vested interest in Intel.
+
+: >From Toms comments above, it seems good to know that those who agree
+: >with you have integrity and those that don't, don't.
+
+
+: Kevin, et al,
+
+: DQ is a market research firm that specializes in the computer industry.
+
+: I felt a need to post it as others felt a need to post our competitors
+official
+: statements (some might call it propaganda.)  DQ should be considered unbiased
+in
+: this as they receive their revenues independent of industry product
+: merchandising.  I suggest a trip to your local library to find out more about
+
+ 98
+: this as they receive their revenues independent of industry product
+: merchandising.  I suggest a trip to your local library to find out more about
+: them.
+
+: My only affiliation with DQ was several years ago when working in the
+Statistics
+: and Data Collection Research Department of Nielsen Media Research, when we
+: provided statistical sampling support to them (Both are companies of the D&B
+: corporation).
+
+I think that for statistics the three things we know are:  1) SAS will
+not guarantee accuracy using the Pentium;  2)  SPSS's test bed fails when
+run on Pentium;  3)  STATA has done an analysis that seems to indicate
+that for heavy use of ML statistics, a user runs the risk of non-trivial
+error from time to time.  This is based upon Intel's 9 billion before an
+error analysis.  So there you are.
+
+Andy Beveridge
+
+
+100
+Andy Beveridge
+
+P.S. Stata post is follow-up to fire drill above.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 70 of 78 100%      
+
+Date: Mon, 5 Dec 1994 16:03:17 -0500
+From: Paul Wehr <wehrp@AA.WL.COM>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: What Platform am I on?
+
+I have an application that needs to run (conditionally) on both MVS and UNIX,
+and it needs to know what it is currently running on.  Is there a system macro
+variable or somthing that will tell me?
+
+tx
+
+-paul
+--
+
+    "Megabytes, Gigabytes, Trilobytes?"            | Why would Parke-Davis
+Paul Wehr:  Ann Arbor, MI                          | want me to say anything
+NewtonMail:  wally@online.apple.com                | on their behalf?
+Parke-Davis:  wehrp@aa.wl.com                      |
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+[Already at end of message]
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 71 of 78  11%      
+
+Date: Thu, 15 Dec 1994 21:54:00 EST
+From: Sally Muller <UNCSM1@UNCMVS.OIT.UNC.EDU>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Pentium alert....correction to SAS Inst. take on Pentium!
+
+----------------------------------------------------------------------
+SUMMARY:  Correction to SAS Institutes posting on Pentium
+E-ADDR:   sally_muller@unc.edu
+NAME:     Sally Muller
+PH/ADDR:  919-962-5278  OIT CB#3460, UNC, Chapel Hill NC 27599
+----------------------------------------------------------------------
+Well if Warren Sarle, one of SI's main statistical proc  developers,
+goes to the trouble of e-mailing me and calling me regarding my
+posting the INCORRECT memo on  SAS Institute's opinions re the
+Pentium.....I know that there must have been a major flaw in
+the original message I sent you.  To tell you the truth, I haven't
+had a chance to compare the two memos 'cause Warren asked that
+I post this ASAP.  Please disregard my first posting, though
+and replace it with this one.  Thanks, and so sorry for confusion!
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+ 21
+I post this ASAP.  Please disregard my first posting, though
+and replace it with this one.  Thanks, and so sorry for confusion!
+
+-------------- SAS Institute's Memo on Pentium -------------------------
+
+Intel Corporation has acknowledged a flaw in the floating point
+unit of their Pentium chip. Certain rare combinations of numbers
+in a floating point division (FDIV) will lead to a loss of
+precision in the result.
+
+To verify that your machine has a flawed Pentium chip, run the
+following SAS program and check the SAS Log for the results of
+the PUT statement:
+
+    Data;
+      x = 4195835;
+      y = 3145727;
+      z = x - (x/y) * y;
+      if abs(z)>x*1e-14 then put 'error: ' _all_;
+
+ 30
+      z = x - (x/y) * y;
+      if abs(z)>x*1e-14 then put 'error: ' _all_;
+                        else put 'ok';
+    run;
+
+The Pentium, which uses the IEEE 754 standard for floating point
+numbers, represents double-precision floating point numbers (the
+numbers used in the SAS DATA step and for non-integer
+computations in most SAS procedures) to a precision of about 15
+decimal digits. The loss of precision due to the FDIV bug varies,
+but in the worst known cases the results are accurate to about 4
+significant decimal digits. For example, 4195835/3145727 yields
+1.333739... on a flawed Pentium, whereas the correct result is
+1.333820... . The error can occur in any digit after the 4th, and
+seems to occur with equal frequency in the 6th and later digits,
+with errors in the 5th digit occurring half as often as in other
+digits.  It is important to assess the precision in terms of
+significant digits, not in terms of decimal places, since the
+errors are relative in magnitude. Either number in the division
+
+ 40
+significant digits, not in terms of decimal places, since the
+errors are relative in magnitude. Either number in the division
+can be multiplied by a power of two without changing the relative
+error.
+
+The FDIV bug occurs for about one in nine billion divisions with
+randomly selected numbers according to Intel. This assessment has
+been confirmed to within an order of magnitude by several people
+who are not associated with Intel. However, the values for which
+the bug occurs are not randomly or uniformly distributed.
+According to Tim Coe, 90% of the problem divisors fall within one
+of the following ranges multiplied by any integral power of two:
+
+     3.0 > divisor >=  3.0 - 36*(2**-22)
+     9.0 > divisor >=  9.0 - 36*(2**-20)
+    15.0 > divisor >= 15.0 - 36*(2**-20)
+    21.0 > divisor >= 21.0 - 36*(2**-19)
+    27.0 > divisor >= 27.0 - 36*(2**-19)
+
+
+ 50
+    27.0 > divisor >= 27.0 - 36*(2**-19)
+
+The FDIV bug is believed not to occur for integer divisors less
+than 4000. However, the bug does happen with values that are just
+slightly less than an integer. An example from Vaughan R. Pratt
+shows that 4.999999/14.999999 yields 0.333329... on a flawed
+Pentium and 0.33333329... otherwise. Such values that are
+slightly less than an integer, which Pratt calls "bruised
+integers," can arise in floating point computations involving
+multiplication and division of integers and are a serious concern
+in situations where a large amount (such as 1E-8 or more) of
+bruising can occur.  However, the SAS DATA step and most
+procedures use double-precision arithmetic, so the amount of
+bruising that occurs in typical calculations will rarely be more
+than 1E-12.  According to Pratt's table, if the amount of
+bruising is less than 1E-12, the result is accurate to at least
+10 significant digits.  If you have a DATA step division
+involving a value that you know should be a small integer in
+exact arithmetic but that may have been bruised, you can use the
+
+ 60
+involving a value that you know should be a small integer in
+exact arithmetic but that may have been bruised, you can use the
+ROUND function to make the value an exact integer.
+
+The risk to which SAS users are exposed due to the FDIV bug
+varies with the application. The greatest concern would attach to
+applications in which a high degree of precision is required in
+the results, such as many financial computations. The number of
+floating point divisions obviously should be considered,
+especially those in which the divisor is slightly less than an
+integer. Another concern would be whether numeric errors can be
+magnified during the computation.
+
+Many statistical applications involve only divisions by small
+integers, such as computing means and standard deviations of a
+sample of less than 4000 observations; in such cases there
+obviously is no risk. Many statistical computations involve few
+divisions. For example, computing the coefficients in a multiple
+regression on n predictors with PROC REG requires only n+1
+
+ 70
+divisions. For example, computing the coefficients in a multiple
+regression on n predictors with PROC REG requires only n+1
+divisions. As many as 60 additional divisions are required for
+each t statistic and p value, but the worst possible errors in
+probability computations are unlikely to show up in the customary
+4 decimal places that SAS procedures print. On the other hand,
+PROC ORTHOREG does 6n divisions for every observation. Hence, the
+chance of encountering the FDIV bug is much greater with ORTHOREG
+than with REG.
+
+Numerical computations are described as "ill-conditioned" if a
+small numerical error can be magnified during the computation. An
+example is a multiple regression with highly correlated
+predictors. If the FDIV bug is encountered in PROC REG with
+uncorrelated predictors, the results are still likely to be
+accurate to at least three significant digits.  If the predictors
+are highly correlated, it is possible that the error could be
+magnified to the point that some results have no accurate digits,
+but the more likely result is that the problem will incorrectly
+
+ 80
+magnified to the point that some results have no accurate digits,
+but the more likely result is that the problem will incorrectly
+be declared singular. In either case, however, the error
+introduced by the FDIV bug is likely to be smaller than the
+statistical uncertainty.  Computations involving discontinuous
+functions, such as subset regression or cluster analysis, are
+also ill-conditioned, since a small change in the input can
+produce a large change in the output. However, an error
+introduced by the FDIV bug is again likely to be smaller than the
+statistical uncertainty.
+
+Computationally intensive procedures such as CALIS or MIXED are
+more likely than most procedures to encounter the FDIV bug simply
+because they require more floating point computation than most
+procedures.  Most of these computationally intensive procedures
+do some form of nonlinear optimization. An FDIV error that occurs
+during a nonlinear optimization is likely to be corrected at a
+later stage of the computation. Hence these procedures are
+probably at little more risk of producing incorrect final results
+
+ 90
+later stage of the computation. Hence these procedures are
+probably at little more risk of producing incorrect final results
+than are noniterative procedures such as REG.
+
+RANUNI should not be affected by the FDIV bug since it has only one
+floating point division, and the divisor, 2**31-1, is not considered
+at risk. Neither should RANEXP, RANNOR, RANTBL, or RANTRI be affected.
+However, RANBIN, RANCAU, and RANGAM do contain divisions that could
+conceivably be affected.
+
+To obtain a crude assessment of the risk of an FDIV error of
+practical significance in statistical computations, we have rerun
+large parts of of the test libraries for the SAS/ETS, SAS/IML,
+SAS/OR, and SAS/STAT products on both Pentium and 486 machines.
+We failed to find any discrepancy greater than what would
+normally be expected due to numerical error. A few
+inconsequential differences could be attributed to the Pentium's
+greater accuracy in some transcendental functions.
+
+
+100
+greater accuracy in some transcendental functions.
+
+Version 6.10 of the SAS System for the PC was built with a
+compiler designed to take full advantage of improvements in the
+486 and Pentium processors.  Examples of these optimizations
+include instruction scheduling (re-arranging instructions to
+allow for more concurrent execution) and instruction pairing
+(selective use of instructions that have improved performance on
+this class of processors).  These optimizations have no effect on
+the likelihood of SAS users encountering the FDIV bug in the
+Pentium processor.
+
+SAS Institute is vitally interested in the integrity of the
+results produced by its products.  We recommend that if you have
+a Pentium that exhibits the problem and you are concerned about
+possible errors, please contact Intel's Customer Service at
+800/628-8686 for information on obtaining a corrected Pentium
+chip.
+
+
+[Already at end of message]
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 72 of 78  95%      
+
+Date: Fri, 16 Dec 1994 00:27:43 -0500
+From: RWnewmedia@aol.com
+To: wwwwwh@phantom.com
+Subject: stuff
+
+Hi Stephen,
+
+Good seeing you today; configuring softwarte to modem and working fine.
+
+Could you send me an invoice for the services on Openetwork letterhead?
+e-mail rwnewmedia@aol.com
+fax: 212/679-2867
+
+How do I get onto pipeline.
+
+Speak to you soon
+
+Rob
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+  PINE 3.89   FOLDER INDEX                 Folder: INBOX  Message 72 of 78      
+
+  D 58  Dec 15 Tom Minor           (1,360) Re: sas under win32s...which version?
+  D 59  Dec 15 Steven M. Kemp (Un  (3,035) Re: The Great Pentium Fire Drill     
+  D 60  Dec 15 HILL@CMSUVMB.CMSU.  (2,002) Re: Of Anecdotes, Antidotes, and Anti
+  D 61  Dec 16 Mason, Phil         (1,185) SASTrap: INCLUDE macro statement     
+  D 62  Dec 15 ranan samanya       (1,463) Re: SAS for OS/2 (long!) was (Re: Hot
+  D 63  Dec 15 Sally Muller        (9,049) SAS Institute's take on Pentium      
+  D 64  Dec 15 Ewan Grantham       (1,776) Help with ORDER BY/DISTINCT bug/info?
+  D 65  Dec 15 David Carroll       (2,906) Stop Net Abuse - A Suggestion        
+  D 66  Dec 15 Louis Fox           (1,231) MIXREG                               
+  D 67  Dec 15 Melvin Klassen      (1,392) Free! solution to the Intel Pentium "
+  D 68  Dec 15 Andrew Beveridge   (14,258) Re: The Great Pentium Fire Drill     
+  D 69  Dec 15 Andrew Beveridge    (2,936) Re: Re[2]: The Great Pentium Fire Dri
+  D 70  Dec  5 Paul Wehr           (1,368) What Platform am I on?               
+  D 71  Dec 15 Sally Muller        (9,619) Pentium alert....correction to SAS In
++   72  Dec 16 RWnewmedia@aol.com    (689) stuff                                
+  N 73  Dec 15 Jack Hamilton       (3,724) Re: Stop Net Abuse - A Suggestion    
+  N 74  Dec  6 Paul Wehr           (2,721) Re: Wanted: Examples of SAS code for 
+  N 75  Dec 16 Tom Robinson        (1,616) Re: Greetings O wise SAS ones!       
+  N 76  Dec 16 RobinWay            (1,876) Re: PROC STEPWISE -- Output of predic
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V [ViewMsg]  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+73
+NEW
++   72  Dec 16 RWnewmedia@aol.com    (689) stuff                                
+  N 73  Dec 15 Jack Hamilton       (3,724) Re: Stop Net Abuse - A Suggestion    
+
+
+72
+   
+  N 73  Dec 15 Jack Hamilton       (3,724) Re: Stop Net Abuse - A Suggestion    
++   72  Dec 16 RWnewmedia@aol.com    (689) stuff                                
+
+
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 72 of 78  95%      
+
+Date: Fri, 16 Dec 1994 00:27:43 -0500
+From: RWnewmedia@aol.com
+To: wwwwwh@phantom.com
+Subject: stuff
+
+Hi Stephen,
+
+Good seeing you today; configuring softwarte to modem and working fine.
+
+Could you send me an invoice for the services on Openetwork letterhead?
+e-mail rwnewmedia@aol.com
+fax: 212/679-2867
+
+How do I get onto pipeline.
+
+Speak to you soon
+
+Rob
+
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+Rob
+
+speak to you soon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 73 of 78  24%      
+
+Date: Thu, 15 Dec 1994 22:03:22 CST
+From: Jack Hamilton <hamiltja@HCCOMPARE.COM>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: Stop Net Abuse - A Suggestion
+
+David Carroll <BDCARRD1%BUDGET.BITNET@uga.cc.uga.edu> wrote:
+
+>Another list that I receive had some additional information
+>on trying to go after the chump who posted that chip liquid-
+>ation sale listing. Evidently netcom.com, his Internet Service
+>Provider, also had been the source of that previous "Green
+>Card" post
+
+That's not entirely correct.  C&S posted from a number of different sites.
+
+>(strange that both of these came from lawyers
+>behaving unethically?)
+
+The chip poster said he was an actuary, not a lawyer.
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 74 of 78  39%      
+
+Date: Tue, 6 Dec 1994 09:21:45 -0500
+From: Paul Wehr <wehrp@AA.WL.COM>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: Wanted: Examples of SAS code for drug trials
+
+In article <3959211405121994/A53444/MEDEC/118C2B953700*@mr.syntex.com>, Faith
+Renee Sloan 415-855-5832 <Faith.Sloan@SYNTEX.COM> writes:
+> mr self couldn't have said it better.  would i feel comfortable hiring mr.
+shain
+> as an independent contractor?  no, i wouldn't.  mr shain would do better at
+> soliciting business in his current area of 'expertise' whatever that may be.
+if
+> mr. shain is an excellent SAS programmer and listener, then the
+> industry-specifics is irrelevant.
+>
+> aahhhhhhhh....i feel better now. you won't hear from me on this issue again.
+>
+> Faith Renee Sloan
+> Senior Project Analyst (Expert)
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+ 75
+> Faith Renee Sloan
+> Senior Project Analyst (Expert)
+> Syntex, affiliate of the Roche Group
+> Mycophenolate Mofetil Transplant Program
+> Palo Alto, CA 94303
+> faith.sloan@syntex.com
+> http://www.syntex.com/welcome.html
+> ***Life is too SHORT--De-jobbing is IN!!***
+
+On the other hand, imagine where pharmaceutical research would be
+if the programmers were free to exchange code of any kind--macro
+libraries, data views, even whole applications...  That Lab data
+management application that you have been slaving away at over
+the past three months is the same one that has already been done
+in 12 other companies, and is currently being developed in another
+five.  Kind of makes you wonder who is to gain with this concept
+of "proprietary" code, except for the gainfully-employed legions of
+SAS programmers, of course ;)
+
+
+100
+SAS programmers, of course ;)
+
+
+P.S., I think Ian Whitlock has somehow let slip his "proprietary"
+%age macro.  I hope he doesn't get fired :)
+
+-paul
+
+--
+
+    "Megabytes, Gigabytes, Trilobytes?"            | Why would Parke-Davis
+Paul Wehr:  Ann Arbor, MI                          | want me to say anything
+NewtonMail:  wally@online.apple.com                | on their behalf?
+Parke-Davis:  wehrp@aa.wl.com                      |
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 75 of 78  95%      
+
+Date: Fri, 16 Dec 1994 03:27:05 GMT
+From: Tom Robinson <robinson@ATLANTIS.ACTRIX.GEN.NZ>
+Reply to: tomr.bnz@mhsgate.nui-wgtn.gen.nz
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: Greetings O wise SAS ones!
+
+In article <01HKN1EX2BK6008JM7@mr.lilly.com>,
+CATLEY DENNIS B  <CATLEY_DENNIS_B@LILLY.COM> wrote:
+>I just had a user present me with an SCL error that's a new one for me and
+>would love to hear some SCL expertise spilled forth to explain it.
+>
+>the error is 'Out of file handles creating WORK'
+>with a hopefully related 'Appendage auto-load failure' message
+
+If you're running under Windoze I suggest increasing the number of
+file handles in the config.sys
+--
+  8    Bare          What does the 95 in Windows 95 stand for?         vuU Uuv
+o-+-o  Foot           The shipping date in hexadecimal - 2149              GCS
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+  8    Bare          What does the 95 in Windows 95 stand for?         vuU Uuv
+o-+-o  Foot           The shipping date in hexadecimal - 2149              GCS
+ < >   Guru    -d+(-) p(--) c++ !l u+ e* m+(---) s+/ n+ h@ f !g w+ t+ r+ y+(*)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 76 of 78  79%      
+
+Date: Fri, 16 Dec 1994 01:35:14 -0500
+From: RobinWay <robinway@AOL.COM>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: PROC STEPWISE -- Output of predicted & residuals
+
+In article <3cnuvi$ll7@tequesta.gate.net>, jjmacak3@gate.net writes:
+
+<<I use both PROC GLM and PROC STEPWISE for
+multiple regression analyses.  I know that PROC GLM offers
+an option to print observed, predicted, residuals, and CLM95.
+However, is there a way to use PROC STEWISE and output
+the predicted and residual values to a dataset?  I use SAS 6.08
+for Windows.>>
+
+First, upgrade to version 6.10, and then switch to Proc Reg, and choose
+the Adjrsq option, or the rsquare option, or the forward, backward,
+stepwise, etc. options.  The selection you make determines how independent
+variables are added to (removed from) the model.  Then Proc Reg permits
+the Outest= option to  output parm estimates.
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+variables are added to (removed from) the model.  Then Proc Reg permits
+the Outest= option to  output parm estimates.
+
+On a more theoretical note, IMHO, stepwise regression (as it had been
+drilled into me over and over again in school) is fine for doing
+exploratory analysis, but modeling should be guided by theory first and by
+diagnostic statistics last.  ;-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 77 of 78  67%      
+
+Date: Fri, 16 Dec 1994 01:40:07 -0500
+From: RobinWay <robinway@AOL.COM>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Re: sas under win32s...which version?
+
+In article:
+
+<<One of my net administrators is running win32s v1.1.88 on his network.
+The spec sheets for SAS v6.10 specifies that v6.10 supports win32s
+v1.15.111.
+Tech support in Cary further states than v1.15.111 is the *only* version
+of
+win32s supported.>>
+
+In order to install sas version 6.10 for windows, SI includes some
+supplementary files which must be installed first--these will install the
+files necessary to convert your windows setup to Win32s v1.15.111.  So if
+you want to bypass your net administrator (and suffer the potential
+consequences), you may not need to wait for the entire net to
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+you want to bypass your net administrator (and suffer the potential
+consequences), you may not need to wait for the entire net to
+upgrade--just install the software locally.
+
+Of course, there may be all sorts of network-specific details at your site
+of which I am woefully unaware, but our Netware-based LAN doesn't seem to
+mind (or even acknowledge) that I am running a "new" version of Windows.
+
+Robin Way
+Associate, Barakat & Chamberlin
+robinway@aol.com
+
+
+
+
+
+
+
+
+
+DEL
+  PINE 3.89   MESSAGE TEXT            Folder: INBOX  Message 78 of 78  79%      
+
+Date: Fri, 16 Dec 1994 09:43:50 +0000
+From: HEDDERLE <duncan.hedderley@AFRC.AC.UK>
+To: Multiple recipients of list SAS-L <SAS-L@uga.cc.uga.edu>
+Subject: Segmentation Violation" on SAS6.07 under Ultrix
+
+Hello,
+I'm running SAS 6.07.01 under Ultrix on a DecStation 5000 - or at
+least I'm trying to. I'm working on a program which doesn't involve
+particularly large data sets (about 100 obs x 20 variables, or 2000
+obs x 5 variables) or particularly fancy code (though there are a
+lot of Proc Corrs and Proc Regs, and I'm reshaping the data sets
+a lot), but when I try to run it it gives me a "Segmentation Violation
+in Task OUTPUT" at the end of the log, and every time I try to
+change windows they shut.
+I haven't got a CLUE what a "Segmentation Violation" is, so I can't
+even start working out what's wrong with my code (and I'm fairly
+sure it's a code problem, not a hardware one - I've tried it on
+two machines and they've both bombed). Please could someone
+enlighten me?
+? Help       M Main Menu  P PrevMsg     - PrevPage    D Delete      R Reply
+O OTHER CMDS V ViewAttch  N NextMsg   Spc NextPage    U Undelete    F Forward
+
+100
+two machines and they've both bombed). Please could someone
+enlighten me?
+Many thnaks in advance
+
+Duncan Hedderley
+
+Institute of Food Research, Reading, UK
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEL
+
+[Last message deleted]
+Really quit pine? (y/n/^C) [y]:                                                 
+
+Yes
+
+[Closing "INBOX"...]
+Expunge the 34 deleted messages from "INBOX"? (y/n) [y]:                        
+
+Yes
+
+[Closing "INBOX". Keeping 44 messages and deleting 34]
+
+
+
+
+Pine finished
+
+
+(10:02am)        [ Phantom Access Technologies, Inc. (TM) ]         (? for Menu)
+
+[Main Menu]: o
+
+
+
+
+
+
+
+
+     [ wwwwwh ] Leaving the MindVox Thoughtscape on [16-Dec-94] / [10:02am]
+
+
+NO CARRIER

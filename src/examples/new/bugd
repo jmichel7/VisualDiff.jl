@@ -1,0 +1,17 @@
+% file  2lat1-5.tex   (has a .fr)
+\magnification=1200
+\pageno=153
+\hfuzz=2.5pt
+\input ../louis.sty
+\input ../l.sty
+\input lattice.sty
+\headline{Geometry of lattices I\s5 \hfill\er file 2lat1-5.tex.\qquad\today}
+
+\entete {I \s5 }{The classification of two dimensional lattices}
+
+\proclaim I\s5-1. Reduction of two variable quadratic forms. 
+
+We can always choose an arbitrary visible vector to be a vector basis. 
+For the 2-dimensional lattice $L$ we choose a shortest vector $\vec s\in 
+S$. Then the other basis vector must be in one the two $\Sigma_\pm$ the 
+nearest paralleles to $\lambda\vec s$ which contain lattice points 

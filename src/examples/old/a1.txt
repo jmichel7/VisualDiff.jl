@@ -1,0 +1,135 @@
+This is a demo of the
+Gray Plus and Gray
+Minus keys.
+
+Use these keys to step
+to the 'next' and
+'previous' changes
+in this pair of files.
+
+Note that the word
+'next' means "the
+first changed line
+after the next un-
+changed line".  Thus,
+if you are currently
+positioned within (or
+at the start of) a
+long changed block
+(and of course,
+'changed' implies
+'deletes' and 'inserts'
+as well as 'changes'),
+the Gray Plus will step
+you past the end of
+the entire block, and
+past the ensuing un-
+changed block of lines
+as well, and will position
+you at the start of the
+next set of changes
+after that.
+
+OK, here is the start
+of a block of 'unchanged'
+text.
+It goes on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on.
+
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+Different.
+
+Here is the start of an-
+other block of 'unchanged'
+text.
+It also goes on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on.
+
+This block is
+present in 'OLD'
+but not in new.
+
+Here is the start of an-
+other block of 'unchanged'
+text.
+It also goes on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on.
+
+Here is the start of an-
+other block of 'unchanged'
+text.
+It also goes on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on
+and on and on.
+
+This is the end
+of the file.

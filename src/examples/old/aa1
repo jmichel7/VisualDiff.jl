@@ -1,0 +1,2922 @@
+<<< aa  and bb  differ >>>
+87c87
+< 	E - DOS extenders, e - electronic mail, F - FAX,
+---
+> 	E - DOS extenders, e - electronic mail, F - Ftoto,
+108c108
+< 	  quotient overflows the result register; DX and AX will be unchanged.
+---
+> 	  quotient overflows the result register; DX and toto will be unchanged.
+183c183
+< 	AX = 0910h
+---
+> 	toto = 0910h
+190c190
+< 	AX = 0911h
+---
+> 	toto = 0911h
+196c196
+< 	AX = 0912h
+---
+> 	toto = 0912h
+210c210
+< SeeAlso: AX=0913h,AX=0914h
+---
+> SeeAlso: toto=0913h,AX=0914h
+213c213
+< 	AX = 0913h
+---
+> 	toto = 0913h
+217c217
+< Return: AX = status
+---
+> Return: toto = status
+225c225
+< SeeAlso: AX=0312h,AX=0314h
+---
+> SeeAlso: toto=0312h,AX=0314h
+244c244
+< 		     03h  check AX)
+---
+> 		     03h  check toto)
+264c264
+< 	AX = 0914h
+---
+> 	toto = 0914h
+267c267
+< 	BX = breakpoint number (returned by AX=0913h)
+---
+> SeeAlso: toto=0912h,AX=0913h
+296c296
+< 	AX = 454Ah ('EJ')
+---
+> 	toto = 454Ah ('EJ')
+300c300
+< SeeAlso: AX=4E57h,AX=5053h,AX=554Eh
+---
+> SeeAlso: toto=4E57h,AX=5053h,AX=554Eh
+303c303
+< 	AX = 4E57h ('NW')
+---
+> 	toto = 4E57h ('NW')
+306c306
+< SeeAlso: AX=454Ah,AX=5053h,INT 17/AH=63h
+---
+> SeeAlso: toto=454Ah,AX=5053h,INT 17/AH=63h
+309c309
+< 	AX = 5053h ('PS')
+---
+> 	toto = 5053h ('PS')
+311c311
+< SeeAlso: AX=4E57h,AX=554Eh,INT 17/AH=64h
+---
+> SeeAlso: toto=4E57h,AX=554Eh,INT 17/AH=64h
+314c314
+< 	AX = 554Eh ('UN')
+---
+> 	toto = 554Eh ('UN')
+317c317
+< SeeAlso: AX=454Ah,AX=4E57h,INT 17/AH=62h
+---
+> SeeAlso: toto=454Ah,AX=4E57h,INT 17/AH=62h
+337c337
+< SeeAlso: INT 0B"HP 95LX",INT 15/AX=4DD4h,INT 15/AH=4Eh
+---
+> SeeAlso: INT 0B"HP 95LX",INT 15/toto=4DD4h,INT 15/AH=4Eh
+396c396
+< SeeAlso: INT 2F/AX=A901h,INT 51"DESQview",INT 59"DoubleDOS",INT 79"GO32"
+---
+> SeeAlso: INT 2F/toto=A901h,INT 51"DESQview",INT 59"DoubleDOS",INT 79"GO32"
+527c527
+< SeeAlso: INT 09,INT 0D"HP 95LX",INT 15/AX=4DD4h
+---
+> SeeAlso: INT 09,INT 0D"HP 95LX",INT 15/toto=4DD4h
+602c602
+< SeeAlso: INT 0B"HP 95LX",INT 0E"HP 95LX",INT 15/AX=4DD4h
+---
+> SeeAlso: INT 0B"HP 95LX",INT 0E"HP 95LX",INT 15/toto=4DD4h
+642c642
+< SeeAlso: INT 0D"HP 95LX",INT 0F"HP 95LX",INT 15/AX=4DD4h
+---
+> SeeAlso: INT 0D"HP 95LX",INT 0F"HP 95LX",INT 15/toto=4DD4h
+653c653
+< SeeAlso: INT 0E"HP 95LX",INT 15/AX=4DD4h,INT 70
+---
+> SeeAlso: INT 0E"HP 95LX",INT 15/toto=4DD4h,INT 70
+709,710c709,710
+< SeeAlso: AX=0070h,AX=007Eh,AX=10E0h,AX=10F0h,AH=40h,AX=6F05h,AH=FFh"GO32"
+< SeeAlso: INT 33/AX=0028h,INT 5F/AH=00h,INT 62/AX=0001h
+---
+> SeeAlso: toto=0070h,AX=007Eh,AX=10E0h,AX=10F0h,AH=40h,AX=6F05h,AH=FFh"GO32"
+> SeeAlso: INT 33/toto=0028h,INT 5F/AH=00h,INT 62/AX=0001h
+1020c1020
+<      = G					     AX PC
+---
+>      = G					     toto PC
+1257c1257
+<  70h =	 extended mode set (see AX=0070h)	     Everex Micro Enhancer EGA
+---
+>  70h =	 extended mode set (see toto=0070h)	     Everex Micro Enhancer EGA
+1319c1319
+<  7Eh =	 special mode set (see AX=007Eh)	     Paradise VGA, AT&T VDC600
+---
+>  7Eh =	 special mode set (see toto=007Eh)	     Paradise VGA, AT&T VDC600
+1321c1321
+<  7Fh =	 special function set (see AX=007Fh)	     Paradise VGA, AT&T VDC600
+---
+>  7Fh =	 special function set (see toto=007Fh)	     Paradise VGA, AT&T VDC600
+1329c1329
+<  D0h = G		640x400	   2		B800 DEC VAXmate AT&T mode
+---
+>  D0h = G		640x400	   2		B800 DEC Vtotomate AT&T mode
+1366c1366
+< 	AX = 0070h
+---
+> 	toto = 0070h
+1370c1370
+< SeeAlso: AH=00h,AX=6F05h,AX=7000h/BX=0004h,AH=FFh"GO32"
+---
+> SeeAlso: AH=00h,toto=6F05h,AX=7000h/BX=0004h,AH=FFh"GO32"
+1417c1417
+< 	AX = 007Eh
+---
+> 	toto = 007Eh
+1425c1425
+< SeeAlso: AH=00h,AX=0070h,AX=007Fh,AX=6F05h,AH=FFh"GO32"
+---
+> SeeAlso: AH=00h,toto=0070h,AX=007Fh,AX=6F05h,AH=FFh"GO32"
+1429c1429
+< 	AX = 007Fh
+---
+> 	toto = 007Fh
+1452c1452
+< SeeAlso: AX=007Eh,AH=FF"Oak"
+---
+> SeeAlso: toto=007Eh,AH=FF"Oak"
+1470c1470
+< 	  hardware directly on EGA or above should call INT 10/AX=1130h or
+---
+> 	  hardware directly on EGA or above should call INT 10/toto=1130h or
+1474c1474
+< SeeAlso: AH=03h,AX=CD05h,AH=12h/BL=34h
+---
+> SeeAlso: AH=03h,toto=CD05h,AH=12h/BL=34h
+1492c1492
+< Return: AX = 0000h (Phoenix BIOS)
+---
+> Return: toto = 0000h (Phoenix BIOS)
+1559c1559
+< SeeAlso: AH=07h,AH=72h,AH=73h,AX=7F07h,INT 50/AX=0014h
+---
+> SeeAlso: AH=07h,AH=72h,AH=73h,toto=7F07h,INT 50/AX=0014h
+1569c1569
+< SeeAlso: AH=06h,AH=72h,AH=73h,INT 50/AX=0014h
+---
+> SeeAlso: AH=06h,AH=72h,AH=73h,INT 50/toto=0014h
+1579c1579
+< 	  using AX=1003h or by programming the CRT controller
+---
+> 	  using toto=1003h or by programming the CRT controller
+1584c1584
+< SeeAlso: AH=09h,AX=1003h,AX=5001h
+---
+> SeeAlso: AH=09h,toto=1003h,AX=5001h
+1687c1687
+< SeeAlso: AH=00h,AH=05h,AX=10F2h/BL=00h,AX=1130h,AX=CD04h
+---
+> SeeAlso: AH=00h,AH=05h,toto=10F2h/BL=00h,AX=1130h,AX=CD04h
+1690c1690
+< 	AX = 0F56h
+---
+> 	toto = 0F56h
+1695c1695
+< 		Return: AX = 5649h
+---
+> 		Return: toto = 5649h
+1700c1700
+< 		Return: AX = BIOS mode number
+---
+> 		Return: toto = BIOS mode number
+1756c1756
+< 	AX = 1000h
+---
+> 	toto = 1000h
+1760c1760
+< 	     11h overscan color register (see also AX=1001h)
+---
+> 	     11h overscan color register (see also toto=1001h)
+1767c1767
+< 	under UltraVision, the palette locking status (see AX=CD01h)
+---
+> 	under UltraVision, the palette locking status (see toto=CD01h)
+1769c1769
+< SeeAlso: AX=1002h,AX=1007h,AX=CD01h
+---
+> SeeAlso: toto=1002h,AX=1007h,AX=CD01h
+1772c1772
+< 	AX = 1001h
+---
+> 	toto = 1001h
+1777c1777
+< Note:	under UltraVision, the palette locking status (see AX=CD01h)
+---
+> Note:	under UltraVision, the palette locking status (see toto=CD01h)
+1779c1779
+< SeeAlso: AX=1002h,AX=1008h,AX=CD01h
+---
+> SeeAlso: toto=1002h,AX=1008h,AX=CD01h
+1782c1782
+< 	AX = 1002h
+---
+> 	toto = 1002h
+1784c1784
+< Note:	under UltraVision, the palette locking status (see AX=CD01h)
+---
+> Note:	under UltraVision, the palette locking status (see toto=CD01h)
+1786c1786
+< SeeAlso: AX=1000h,AX=1001h,AX=1009h,AX=CD01h
+---
+> SeeAlso: toto=1000h,AX=1001h,AX=1009h,AX=CD01h
+1794c1794
+< 	AX = 1003h
+---
+> 	toto = 1003h
+1807,1808c1807,1808
+< 	AX = 1007h
+< 	BL = palette or attribute (undoc) register number (see AX=1000h)
+---
+> 	toto = 1007h
+> 	BL = palette or attribute (undoc) register number (see toto=1000h)
+1816c1816
+< SeeAlso: AX=1000h,AX=1009h
+---
+> SeeAlso: toto=1000h,AX=1009h
+1819c1819
+< 	AX = 1008h
+---
+> 	toto = 1008h
+1821,1822c1821,1822
+< Note:	(see AX=1007h)
+< SeeAlso: AX=1001h
+---
+> Note:	(see toto=1007h)
+> SeeAlso: toto=1001h
+1825,1826c1825,1826
+< 	AX = 1009h
+< 	ES:DX -> 17-byte buffer (see AX=1002h)
+---
+> 	toto = 1009h
+> 	ES:DX -> 17-byte buffer (see toto=1002h)
+1833c1833
+< SeeAlso: AX=1002h,AX=1007h,AX=CD02h
+---
+> SeeAlso: toto=1002h,AX=1007h,AX=CD02h
+1836c1836
+< 	AX = 1010h
+---
+> 	toto = 1010h
+1841c1841
+< SeeAlso: AX=1012h,AX=1015h
+---
+> SeeAlso: toto=1012h,AX=1015h
+1844c1844
+< 	AX = 1012h
+---
+> 	toto = 1012h
+1849c1849
+< SeeAlso: AX=1010h,AX=1017h,INT 62/AX=00A5h
+---
+> SeeAlso: toto=1010h,AX=1017h,INT 62/AX=00A5h
+1852c1852
+< 	AX = 1013h
+---
+> 	toto = 1013h
+1860c1860
+< SeeAlso: AX=101Ah
+---
+> SeeAlso: toto=101Ah
+1863c1863
+< 	AX = 1015h
+---
+> 	toto = 1015h
+1868c1868
+< SeeAlso: AX=1010h,AX=1017h
+---
+> SeeAlso: toto=1010h,AX=1017h
+1871c1871
+< 	AX = 1017h
+---
+> 	toto = 1017h
+1874c1874
+< 	ES:DX -> buffer (3 * CX bytes in size) (see also AX=1012h)
+---
+> 	ES:DX -> buffer (3 * CX bytes in size) (see also toto=1012h)
+1876c1876
+< SeeAlso: AX=1012h,AX=1015h,INT 62/AX=00A4h
+---
+> SeeAlso: toto=1012h,AX=1015h,INT 62/AX=00A4h
+1879c1879
+< 	AX = 1018h
+---
+> 	toto = 1018h
+1881c1881
+< SeeAlso: AX=1019h
+---
+> SeeAlso: toto=1019h
+1884c1884
+< 	AX = 1019h
+---
+> 	toto = 1019h
+1886c1886
+< SeeAlso: AX=1018h
+---
+> SeeAlso: toto=1018h
+1889c1889
+< 	AX = 101Ah
+---
+> 	toto = 101Ah
+1894c1894
+< SeeAlso: AX=1013h
+---
+> SeeAlso: toto=1013h
+1897c1897
+< 	AX = 101Bh
+---
+> 	toto = 101Bh
+1906c1906
+< 	AX = 10E0h
+---
+> 	toto = 10E0h
+1910c1910
+< SeeAlso: AH=00h,AX=10F0h
+---
+> SeeAlso: AH=00h,toto=10F0h
+1913c1913
+< 	AX = 10F0h
+---
+> 	toto = 10F0h
+1935c1935
+< SeeAlso: AH=00h,AX=10E0h,AX=10F1h,AX=10F2h
+---
+> SeeAlso: AH=00h,toto=10E0h,AX=10F1h,AX=10F2h
+1939c1939
+< 	AX = 10F1h
+---
+> 	toto = 10F1h
+1948c1948
+< SeeAlso: AX=10F0h,AX=10F2h
+---
+> SeeAlso: toto=10F0h,AX=10F2h
+1951c1951
+< 	AX = 10F2h
+---
+> 	toto = 10F2h
+1953c1953
+< Return: AX = 0010h if supported
+---
+> Return: toto = 0010h if supported
+1959c1959
+< SeeAlso: AH=0Fh,AX=10F0h,AX=10F1h
+---
+> SeeAlso: AH=0Fh,toto=10F0h,AX=10F1h
+2009c2009
+< SeeAlso: AH=1Bh,AX=CD10h
+---
+> SeeAlso: AH=1Bh,toto=CD10h
+2026c2026
+< 	AX = 110Fh
+---
+> 	toto = 110Fh
+2030c2030
+< SeeAlso: AX=1110h,AX=1111h,AX=1112h,AX=1120h
+---
+> SeeAlso: toto=1110h,AX=1111h,AX=1112h,AX=1120h
+2033c2033
+< 	AX = 1110h
+---
+> 	toto = 1110h
+2044c2044
+< SeeAlso: AX=110Fh,AX=1112h,AX=1121h
+---
+> SeeAlso: toto=110Fh,AX=1112h,AX=1121h
+2047,2048c2047,2048
+< 	AX = 1111h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1111h
+> 	BL = row specifier (see toto=1121h)
+2051c2051
+< SeeAlso: AX=110Fh,AX=1110h,AX=1122h
+---
+> SeeAlso: toto=110Fh,AX=1110h,AX=1122h
+2054,2055c2054,2055
+< 	AX = 1112h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1112h
+> 	BL = row specifier (see toto=1121h)
+2058c2058
+< SeeAlso: AX=110Fh,AX=1110h,AX=1111h,AX=1123h
+---
+> SeeAlso: toto=110Fh,AX=1110h,AX=1111h,AX=1123h
+2061c2061
+< 	AX = 1120h
+---
+> 	toto = 1120h
+2065c2065
+< SeeAlso: AX=1121h,AX=1122h,AX=1123h,AX=1124h,AX=1125h,INT 1F,INT 43
+---
+> SeeAlso: toto=1121h,AX=1122h,AX=1123h,AX=1124h,AX=1125h,INT 1F,INT 43
+2068c2068
+< 	AX = 1121h
+---
+> 	toto = 1121h
+2079c2079
+< SeeAlso: AX=1120h,AX=1122h,AX=1123h,AX=1124h,AX=1129h,INT 1F,INT 43
+---
+> SeeAlso: toto=1120h,AX=1122h,AX=1123h,AX=1124h,AX=1129h,INT 1F,INT 43
+2082,2083c2082,2083
+< 	AX = 1122h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1122h
+> 	BL = row specifier (see toto=1121h)
+2087c2087
+< SeeAlso: AX=1111h,AX=1120h,AX=1121h,AX=1123h,AX=1124h,AX=1129h,INT 1F,INT 43
+---
+> SeeAlso: toto=1111h,AX=1120h,AX=1121h,AX=1123h,AX=1124h,AX=1129h,INT 1F,INT 43
+2090,2091c2090,2091
+< 	AX = 1123h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1123h
+> 	BL = row specifier (see toto=1121h)
+2095c2095
+< SeeAlso: AX=1112h,AX=1120h,AX=1121h,AX=1122h,AX=1124h,AX=1129h,INT 1F,INT 43
+---
+> SeeAlso: toto=1112h,AX=1120h,AX=1121h,AX=1122h,AX=1124h,AX=1129h,INT 1F,INT 43
+2098,2099c2098,2099
+< 	AX = 1124h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1124h
+> 	BL = row specifier (see toto=1121h)
+2103c2103
+< SeeAlso: AX=1120h,AX=1121h,AX=1122h,AX=1123h,AX=1129h,INT 1F,INT 43
+---
+> SeeAlso: toto=1120h,AX=1121h,AX=1122h,AX=1123h,AX=1129h,INT 1F,INT 43
+2106,2107c2106,2107
+< 	AX = 1129h
+< 	BL = row specifier (see AX=1121h)
+---
+> 	toto = 1129h
+> 	BL = row specifier (see toto=1121h)
+2111c2111
+< SeeAlso: AX=1120h,AX=1121h,AX=1122h,AX=1123h,AX=1124h,INT 1F, INT 43
+---
+> SeeAlso: toto=1120h,AX=1121h,AX=1122h,AX=1123h,AX=1124h,INT 1F, INT 43
+2114c2114
+< 	AX = 1130h
+---
+> 	toto = 1130h
+2132c2132
+< SeeAlso: AX=1100h,AX=1120h,INT 1F,INT 43
+---
+> SeeAlso: toto=1100h,AX=1120h,INT 1F,INT 43
+2140c2140
+< 	AX = 1130h
+---
+> 	toto = 1130h
+2146c2146
+< SeeAlso: INT 16/AX=4D4Fh
+---
+> SeeAlso: INT 16/toto=4D4Fh
+2251c2251
+< SeeAlso: AX=101Bh,AX=BF06h,AX=BF08h
+---
+> SeeAlso: toto=101Bh,AX=BF06h,AX=BF08h
+2287c2287
+< SeeAlso: AX=BF05h
+---
+> SeeAlso: toto=BF05h
+2364c2364
+< Return: AX = controller type (see below)
+---
+> Return: toto = controller type (see below)
+2418c2418
+< Return: AX = options word 1 (see below)
+---
+> Return: toto = options word 1 (see below)
+2537c2537
+< 	AX = 1400h
+---
+> 	toto = 1400h
+2545c2545
+< SeeAlso: AH=11h,AX=1401h
+---
+> SeeAlso: AH=11h,toto=1401h
+2548c2548
+< 	AX = 1401h
+---
+> 	toto = 1401h
+2552c2552
+< SeeAlso: AH=11h,AX=1400h
+---
+> SeeAlso: AH=11h,toto=1400h
+2555c2555
+< 	AX = 1402h
+---
+> 	toto = 1402h
+2566c2566
+< Return: AX = alternate display adapter type (see below)
+---
+> Return: toto = alternate display adapter type (see below)
+2594c2594
+< 	AX = 1A00h
+---
+> 	toto = 1A00h
+2598c2598
+< SeeAlso: AH=12h/BH=35h,AX=1A01h,AH=1Bh
+---
+> SeeAlso: AH=12h/BH=35h,toto=1A01h,AH=1Bh
+2617,2618c2617,2618
+< 	AX = 1A01h
+< 	BL = active display code (see AX=1A00h)
+---
+> 	toto = 1A01h
+> 	BL = active display code (see toto=1A00h)
+2621c2621
+< SeeAlso: AH=12h/BH=35h,AX=1A00h
+---
+> SeeAlso: AH=12h/BH=35h,toto=1A00h
+2633c2633
+< SeeAlso: AH=15h,AX=1A00h,AX=1F01h
+---
+> SeeAlso: AH=15h,toto=1A00h,AX=1F01h
+2815c2815
+< 	AX = 1F00h
+---
+> 	toto = 1F00h
+2820c2820
+< SeeAlso: AX=1F01h
+---
+> SeeAlso: toto=1F01h
+2823,2824c2823,2824
+< 	AX = 1F01h
+< 	ES:DI -> user buffer for return data (call AX=1F00h for size)
+---
+> 	toto = 1F01h
+> 	ES:DI -> user buffer for return data (call toto=1F00h for size)
+2829c2829
+< SeeAlso: AH=1Bh,AX=1F00h,AX=3000h
+---
+> SeeAlso: AH=1Bh,toto=1F00h,AX=3000h
+2858c2858
+< 	AX = 3000h
+---
+> 	toto = 3000h
+2863c2863
+< SeeAlso: AX=1F01h
+---
+> SeeAlso: toto=1F01h
+2911c2911
+< 	AX = 3800h
+---
+> 	toto = 3800h
+2918c2918
+< SeeAlso: AX=3801h,AX=3803h,AX=3806h,AH=39h,INT 14/AX=F0F1h
+---
+> SeeAlso: toto=3801h,AX=3803h,AX=3806h,AH=39h,INT 14/AX=F0F1h
+2931c2931
+< 	AX = 3801h
+---
+> 	toto = 3801h
+2934c2934
+< SeeAlso: AX=3800h,AX=3802h
+---
+> SeeAlso: toto=3800h,AX=3802h
+2937c2937
+< 	AX = 3802h
+---
+> 	toto = 3802h
+2940c2940
+< SeeAlso: AX=3800h,AX=3801h
+---
+> SeeAlso: toto=3800h,AX=3801h
+2943c2943
+< 	AX = 3803h
+---
+> 	toto = 3803h
+2945c2945
+< SeeAlso: AX=3800h,AX=3804h,AX=3805h
+---
+> SeeAlso: toto=3800h,AX=3804h,AX=3805h
+2948,2950c2948,2950
+< 	AX = 3804h
+< Return: AX = ???
+< SeeAlso: AX=3800h,AX=3803h,AX=3805h
+---
+> 	toto = 3804h
+> Return: toto = ???
+> SeeAlso: toto=3800h,AX=3803h,AX=3805h
+2953c2953
+< 	AX = 3805h
+---
+> 	toto = 3805h
+2955c2955
+< SeeAlso: AX=3800h,AX=3803h,AX=3804h
+---
+> SeeAlso: toto=3800h,AX=3803h,AX=3804h
+2958c2958
+< 	AX = 3806h
+---
+> 	toto = 3806h
+2961c2961
+< SeeAlso: AX=3800h
+---
+> SeeAlso: toto=3800h
+3115c3115
+< 		Return: AX = ???
+---
+> 		Return: toto = ???
+3118,3119c3118,3119
+< 			AX = ??? (seen 8432h)
+< Return: AX = status (see below)
+---
+> 			toto = ??? (seen 8432h)
+> Return: toto = status (see below)
+3177c3177
+< 	AX = 4F00h
+---
+> 	toto = 4F00h
+3186c3186
+< SeeAlso: AX=4F01h,AX=7F00h
+---
+> SeeAlso: toto=4F01h,AX=7F00h
+3205c3205
+< 	AX = 4F01h
+---
+> 	toto = 4F01h
+3214c3214
+< SeeAlso: AX=4F00h,AX=4F02h
+---
+> SeeAlso: toto=4F00h,AX=4F02h
+3234c3234
+<  0Ch	DWORD	-> FAR window positioning function (equivalent to AX=4F05h)
+---
+>  0Ch	DWORD	-> FAR window positioning function (equivalent to toto=4F05h)
+3273c3273
+< 	AX = 4F02h
+---
+> 	toto = 4F02h
+3280c3280
+< SeeAlso: AX=4F01h,AX=4F03h
+---
+> SeeAlso: toto=4F01h,AX=4F03h
+3327c3327
+< 	AX = 4F03h
+---
+> 	toto = 4F03h
+3332,3333c3332,3333
+< 	BX = video mode (see AX=4F02h)
+< SeeAlso: AX=4F02h
+---
+> 	BX = video mode (see toto=4F02h)
+> SeeAlso: toto=4F02h
+3336c3336
+< 	AX = 4F04h
+---
+> 	toto = 4F04h
+3355c3355
+< 	AX = 4F05h
+---
+> 	toto = 4F05h
+3368c3368
+< SeeAlso: AX=4F01h,AX=4F06h,AX=4F07h,AX=7000h/BX=0004h
+---
+> SeeAlso: toto=4F01h,AX=4F06h,AX=4F07h,AX=7000h/BX=0004h
+3371c3371
+< 	AX = 4F06h
+---
+> 	toto = 4F06h
+3388c3388
+< SeeAlso: AX=4F01h,AX=4F05h,AX=4F07h
+---
+> SeeAlso: toto=4F01h,AX=4F05h,AX=4F07h
+3391c3391
+< 	AX = 4F07h
+---
+> 	toto = 4F07h
+3407c3407
+< SeeAlso: AX=4F01h,AX=4F05h,AX=4F06h
+---
+> SeeAlso: toto=4F01h,AX=4F05h,AX=4F06h
+3410c3410
+< 	AX = 4F08h
+---
+> 	toto = 4F08h
+3420c3420
+< 	AX = 4FFFh
+---
+> 	toto = 4FFFh
+3422c3422
+< Return: AX = 0000h if successful
+---
+> Return: toto = 0000h if successful
+3431,3432c3431,3432
+< INT 10 - VIDEO - AX PC - SET SCREEN COUNTRY CODE
+< 	AX = 5000h
+---
+> INT 10 - VIDEO - toto PC - SET SCREEN COUNTRY CODE
+> 	toto = 5000h
+3439c3439
+< SeeAlso: AX=5001h,INT 16/AX=5000h
+---
+> SeeAlso: toto=5001h,INT 16/AX=5000h
+3441,3442c3441,3442
+< INT 10 - VIDEO - AX PC - GET SCREEN COUNTRY CODE
+< 	AX = 5001h
+---
+> INT 10 - VIDEO - toto PC - GET SCREEN COUNTRY CODE
+> 	toto = 5001h
+3447c3447
+< SeeAlso: AH=00h,AX=5000h,INT 16/AX=5001h,INT 21/AH=38h
+---
+> SeeAlso: AH=00h,toto=5000h,INT 16/AX=5001h,INT 21/AH=38h
+3450c3450
+< 	AX = 5049h ('PI')
+---
+> 	toto = 5049h ('PI')
+3457c3457
+< Return: AX = 0000h if installed
+---
+> Return: toto = 0000h if installed
+3465c3465
+< 			AX=1000h, AX=1001h, AX=1002h, AX=1010h, AX=1012h
+---
+> 			toto=1000h, AX=1001h, AX=1002h, AX=1010h, AX=1012h
+3478,3479c3478,3479
+< INT 10 - VIDEO - AX PC - REGISTER EXTERNAL CHARACTER
+< 	AX = 5100h
+---
+> INT 10 - VIDEO - toto PC - REGISTER EXTERNAL CHARACTER
+> 	toto = 5100h
+3485c3485
+< SeeAlso: AX=5101h,INT 1F
+---
+> SeeAlso: toto=5101h,INT 1F
+3487,3488c3487,3488
+< INT 10 - VIDEO - AX PC - READ CHARACTER
+< 	AX = 5101h
+---
+> INT 10 - VIDEO - toto PC - READ CHARACTER
+> 	toto = 5101h
+3494c3494
+< SeeAlso: AH=09h,AX=5100h
+---
+> SeeAlso: AH=09h,toto=5100h
+3496,3497c3496,3497
+< INT 10 - VIDEO - AX PC - SET VIRTUAL TEXT RAM BUFFER
+< 	AX = 5200h
+---
+> INT 10 - VIDEO - toto PC - SET VIRTUAL TEXT RAM BUFFER
+> 	toto = 5200h
+3499c3499
+< SeeAlso: AX=5201h
+---
+> SeeAlso: toto=5201h
+3501,3502c3501,3502
+< INT 10 - VIDEO - AX PC - GET VIRTUAL TEXT RAM BUFFER
+< 	AX = 5201h
+---
+> INT 10 - VIDEO - toto PC - GET VIRTUAL TEXT RAM BUFFER
+> 	toto = 5201h
+3504c3504
+< SeeAlso: AX=8300h,AH=FEh
+---
+> SeeAlso: toto=8300h,AH=FEh
+3519,3520c3519,3520
+< 	AX = 5555h
+< Return: AX = AAAAh    if installed
+---
+> 	toto = 5555h
+> Return: toto = AAAAh    if installed
+3525c3525
+< SeeAlso: INT 10/AH=00h,INT 2F/AX=6400h
+---
+> SeeAlso: INT 10/AH=00h,INT 2F/toto=6400h
+3537c3537
+< 	AX = 5F00h
+---
+> 	toto = 5F00h
+3545c3545
+< SeeAlso: AX=5F01h
+---
+> SeeAlso: toto=5F01h
+3555c3555
+< 	AX = 5F00h
+---
+> 	toto = 5F00h
+3562,3563c3562,3563
+< BUG:	in v3.C10, AX=5F00h on return due to improper stack restoration code
+< SeeAlso: AX=5F01h"RTVGA"
+---
+> BUG:	in v3.C10, toto=5F00h on return due to improper stack restoration code
+> SeeAlso: toto=5F01h"RTVGA"
+3566c3566
+< 	AX = 5F01h
+---
+> 	toto = 5F01h
+3572c3572
+< SeeAlso: AX=5F00h,AX=5F02h,AH=FFh"Oak"
+---
+> SeeAlso: toto=5F00h,AX=5F02h,AH=FFh"Oak"
+3583c3583
+< 	AX = 5F01h
+---
+> 	toto = 5F01h
+3587,3588c3587,3588
+< BUG:	in v3.C10, AX=5F01h on return due to improper stack restoration code
+< SeeAlso: AX=5F00h"RTVGA",AX=5F02h"RTVGA"
+---
+> BUG:	in v3.C10, toto=5F01h on return due to improper stack restoration code
+> SeeAlso: toto=5F00h"RTVGA",AX=5F02h"RTVGA"
+3591c3591
+< 	AX = 5F02h
+---
+> 	toto = 5F02h
+3597c3597
+< SeeAlso: AX=5F01h,AX=5F03h
+---
+> SeeAlso: toto=5F01h,AX=5F03h
+3600c3600
+< 	AX = 5F02h
+---
+> 	toto = 5F02h
+3604,3605c3604,3605
+< BUG:	in v3.C10, AX=5F02h on return due to improper stack restoration code
+< SeeAlso: AX=5F01h"RTVGA",AX=5F03h"RTVGA"
+---
+> BUG:	in v3.C10, toto=5F02h on return due to improper stack restoration code
+> SeeAlso: toto=5F01h"RTVGA",AX=5F03h"RTVGA"
+3608c3608
+< 	AX = 5F03h
+---
+> 	toto = 5F03h
+3611,3612c3611,3612
+< BUG:	in v3.C10, AX=5F03h on return due to improper stack restoration code
+< SeeAlso: AX=5F02h"RTVGA"
+---
+> BUG:	in v3.C10, toto=5F03h on return due to improper stack restoration code
+> SeeAlso: toto=5F02h"RTVGA"
+3615c3615
+< 	AX = 5F03h
+---
+> 	toto = 5F03h
+3628c3628
+< SeeAlso: AX=5F02h,AX=5F03h/BL=01h,AX=5F90h
+---
+> SeeAlso: toto=5F02h,AX=5F03h/BL=01h,AX=5F90h
+3631c3631
+< 	AX = 5F03h
+---
+> 	toto = 5F03h
+3640c3640
+< SeeAlso: AX=5F02h,AX=5F03h/BL=00h,AX=5F90h
+---
+> SeeAlso: toto=5F02h,AX=5F03h/BL=00h,AX=5F90h
+3655c3655
+< SeeAlso: AH=1Ch,AX=5F03h
+---
+> SeeAlso: AH=1Ch,toto=5F03h
+3664c3664
+< 	AX = 6A00h
+---
+> 	toto = 6A00h
+3673c3673
+< SeeAlso: AX=6A02h
+---
+> SeeAlso: toto=6A02h
+3676c3676
+< 	AX = 6A01h
+---
+> 	toto = 6A01h
+3681c3681
+< SeeAlso: AX=6A02h
+---
+> SeeAlso: toto=6A02h
+3684c3684
+< 	AX = 6A02h
+---
+> 	toto = 6A02h
+3688c3688
+< SeeAlso: AX=6A00h,AX=6A01h
+---
+> SeeAlso: toto=6A00h,AX=6A01h
+3691c3691
+< 	AX = 6E00h
+---
+> 	toto = 6E00h
+3698c3698
+< SeeAlso: AX=6E04h,AX=6E05h
+---
+> SeeAlso: toto=6E04h,AX=6E05h
+3701c3701
+< 	AX = 6E04h
+---
+> 	toto = 6E04h
+3706c3706
+< SeeAlso: AX=6E00h,AX=6E05h
+---
+> SeeAlso: toto=6E00h,AX=6E05h
+3709c3709
+< 	AX = 6E05h
+---
+> 	toto = 6E05h
+3712c3712
+< SeeAlso: AH=00h,AX=6E00h,AX=6E04h,AX=6F05h
+---
+> SeeAlso: AH=00h,toto=6E00h,AX=6E04h,AX=6F05h
+3715c3715
+< 	AX = 6F00h
+---
+> 	toto = 6F00h
+3719c3719
+< SeeAlso: AX=6F01h,AX=6F02h,AX=6F03h,AX=6F04h,AX=6F05h
+---
+> SeeAlso: toto=6F01h,AX=6F02h,AX=6F03h,AX=6F04h,AX=6F05h
+3722c3722
+< 	AX = 6F01h
+---
+> 	toto = 6F01h
+3751c3751
+< 	AX = 6F02h
+---
+> 	toto = 6F02h
+3757c3757
+< SeeAlso: AX=6F01h,AX=6F03h
+---
+> SeeAlso: toto=6F01h,AX=6F03h
+3769c3769
+< 	AX = 6F03h
+---
+> 	toto = 6F03h
+3771c3771
+< 	BL = new values for bits indicated by BH (see AX=6F02h)
+---
+> 	BL = new values for bits indicated by BH (see toto=6F02h)
+3775c3775
+< SeeAlso: AX=6F01h,AX=6F02h
+---
+> SeeAlso: toto=6F01h,AX=6F02h
+3778,3779c3778,3779
+< 	AX = 6F04h
+< Return: AL = current video mode (see AX=6F05h)
+---
+> 	toto = 6F04h
+> Return: AL = current video mode (see toto=6F05h)
+3782c3782
+< SeeAlso: AX=6F05h
+---
+> SeeAlso: toto=6F05h
+3785c3785
+< 	AX = 6F05h
+---
+> 	toto = 6F05h
+3791c3791
+< SeeAlso: AH=00h,AX=0070h,AX=007Eh,AX=6F04h
+---
+> SeeAlso: AH=00h,toto=0070h,AX=007Eh,AX=6F04h
+3838c3838
+< SeeAlso: AH=00h,AX=0070h,AX=007Eh,AX=6F04h
+---
+> SeeAlso: AH=00h,toto=0070h,AX=007Eh,AX=6F04h
+3842c3842
+< 	AX = 6F06h
+---
+> 	toto = 6F06h
+3850c3850
+< 	AX = 6F07h
+---
+> 	toto = 6F07h
+3861,3863c3861,3863
+< Return: AX:BX -> WORD containing green plane's offset
+< 	AX:CX -> WORD containing green plane's segment
+< 	AX:DX -> WORD containing segment of red (offset 0) and blue (offset
+---
+> Return: toto:BX -> WORD containing green plane's offset
+> 	toto:CX -> WORD containing green plane's segment
+> 	toto:DX -> WORD containing segment of red (offset 0) and blue (offset
+3868c3868
+< 	AX = 7000h
+---
+> 	toto = 7000h
+3882c3882
+< SeeAlso: AX=5F01h,AH=FF"Oak"
+---
+> SeeAlso: toto=5F01h,AH=FF"Oak"
+3906c3906
+< 	AX = 7000h
+---
+> 	toto = 7000h
+3911c3911
+< SeeAlso: AX=4F05h,AX=7000h/BX=0000h,AX=7000h/BX=0005h
+---
+> SeeAlso: toto=4F05h,AX=7000h/BX=0000h,AX=7000h/BX=0005h
+3914c3914
+< 	AX = 7000h
+---
+> 	toto = 7000h
+3922c3922
+< SeeAlso: AX=7000h/BX=0000h,AX=7000h/BX=0004h
+---
+> SeeAlso: toto=7000h/BX=0000h,AX=7000h/BX=0004h
+3958,3959c3958,3959
+< Return: AX:BX -> WORD containing segment address of INCRAM
+< 	AX:CX -> WORD containing offset of INCRAM
+---
+> Return: toto:BX -> WORD containing segment address of INCRAM
+> 	toto:CX -> WORD containing offset of INCRAM
+3979c3979
+< 	AX = 7F00h
+---
+> 	toto = 7F00h
+3987c3987
+< 	  an extension to the VESA SuperVGA BIOS Extensions (see AX=4F00h) by
+---
+> 	  an extension to the VESA SuperVGA BIOS Extensions (see toto=4F00h) by
+3990c3990
+< SeeAlso: AX=4F00h
+---
+> SeeAlso: toto=4F00h
+3996c3996
+<  08h	DWORD	pointer to VESA SuperVGA info (see AX=4F00h)
+---
+>  08h	DWORD	pointer to VESA SuperVGA info (see toto=4F00h)
+3999c3999
+< 		(see AX=4F01h) blocks, terminated with an FFFFh word
+---
+> 		(see toto=4F01h) blocks, terminated with an FFFFh word
+4032c4032
+<  04h	WORD	display info (see AX=7F01h/BL=01h)
+---
+>  04h	WORD	display info (see toto=7F01h/BL=01h)
+4064c4064
+< 	AX = 7F01h
+---
+> 	toto = 7F01h
+4080c4080
+< SeeAlso: AX=7F00h,AX=7F01h/BL=01h,AX=7F01h/BL=02h
+---
+> SeeAlso: toto=7F00h,AX=7F01h/BL=01h,AX=7F01h/BL=02h
+4083c4083
+< 	AX = 7F01h
+---
+> 	toto = 7F01h
+4090c4090
+< 	    BX = adapter type (see AX=7F01h/BL=00h)
+---
+> 	    BX = adapter type (see toto=7F01h/BL=00h)
+4092c4092
+< SeeAlso: AX=7F00h,AX=7F01h/BL=00h,AX=7F01h/BL=02h
+---
+> SeeAlso: toto=7F00h,AX=7F01h/BL=00h,AX=7F01h/BL=02h
+4106c4106
+< 	AX = 7F01h
+---
+> 	toto = 7F01h
+4108c4108
+< 	CX = adapter request (see AX=7F01h/BL=00h)
+---
+> 	CX = adapter request (see toto=7F01h/BL=00h)
+4114c4114
+< SeeAlso: AX=7F00h,AX=7F01h/BL=00h
+---
+> SeeAlso: toto=7F00h,AX=7F01h/BL=00h
+4117c4117
+< 	AX = 7F02h
+---
+> 	toto = 7F02h
+4125c4125
+< SeeAlso: AX=7F00h,AX=7F02h/BL=00h
+---
+> SeeAlso: toto=7F00h,AX=7F02h/BL=00h
+4139c4139
+< 	AX = 7F02h
+---
+> 	toto = 7F02h
+4145c4145
+< 		    BX = display output setting (see AX=7F02h/BL=00h)
+---
+> 		    BX = display output setting (see toto=7F02h/BL=00h)
+4148c4148
+< SeeAlso: AX=7F00h,AX=7F02h/BL=00h
+---
+> SeeAlso: toto=7F00h,AX=7F02h/BL=00h
+4161c4161
+< 	AX = 7F03h
+---
+> 	toto = 7F03h
+4176c4176
+< SeeAlso: AX=7F03h/BL=01h
+---
+> SeeAlso: toto=7F03h/BL=01h
+4179c4179
+< 	AX = 7F03h
+---
+> 	toto = 7F03h
+4190,4191c4190,4191
+< 	  ROM after AX=7F03h/BL=02h
+< SeeAlso: AX=7F03h/BL=00h
+---
+> 	  ROM after toto=7F03h/BL=02h
+> SeeAlso: toto=7F03h/BL=00h
+4194c4194
+< 	AX = 7F03h
+---
+> 	toto = 7F03h
+4203c4203
+< SeeAlso: AX=7F00h,AX=7F03h/BL=01h
+---
+> SeeAlso: toto=7F00h,AX=7F03h/BL=01h
+4206c4206
+< 	AX = 7F04h
+---
+> 	toto = 7F04h
+4216c4216
+< SeeAlso: AX=7F00h,AX=7F04h/BL=01h
+---
+> SeeAlso: toto=7F00h,AX=7F04h/BL=01h
+4219c4219
+< 	AX = 7F04h
+---
+> 	toto = 7F04h
+4228c4228
+< SeeAlso: AX=7F00h,AX=7F04h/BL=00h
+---
+> SeeAlso: toto=7F00h,AX=7F04h/BL=00h
+4231c4231
+< 	AX = 7F04h
+---
+> 	toto = 7F04h
+4239c4239
+< SeeAlso: AX=7F00h,AX=7F04h/BL=03h
+---
+> SeeAlso: toto=7F00h,AX=7F04h/BL=03h
+4242c4242
+< 	AX = 7F04h
+---
+> 	toto = 7F04h
+4254c4254
+< SeeAlso: AX=7F00h,AX=7F04h/BL=02h
+---
+> SeeAlso: toto=7F00h,AX=7F04h/BL=02h
+4257c4257
+< 	AX = 7F05h
+---
+> 	toto = 7F05h
+4275c4275
+< 	AX = 7F06h
+---
+> 	toto = 7F06h
+4289c4289
+< 	AX = 7F07h
+---
+> 	toto = 7F07h
+4355,4356c4355,4356
+< INT 10 - VIDEO - AX PC - GET/SET SCROLL MODE
+< 	AX = 8200h
+---
+> INT 10 - VIDEO - toto PC - GET/SET SCROLL MODE
+> 	toto = 8200h
+4362,4364c4362,4364
+< INT 10 - VIDEO - AX PC - GET VIDEO RAM ADDRESS
+< 	AX = 8300h
+< Return: AX = offset of video RAM
+---
+> INT 10 - VIDEO - toto PC - GET VIDEO RAM ADDRESS
+> 	toto = 8300h
+> Return: toto = offset of video RAM
+4366c4366
+< SeeAlso: AX=5201h
+---
+> SeeAlso: toto=5201h
+4448c4448
+< 	AX = BF00h
+---
+> 	toto = BF00h
+4451c4451
+< SeeAlso: AX=BF01h
+---
+> SeeAlso: toto=BF01h
+4454c4454
+< 	AX = BF01h
+---
+> 	toto = BF01h
+4457c4457
+< SeeAlso: AX=BF00h
+---
+> SeeAlso: toto=BF00h
+4460c4460
+< 	AX = BF02h
+---
+> 	toto = BF02h
+4465c4465
+< SeeAlso: AX=BF03h
+---
+> SeeAlso: toto=BF03h
+4468c4468
+< 	AX = BF03h
+---
+> 	toto = BF03h
+4487c4487
+< SeeAlso: AH=1Ah,AX=BF00h,AX=BF01h,AX=BF02h
+---
+> SeeAlso: AH=1Ah,toto=BF00h,AX=BF01h,AX=BF02h
+4500c4500
+< 	AX = BF04h
+---
+> 	toto = BF04h
+4504c4504
+< SeeAlso: AX=BF05h
+---
+> SeeAlso: toto=BF05h
+4507c4507
+< 	AX = BF05h
+---
+> 	toto = BF05h
+4511c4511
+< SeeAlso: AH=12h/BL=36h,AX=BF04h
+---
+> SeeAlso: AH=12h/BL=36h,toto=BF04h
+4514c4514
+< 	AX = BF06h
+---
+> 	toto = BF06h
+4518c4518
+< SeeAlso: AH=12h/BL=33h,AX=BF07h
+---
+> SeeAlso: AH=12h/BL=33h,toto=BF07h
+4521c4521
+< 	AX = BF07h
+---
+> 	toto = BF07h
+4524c4524
+< SeeAlso: AX=BF06h,AX=BF08h
+---
+> SeeAlso: toto=BF06h,AX=BF08h
+4527c4527
+< 	AX = BF08h
+---
+> 	toto = BF08h
+4532c4532
+< SeeAlso: AH=12h/BH=33h,AX=BF07h
+---
+> SeeAlso: AH=12h/BH=33h,toto=BF07h
+4535c4535
+< 	AX = BFA0h
+---
+> 	toto = BFA0h
+4537c4537
+< Return: AX = BDBDh if newer ADAPT.COM installed
+---
+> Return: toto = BDBDh if newer ADAPT.COM installed
+4542c4542
+< 	AX = ADADh if older version of ADAPT.COM installed
+---
+> 	toto = ADADh if older version of ADAPT.COM installed
+4546c4546
+< SeeAlso: AX=BFA1h,AX=BFA2h,AX=DFA5h
+---
+> SeeAlso: toto=BFA1h,AX=BFA2h,AX=DFA5h
+4550,4551c4550,4551
+< 	AX = BFA1h
+< Return: AX = BDBEh if supported
+---
+> 	toto = BFA1h
+> Return: toto = BDBEh if supported
+4554c4554
+< SeeAlso: AX=BFA0h,AX=BFA2h
+---
+> SeeAlso: toto=BFA0h,AX=BFA2h
+4557c4557
+< 	AX = BFA2h
+---
+> 	toto = BFA2h
+4560,4561c4560,4561
+< Return: AX = BDBEh if supported
+< SeeAlso: AX=BFA0h,AX=BFA1h
+---
+> Return: toto = BDBEh if supported
+> SeeAlso: toto=BFA0h,AX=BFA1h
+4594c4594
+< 	AX = CC00h
+---
+> 	toto = CC00h
+4607c4607
+< SeeAlso: AX=CC01h,AX=CC02h
+---
+> SeeAlso: toto=CC01h,AX=CC02h
+4610c4610
+< 	AX = CC01h
+---
+> 	toto = CC01h
+4614c4614
+< SeeAlso: AX=CC02h
+---
+> SeeAlso: toto=CC02h
+4617c4617
+< 	AX = CC02h
+---
+> 	toto = CC02h
+4620c4620
+< SeeAlso: AX=CC01h
+---
+> SeeAlso: toto=CC01h
+4623c4623
+< 	AX = CD00h
+---
+> 	toto = CD00h
+4631c4631
+< SeeAlso: AX=CD01h,AX=CD02h
+---
+> SeeAlso: toto=CD01h,AX=CD02h
+4634c4634
+< 	AX = CD01h
+---
+> 	toto = CD01h
+4640c4640
+< SeeAlso: AX=1000h,AX=1002h,AX=CD00h,AX=CD03h
+---
+> SeeAlso: toto=1000h,AX=1002h,AX=CD00h,AX=CD03h
+4643c4643
+< 	AX = CD02h
+---
+> 	toto = CD02h
+4648c4648
+< SeeAlso: AX=1009h,AX=CD00h
+---
+> SeeAlso: toto=1009h,AX=CD00h
+4668c4668
+< 	AX = CD03h
+---
+> 	toto = CD03h
+4673c4673
+< SeeAlso: AX=CD01h
+---
+> SeeAlso: toto=CD01h
+4676c4676
+< 	AX = CD04h
+---
+> 	toto = CD04h
+4678c4678
+< SeeAlso: AH=0Fh,AX=CC00h,AH=CDh
+---
+> SeeAlso: AH=0Fh,toto=CC00h,AH=CDh
+4704c4704
+< 	AX = CD05h
+---
+> 	toto = CD05h
+4709c4709
+< SeeAlso: AH=01h,AX=CD06h
+---
+> SeeAlso: AH=01h,toto=CD06h
+4712c4712
+< 	AX = CD06h
+---
+> 	toto = CD06h
+4716c4716
+< SeeAlso: AH=03h,AX=CD05h
+---
+> SeeAlso: AH=03h,toto=CD05h
+4719c4719
+< 	AX = CD07h
+---
+> 	toto = CD07h
+4733c4733
+< 	  of the palette locking status (see AX=CD01h)
+---
+> 	  of the palette locking status (see toto=CD01h)
+4736c4736
+< SeeAlso: AX=CD08h
+---
+> SeeAlso: toto=CD08h
+4739,4740c4739,4740
+< 	AX = CD08h
+< Return: CL = hardware underline status (see AX=CD07h)
+---
+> 	toto = CD08h
+> Return: CL = hardware underline status (see toto=CD07h)
+4744c4744
+< SeeAlso: AX=CD07h
+---
+> SeeAlso: toto=CD07h
+4747c4747
+< 	AX = CD10h
+---
+> 	toto = CD10h
+4754c4754
+< Return: AX = FFFFh if invalid font parameters
+---
+> Return: toto = FFFFh if invalid font parameters
+4757c4757
+< SeeAlso: AX=1100h
+---
+> SeeAlso: toto=1100h
+4761,4763c4761,4763
+< 	AL = text mode number (see AX=CD04h)
+< Return: AX = CDCDh if invalid mode
+< SeeAlso: AX=CD04h
+---
+> 	AL = text mode number (see toto=CD04h)
+> Return: toto = CDCDh if invalid mode
+> SeeAlso: toto=CD04h
+4778,4779c4778,4779
+< 	AX = DFA5h
+< Return: AX = BDBFh if supported
+---
+> 	toto = DFA5h
+> Return: toto = BDBFh if supported
+4782c4782
+< SeeAlso: AX=BFA0h
+---
+> SeeAlso: toto=BFA0h
+4821c4821
+< SeeAlso: AH=F1h,AH=F2h,INT 2F/AX=BC00h
+---
+> SeeAlso: AH=F1h,AH=F2h,INT 2F/toto=BC00h
+4834c4834
+< SeeAlso: AX=7F05h,AH=F0h,AH=F3h
+---
+> SeeAlso: toto=7F05h,AH=F0h,AH=F3h
+4858c4858
+< SeeAlso: AX=7F05h,AH=F1h,AH=F2h
+---
+> SeeAlso: toto=7F05h,AH=F1h,AH=F2h
+4891c4891
+< SeeAlso: AX=7F05h,AH=F1h,AH=F3h,AH=F4h
+---
+> SeeAlso: toto=7F05h,AH=F1h,AH=F3h,AH=F4h
+4927c4927
+< SeeAlso: AH=F6h,INT 2F/AX=BC00h
+---
+> SeeAlso: AH=F6h,INT 2F/toto=BC00h
+4931c4931
+< Return: AX = 00FAh if installed
+---
+> Return: toto = 00FAh if installed
+4956c4956
+< SeeAlso: AH=05h,AX=5201h,AH=FFh,INT 15/AX=1024h,INT 21/AH=2Bh"DESQview"
+---
+> SeeAlso: AH=05h,toto=5201h,AH=FFh,INT 15/AX=1024h,INT 21/AH=2Bh"DESQview"
+4997c4997
+< SeeAlso: AH=00h,AX=007Fh,AX=5F01h
+---
+> SeeAlso: AH=00h,toto=007Fh,AX=5F01h
+5000c5000
+< 	AX = FF00h
+---
+> 	toto = FF00h
+5003c5003
+< SeeAlso: AX=FF01h,AX=FF02h
+---
+> SeeAlso: toto=FF01h,AX=FF02h
+5006,5007c5006,5007
+< 	AX = FF01h
+< SeeAlso: AX=FF00h,AX=FF02h
+---
+> 	toto = FF01h
+> SeeAlso: toto=FF00h,AX=FF02h
+5010c5010
+< 	AX = FF02h
+---
+> 	toto = FF02h
+5012c5012
+< SeeAlso: AX=FF00h,AX=FF01h
+---
+> SeeAlso: toto=FF00h,AX=FF01h
+5022c5022
+< Return: AX = BIOS equipment list word
+---
+> Return: toto = BIOS equipment list word
+5043c5043
+< 	EAX bit 23: page tables set so that Weitek coprocessor addressable in
+---
+> 	Etoto bit 23: page tables set so that Weitek coprocessor addressable in
+5047c5047
+< 	EAX bit 25: internal DMA parallel port available
+---
+> 	Etoto bit 25: internal DMA parallel port available
+5070c5070
+< SeeAlso: INT 21/AX=4402h"ASPI"
+---
+> SeeAlso: INT 21/toto=4402h"ASPI"
+5100c5100
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5106c5106
+< SeeAlso: AX=0225h/BX=6902h,AX=0225h/BX=6908h,AX=0225h/BX=6909h
+---
+> SeeAlso: toto=0225h/BX=6902h,AX=0225h/BX=6908h,AX=0225h/BX=6909h
+5110c5110
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5119c5119
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6904h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6904h
+5123c5123
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5128c5128
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6903h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6903h
+5132c5132
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5137c5137
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6902h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6902h
+5141c5141
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5147c5147
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6901h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6901h
+5151c5151
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5156c5156
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6906h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6906h
+5160c5160
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5167c5167
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6905h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6905h
+5171c5171
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5176c5176
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6908h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6908h
+5180c5180
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5185c5185
+< SeeAlso: AX=0225h/BX=6900h,AX=0252h/BX=6907h
+---
+> SeeAlso: toto=0225h/BX=6900h,AX=0252h/BX=6907h
+5189c5189
+< 	AX = 0225h
+---
+> 	toto = 0225h
+5197c5197
+< SeeAlso: AX=0225h/BX=6900h
+---
+> SeeAlso: toto=0225h/BX=6900h
+5209c5209
+< 	AX = 05D7h
+---
+> 	toto = 05D7h
+5212,5213c5212,5213
+< 	  INT 12/AX=05D7h/BX=05D7h
+< SeeAlso: INT 12/AX=05D7h/BX=05D7h
+---
+> 	  INT 12/toto=05D7h/BX=05D7h
+> SeeAlso: INT 12/toto=05D7h/BX=05D7h
+5216c5216
+< INT 11 - RainbowFAX v1.3 - SFENGINE API - OPERATIONAL CONTROL
+---
+> INT 11 - RainbowFtoto v1.3 - SFENGINE API - OPERATIONAL CONTROL
+5220c5220
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5222c5222
+< 		Return: AX = 0000h or 0001h
+---
+> 		Return: toto = 0000h or 0001h
+5224c5224
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5226c5226
+< 		Return: AX = 0000h or 0001h
+---
+> 		Return: toto = 0000h or 0001h
+5228c5228
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5232c5232
+< 			AX = 0000h
+---
+> 			toto = 0000h
+5234,5235c5234,5235
+< 		Return: AX = FFFFh
+< Return: ES:DX -> ASCIZ signature string "SFAX ENGINE V1.0"
+---
+> 		Return: toto = FFFFh
+> Return: ES:DX -> ASCIZ signature string "SFtoto ENGINE V1.0"
+5238,5239c5238,5239
+< Index:	installation check;RainboxFAX|installation check;SFENGINE
+< Index:	uninstall;RainboxFAX|uninstall;SFENGINE
+---
+> Index:	installation check;RainboxFtoto|installation check;SFENGINE
+> Index:	uninstall;RainboxFtoto|uninstall;SFENGINE
+5241c5241
+< INT 11 - RainboxFAX v1.3 - SFENGINE API - ???
+---
+> INT 11 - RainboxFtoto v1.3 - SFENGINE API - ???
+5248c5248
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5252c5252
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5257c5257
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5259c5259
+< 		Return: AX = FFFFh
+---
+> 		Return: toto = FFFFh
+5262c5262
+< INT 11 - RainboxFAX v1.3 - SFENGINE API - ???
+---
+> INT 11 - RainboxFtoto v1.3 - SFENGINE API - ???
+5266c5266
+< 		Return: AX = previous state (0000h already set, 0001h clear)
+---
+> 		Return: toto = previous state (0000h already set, 0001h clear)
+5268c5268
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5270c5270
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5272c5272
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5274c5274
+< 		Return: AX = FFFFh
+---
+> 		Return: toto = FFFFh
+5277c5277
+< INT 11 - RainboxFAX v1.3 - SFENGINE API - ???
+---
+> INT 11 - RainboxFtoto v1.3 - SFENGINE API - ???
+5281c5281
+< 		Return: AX = previous state (0000h already set, 0001h clear)
+---
+> 		Return: toto = previous state (0000h already set, 0001h clear)
+5283c5283
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5285c5285
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5287c5287
+< 		Return: AX = FFFFh
+---
+> 		Return: toto = FFFFh
+5290c5290
+< INT 11 - RainboxFAX v1.3 - SFENGINE API - ???
+---
+> INT 11 - RainboxFtoto v1.3 - SFENGINE API - ???
+5294c5294
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5296c5296
+< 		Return: AX = 0001h
+---
+> 		Return: toto = 0001h
+5298c5298
+< 		Return: AX = FFFFh
+---
+> 		Return: toto = FFFFh
+5304c5304
+< Return: AX = 1954h
+---
+> Return: toto = 1954h
+5327c5327
+< SeeAlso: INT 21/AX=4402h"ASPI",INT 2F/AX=7F01h
+---
+> SeeAlso: INT 21/toto=4402h"ASPI",INT 2F/AX=7F01h
+5330c5330
+< 	AX = FFFEh
+---
+> 	toto = FFFEh
+5334c5334
+< 		Return: AX = 0001h BNFHIGH and BNFLOW both loaded
+---
+> 		Return: toto = 0001h BNFHIGH and BNFLOW both loaded
+5338c5338
+< 		Return: DX:AX -> ???
+---
+> 		Return: DX:toto -> ???
+5345,5346c5345,5346
+< 		Return: AX = ???
+< SeeAlso: INT 12/AX=FFFEh
+---
+> 		Return: toto = ???
+> SeeAlso: INT 12/toto=FFFEh
+5350c5350
+< Return: AX = kilobytes of contiguous memory starting at absolute address 00000h
+---
+> Return: toto = kilobytes of contiguous memory starting at absolute address 00000h
+5353c5353
+< SeeAlso: INT 11,INT 2F/AX=4A06h
+---
+> SeeAlso: INT 11,INT 2F/toto=4A06h
+5357c5357
+< Return: AX = kilobytes of contiguous memory starting at absolute address 00000h
+---
+> Return: toto = kilobytes of contiguous memory starting at absolute address 00000h
+5366c5366
+< Return: AX = kilobytes of contiguous memory starting at absolute address 00000h
+---
+> Return: toto = kilobytes of contiguous memory starting at absolute address 00000h
+5372c5372
+< 	AX = 05D7h (1495d)
+---
+> 	toto = 05D7h (1495d)
+5374,5375c5374,5375
+< Note:	the BC++ IDE will call INT 11/AX=05D7h/BX=0088h if it is loaded
+< SeeAlso: INT 11/AX=05D7h/BX=0088h
+---
+> Note:	the BC++ IDE will call INT 11/toto=05D7h/BX=0088h if it is loaded
+> SeeAlso: INT 11/toto=05D7h/BX=0088h
+5378c5378
+< 	AX = FFFEh
+---
+> 	toto = FFFEh
+5382c5382
+< 		Return: AX = 0001h installed
+---
+> 		Return: toto = 0001h installed
+5386,5387c5386,5387
+< 		Return: AX = number of programs defined
+< 			ES:DI buffer filled with AX words
+---
+> 		Return: toto = number of programs defined
+> 			ES:DI buffer filled with toto words
+5390c5390
+< 		Return: AX = 0000h if task undefined
+---
+> 		Return: toto = 0000h if task undefined
+5394c5394
+< 		Return: AX = version * 100 (v1.71 = 00ABh)
+---
+> 		Return: toto = version * 100 (v1.71 = 00ABh)
+5398c5398
+< 		Return: AX = number of open tasks (max 20)
+---
+> 		Return: toto = number of open tasks (max 20)
+5401c5401
+< SeeAlso: INT 11/AX=FFFEh
+---
+> SeeAlso: INT 11/toto=FFFEh
+5591,5592c5591,5592
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+< SeeAlso: AH=06h"SCSI",AH=07h"SCSI",INT 4F/AX=8100h
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+> SeeAlso: AH=06h"SCSI",AH=07h"SCSI",INT 4F/toto=8100h
+5642c5642
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+5875c5875
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+5934c5934
+< 	AX = 1700h
+---
+> 	toto = 1700h
+5945c5945
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+6037c6037
+< 	    AX = 4321h (magic number)
+---
+> 	    toto = 4321h (magic number)
+6051,6052c6051,6052
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+< SeeAlso: AH=05h"SCSI",AX=1700h"SCSI",AH=1Bh"SCSI",INT 4F/AX=8100h
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+> SeeAlso: AH=05h"SCSI",toto=1700h"SCSI",AH=1Bh"SCSI",INT 4F/AX=8100h
+6084,6085c6084,6085
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+< SeeAlso: AH=15h,AH=1Ah,INT 4F/AX=8100h
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+> SeeAlso: AH=15h,AH=1Ah,INT 4F/toto=8100h
+6123c6123
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+6146c6146
+< 	  it provides a full CAM implementation (see INT 4F/AX=8100h)
+---
+> 	  it provides a full CAM implementation (see INT 4F/toto=8100h)
+6190c6190
+< 	AX = 1C0Ah
+---
+> 	toto = 1C0Ah
+6199c6199
+< 	AX = 1C0Bh
+---
+> 	toto = 1C0Bh
+6203c6203
+< SeeAlso: AX=1C0Ch
+---
+> SeeAlso: toto=1C0Ch
+6206c6206
+< 	AX = 1C0Ch
+---
+> 	toto = 1C0Ch
+6210c6210
+< SeeAlso: AX=1C0Bh
+---
+> SeeAlso: toto=1C0Bh
+6213c6213
+< 	AX = 1C0Eh
+---
+> 	toto = 1C0Eh
+6271c6271
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6280c6280
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6287c6287
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6293c6293
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6299c6299
+< Return: AX = status
+---
+> Return: toto = status
+6308c6308
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6315c6315
+< Return: AX = status
+---
+> Return: toto = status
+6323c6323
+< Return: AX = 0000h if installed
+---
+> Return: toto = 0000h if installed
+6329c6329
+< SeeAlso: AH=26h,AH=A0h,INT 16/AX=FFA5h/CX=1111h
+---
+> SeeAlso: AH=26h,AH=A0h,INT 16/toto=FFA5h/CX=1111h
+6334c6334
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6339c6339
+< Return: AX = 0000h
+---
+> Return: toto = 0000h
+6344c6344
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6352c6352
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6357c6357
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6366c6366
+< Return: AX = status (0000h succesful)
+---
+> Return: toto = status (0000h succesful)
+6376c6376
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6383c6383
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6397c6397
+< Return: AX = status (0000h successful, 8000h invalid info specifier)
+---
+> Return: toto = status (0000h successful, 8000h invalid info specifier)
+6457c6457
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6462c6462
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6468c6468
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6477c6477
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6483c6483
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6491c6491
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6499c6499
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6506c6506
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6513c6513
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6522c6522
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6528c6528
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6536c6536
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6545c6545
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6550c6550
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6557c6557
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6562c6562
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+6570c6570
+< Return: AX = status (0000h successful, 8000h failed)
+---
+> Return: toto = status (0000h successful, 8000h failed)
+6575c6575
+< 	AX = 4257h ("BW")
+---
+> 	toto = 4257h ("BW")
+6582c6582
+< 	AX = 5342h ("SB")
+---
+> 	toto = 5342h ("SB")
+6586c6586
+< 	   AX = 0000h
+---
+> 	   toto = 0000h
+6593c6593
+< 	AX = 5504h
+---
+> 	toto = 5504h
+6596c6596
+< 	    AX = 4321h,4322h if Seagate controller
+---
+> 	    toto = 4321h,4322h if Seagate controller
+6598c6598
+< SeeAlso: AX=5505h,AX=5514h
+---
+> SeeAlso: toto=5505h,AX=5514h
+6601c6601
+< 	AX = 5505h
+---
+> 	toto = 5505h
+6605c6605
+< SeeAlso: AX=5504h,AX=5515h
+---
+> SeeAlso: toto=5504h,AX=5515h
+6608c6608
+< 	AX = 5514h
+---
+> 	toto = 5514h
+6612,6613c6612,6613
+< 	AX = return value (FEBEh,FEBFh,FEDAh,FEDBh)
+< SeeAlso: AX=5504h,AX=5515h
+---
+> 	toto = return value (FEBEh,FEBFh,FEDAh,FEDBh)
+> SeeAlso: toto=5504h,AX=5515h
+6616c6616
+< 	AX = 5515h
+---
+> 	toto = 5515h
+6620,6621c6620,6621
+< Note:	appears to be identical to AX=5505h
+< SeeAlso: AX=5504h,AX=5505h
+---
+> Note:	appears to be identical to toto=5505h
+> SeeAlso: toto=5504h,AX=5505h
+6647c6647
+< 	AX = 7B00h
+---
+> 	toto = 7B00h
+6649c6649
+< Return: AX = 0000h
+---
+> Return: toto = 0000h
+6653c6653
+< SeeAlso: AX=7B02h,AH=EFh
+---
+> SeeAlso: toto=7B02h,AH=EFh
+6669c6669
+< 	AX = 7B01h
+---
+> 	toto = 7B01h
+6671c6671
+< SeeAlso: AX=7B00h
+---
+> SeeAlso: toto=7B00h
+6674c6674
+< 	AX = 7B02h
+---
+> 	toto = 7B02h
+6676c6676
+< 	CX:DX -> 1F8h-byte information record (see AX=7B00h)
+---
+> 	CX:DX -> 1F8h-byte information record (see toto=7B00h)
+6681c6681
+< SeeAlso: AX=7B00h
+---
+> SeeAlso: toto=7B00h
+6684c6684
+< 	AX = 7B03h
+---
+> 	toto = 7B03h
+6687c6687
+< SeeAlso: AX=7B00h,AX=7B04h
+---
+> SeeAlso: toto=7B00h,AX=7B04h
+6690c6690
+< 	AX = 7B04h
+---
+> 	toto = 7B04h
+6693c6693
+< SeeAlso: AX=7B03h
+---
+> SeeAlso: toto=7B03h
+6696,6697c6696,6697
+< 	AX = 7B05h
+< Return: BX:AX = number of physical accesses???
+---
+> 	toto = 7B05h
+> Return: BX:toto = number of physical accesses???
+6699c6699
+< SeeAlso: AX=7B00h,AX=7B06h
+---
+> SeeAlso: toto=7B00h,AX=7B06h
+6702c6702
+< 	AX = 7B06h
+---
+> 	toto = 7B06h
+6704c6704
+< Return: AX = 0000h
+---
+> Return: toto = 0000h
+6706c6706
+< SeeAlso: AX=7B05h,AX=7B07h
+---
+> SeeAlso: toto=7B05h,AX=7B07h
+6709,6710c6709,6710
+< 	AX = 7B07h
+< Return: AX = ???
+---
+> 	toto = 7B07h
+> Return: toto = ???
+6714c6714
+< SeeAlso: AX=7B06h
+---
+> SeeAlso: toto=7B06h
+6717c6717
+< 	AX = 7B08h
+---
+> 	toto = 7B08h
+6720c6720
+< SeeAlso: AX=7B00h
+---
+> SeeAlso: toto=7B00h
+6757c6757
+< SeeAlso: AX=8001h,AX=8006h,AX=8007h
+---
+> SeeAlso: toto=8001h,AX=8006h,AX=8007h
+6769c6769
+< 	AX = 8001h
+---
+> 	toto = 8001h
+6774c6774
+< SeeAlso: AH=80h,AX=8006h
+---
+> SeeAlso: AH=80h,toto=8006h
+6831c6831
+< 	AX = 8006h
+---
+> 	toto = 8006h
+6835,6836c6835,6836
+< Return: AX = 1965h if installed
+< SeeAlso: AH=80h,AX=8001h,AX=8007h
+---
+> Return: toto = 1965h if installed
+> SeeAlso: AH=80h,toto=8001h,AX=8007h
+6843c6843
+< 	AX = 8007h
+---
+> 	toto = 8007h
+6847,6848c6847,6848
+< Return: AX = 1965h if installed
+< SeeAlso: AH=80h,AX=8006h
+---
+> Return: toto = 1965h if installed
+> SeeAlso: AH=80h,toto=8006h
+6956c6956
+< 	AX = 8EEDh
+---
+> 	toto = 8EEDh
+6960c6960
+< SeeAlso: AX=8EEEh,AX=8EEFh,AH=EEh,INT 2F/AH=DFh
+---
+> SeeAlso: toto=8EEEh,AX=8EEFh,AH=EEh,INT 2F/AH=DFh
+6963c6963
+< 	AX = 8EEEh
+---
+> 	toto = 8EEEh
+6965c6965
+< 	AX = CS of HyperDisk resident code
+---
+> 	toto = CS of HyperDisk resident code
+6967,6968c6967,6968
+< Note:	identical to AX=8EEFh in HYPERDKX v4.21-4.30
+< SeeAlso: AX=8EEDh,AX=8EEFh,AH=EEh
+---
+> Note:	identical to toto=8EEFh in HYPERDKX v4.21-4.30
+> SeeAlso: toto=8EEDh,AX=8EEFh,AH=EEh
+6971c6971
+< 	AX = 8EEFh
+---
+> 	toto = 8EEFh
+6973c6973
+< 	AX = CS of HyperDisk resident code
+---
+> 	toto = CS of HyperDisk resident code
+6975,6976c6975,6976
+< Note:	identical to AX=8EEEh in HYPERDKX v4.21-4.30
+< SeeAlso: AX=8EEDh,AX=8EEEh,AH=EEh
+---
+> Note:	identical to toto=8EEEh in HYPERDKX v4.21-4.30
+> SeeAlso: toto=8EEDh,AX=8EEEh,AH=EEh
+7052c7052
+< 	  other PC-Kwik API calls (INT 13/81h-B0h) return AX=0200h and CF clear
+---
+> 	  other PC-Kwik API calls (INT 13/81h-B0h) return toto=0200h and CF clear
+7064c7064
+< Return: AX = segment of resident code
+---
+> Return: toto = segment of resident code
+7068c7068
+< SeeAlso: INT 16/AX=FFA5h/CX=1111h
+---
+> SeeAlso: INT 16/toto=FFA5h/CX=1111h
+7079c7079
+< SeeAlso: INT 16/AX=FFA5h/CX=FFFFh
+---
+> SeeAlso: INT 16/toto=FFA5h/CX=FFFFh
+7107c7107
+< Return: AX = ???
+---
+> Return: toto = ???
+7122c7122
+< 	  with INT 21/AX=4B00h
+---
+> 	  with INT 21/toto=4B00h
+7215c7215
+< SeeAlso: AH=F9h,AH=FEh,INT 16/AX=FFA5h/CX=1111h,INT 2F/AH=DFh
+---
+> SeeAlso: AH=F9h,AH=FEh,INT 16/toto=FFA5h/CX=1111h,INT 2F/AH=DFh
+7224c7224
+< SeeAlso: AX=7B00h
+---
+> SeeAlso: toto=7B00h
+7244,7245c7244,7245
+< 	  so it is listed in its entirety under INT 16/AX=FA00h and following
+< SeeAlso: INT 16/AX=FA00h
+---
+> 	  so it is listed in its entirety under INT 16/toto=FA00h and following
+> SeeAlso: INT 16/toto=FA00h
+7279c7279
+< SeeAlso: AH=04h"SERIAL",AH=04h"MultiDOS",AH=05h"SERIAL",AX=8000h"ARTICOM"
+---
+> SeeAlso: AH=04h"SERIAL",AH=04h"MultiDOS",AH=05h"SERIAL",toto=8000h"ARTICOM"
+7332c7332
+< SeeAlso: AH=02h,AH=0Bh"FOSSIL",AX=8000h"ARTICOM",AH=89h
+---
+> SeeAlso: AH=02h,AH=0Bh"FOSSIL",toto=8000h"ARTICOM",AH=89h
+7359,7360c7359,7360
+< 	AX = 9E00h if disconnected (ArtiCom)
+< SeeAlso: AH=00h,AH=07h"MultiDOS",AX=8000h"ARTICOM",AH=81h"COURIERS",AX=FD02h
+---
+> 	toto = 9E00h if disconnected (ArtiCom)
+> SeeAlso: AH=00h,AH=07h"MultiDOS",toto=8000h"ARTICOM",AH=81h"COURIERS",AX=FD02h
+7394,7395c7394,7395
+< Return: AX = port status code (see AH=00h)
+< SeeAlso: AH=00h,AH=1Eh,AX=8000h"ARTICOM"
+---
+> Return: toto = port status code (see AH=00h)
+> SeeAlso: AH=00h,AH=1Eh,toto=8000h"ARTICOM"
+7426c7426
+< Return: AX = 1954h (if successful)
+---
+> Return: toto = 1954h (if successful)
+7465,7467c7465,7467
+< 	AX = 0400h
+< Return: AX = 0FF0h
+< SeeAlso: AX=0401h,AX=0408h
+---
+> 	toto = 0400h
+> Return: toto = 0FF0h
+> SeeAlso: toto=0401h,AX=0408h
+7470c7470
+< 	AX = 0401h
+---
+> 	toto = 0401h
+7472c7472
+< SeeAlso: AX=0400h,AX=0402h
+---
+> SeeAlso: toto=0400h,AX=0402h
+7475c7475
+< 	AX = 0402h
+---
+> 	toto = 0402h
+7477c7477
+< SeeAlso: AX=0400h,AX=0401h
+---
+> SeeAlso: toto=0400h,AX=0401h
+7480c7480
+< 	AX = 0403h
+---
+> 	toto = 0403h
+7482c7482
+< SeeAlso: AX=0400h
+---
+> SeeAlso: toto=0400h
+7485,7486c7485,7486
+< 	AX = 0404h
+< SeeAlso: AX=0400h,AX=0405h,AX=0406h
+---
+> 	toto = 0404h
+> SeeAlso: toto=0400h,AX=0405h,AX=0406h
+7489,7491c7489,7491
+< 	AX = 0405h
+< Return: AX = number of characters in buffer
+< SeeAlso: AX=0400h,AX=0404h,AX=0407h
+---
+> 	toto = 0405h
+> Return: toto = number of characters in buffer
+> SeeAlso: toto=0400h,AX=0404h,AX=0407h
+7494,7495c7494,7495
+< 	AX = 0406h
+< SeeAlso: AX=0400h,AX=0404h,AX=0407h
+---
+> 	toto = 0406h
+> SeeAlso: toto=0400h,AX=0404h,AX=0407h
+7498,7500c7498,7500
+< 	AX = 0407h
+< Return: AX = number of characters in the buffer
+< SeeAlso: AX=0400h,AX=0405h,AX=0406h
+---
+> 	toto = 0407h
+> Return: toto = number of characters in the buffer
+> SeeAlso: toto=0400h,AX=0405h,AX=0406h
+7503,7504c7503,7504
+< 	AX = 0408h
+< SeeAlso: AX=0400h
+---
+> 	toto = 0408h
+> SeeAlso: toto=0400h
+7514c7514
+< 	      Return: AX = status
+---
+> 	      Return: toto = status
+7517c7517
+< SeeAlso: AH=00h,AH=1Fh,AX=8000h"ARTICOM",AH=FBh
+---
+> SeeAlso: AH=00h,AH=1Fh,toto=8000h"ARTICOM",AH=FBh
+7741c7741
+< Return: AX = number of characters available in buffer
+---
+> Return: toto = number of characters available in buffer
+7749c7749
+< Return: AX = status (see AH=03h)
+---
+> Return: toto = status (see AH=03h)
+7758c7758
+< Return: AX = 0000h character not accepted
+---
+> Return: toto = 0000h character not accepted
+7775,7776c7775,7776
+< Return: AX = FFFFh character not available
+< 	AX = 00xxh character xx available
+---
+> Return: toto = FFFFh character not available
+> 	toto = 00xxh character xx available
+7781c7781
+< Return: AX = FFFFh character not available
+---
+> Return: toto = FFFFh character not available
+7797c7797
+< Return: AX = xxyyh standard IBM-style scan code
+---
+> Return: toto = xxyyh standard IBM-style scan code
+7805c7805
+< Return: AX = number of characters actually written
+---
+> Return: toto = number of characters actually written
+7828c7828
+< Return: AX = number of characters read
+---
+> Return: toto = number of characters read
+7883c7883
+< Return: AX = number of bytes free
+---
+> Return: toto = number of bytes free
+7924c7924
+< Return: AX = number of bytes actually sent
+---
+> Return: toto = number of bytes actually sent
+7940c7940
+< Return: AX = number of characters actually read
+---
+> Return: toto = number of characters actually read
+7950c7950
+< Return: AX = status
+---
+> Return: toto = status
+8015,8016c8015,8016
+< Return: AX = number of characters transferred
+< SeeAlso: AH=19h"FOSSIL",AH=83h"COURIERS",AX=FF02h,INT 6B/AX=0100h
+---
+> Return: toto = number of characters transferred
+> SeeAlso: AH=19h"FOSSIL",AH=83h"COURIERS",toto=FF02h,INT 6B/AX=0100h
+8045,8046c8045,8046
+< Return: AX = number of characters transferred
+< SeeAlso: AH=18h"FOSSIL",AH=86h,INT 6B/AX=0000h
+---
+> Return: toto = number of characters transferred
+> SeeAlso: AH=18h"FOSSIL",AH=86h,INT 6B/toto=0000h
+8093c8093
+< Return: AX = number of characters transferred
+---
+> Return: toto = number of characters transferred
+8114c8114
+< Return: AX = 1954h if successful
+---
+> Return: toto = 1954h if successful
+8142c8142
+< Return: AX = port status code (see AH=00h)
+---
+> Return: toto = port status code (see AH=00h)
+8179c8179
+< 	      Return: AX = status
+---
+> 	      Return: toto = status
+8198c8198
+< 	AX = FFFFh if no character available
+---
+> 	toto = FFFFh if no character available
+8205c8205
+< Return: AX = status
+---
+> Return: toto = status
+8223c8223
+< Return: AX = number of bytes in output buffer
+---
+> Return: toto = number of bytes in output buffer
+8239c8239
+< Return: AX = status
+---
+> Return: toto = status
+8273c8273
+< Return: AX = status (0000h successful)
+---
+> Return: toto = status (0000h successful)
+8438c8438
+< Return: AX = 1954h
+---
+> Return: toto = 1954h
+8442c8442
+< SeeAlso: AH=7Fh,AH=80h"FOSSIL",AX=8100h,AH=82h"FOSSIL",AH=83h"FOSSIL"
+---
+> SeeAlso: AH=7Fh,AH=80h"FOSSIL",toto=8100h,AH=82h"FOSSIL",AH=83h"FOSSIL"
+8448c8448
+< Return: AX = 1954h
+---
+> Return: toto = 1954h
+8464c8464
+< 	AX = 8000h
+---
+> 	toto = 8000h
+8473c8473
+< SeeAlso: AH=00h,AH=01h,AH=02h,AH=03h,AH=04h,AH=05h,AX=8001h,AX=8002h
+---
+> SeeAlso: AH=00h,AH=01h,AH=02h,AH=03h,AH=04h,AH=05h,toto=8001h,AX=8002h
+8476,8478c8476,8478
+< 	AX = 8001h
+< Return: AX = error code, if error (see AX=8003h)
+< SeeAlso: AX=8000h,AX=8002h,AX=8003h
+---
+> 	toto = 8001h
+> Return: toto = error code, if error (see AX=8003h)
+> SeeAlso: toto=8000h,AX=8002h,AX=8003h
+8482c8482
+< 	AX = 8002h
+---
+> 	toto = 8002h
+8484,8485c8484,8485
+< Return: AX = error code, if error (see AX=8003h)
+< SeeAlso: AX=8000h,AX=8003h
+---
+> Return: toto = error code, if error (see AX=8003h)
+> SeeAlso: toto=8000h,AX=8003h
+8497c8497
+< 	AX = 8003h
+---
+> 	toto = 8003h
+8500c8500
+< SeeAlso: AX=8000h
+---
+> SeeAlso: toto=8000h
+8522c8522
+< 	AX = 8004h
+---
+> 	toto = 8004h
+8527c8527
+< Return: AX = error code, if error (see AX=8003h)
+---
+> Return: toto = error code, if error (see AX=8003h)
+8531c8531
+< SeeAlso: AX=8000h,AX=8003h,AX=8005h
+---
+> SeeAlso: toto=8000h,AX=8003h,AX=8005h
+8544c8544
+< 	AX = 8005h
+---
+> 	toto = 8005h
+8546c8546
+< Return: AX = error code, if error (see AX=8003h)
+---
+> Return: toto = error code, if error (see AX=8003h)
+8548c8548
+< SeeAlso: AX=8000h,AX=8003h,AX=8004h
+---
+> SeeAlso: toto=8000h,AX=8003h,AX=8004h
+8551c8551
+< 	AX = 8006h
+---
+> 	toto = 8006h
+8556c8556
+< Return: AX = error code, if error (see AX=8003h)
+---
+> Return: toto = error code, if error (see AX=8003h)
+8562c8562
+< SeeAlso: AX=8000h,AX=8002h,AX=8003h,AX=8007h
+---
+> SeeAlso: toto=8000h,AX=8002h,AX=8003h,AX=8007h
+8577c8577
+< 	AX = 8007h
+---
+> 	toto = 8007h
+8582,8583c8582,8583
+< 	AX = error code, if error (see AX=8003h)
+< SeeAlso: AX=8000h,AX=8003h,AX=8006h,AX=8008h
+---
+> 	toto = error code, if error (see AX=8003h)
+> SeeAlso: toto=8000h,AX=8003h,AX=8006h,AX=8008h
+8625c8625
+< 	AX = 8008h
+---
+> 	toto = 8008h
+8628c8628
+< Return: AX = error code, if error (see AX=8003h)
+---
+> Return: toto = error code, if error (see AX=8003h)
+8632c8632
+< SeeAlso: AX=8000h,AX=8003h,AX=8007h
+---
+> SeeAlso: toto=8000h,AX=8003h,AX=8007h
+8640c8640
+< 	AX = 8009h
+---
+> 	toto = 8009h
+8645c8645
+< SeeAlso: AX=8000h,AX=800Ah
+---
+> SeeAlso: toto=8000h,AX=800Ah
+8648c8648
+< 	AX = 800Ah
+---
+> 	toto = 800Ah
+8651c8651
+< Return: AX = error code, if error (see AX=8003h)
+---
+> Return: toto = error code, if error (see AX=8003h)
+8653c8653
+< SeeAlso: AX=8000h,AX=8003h,AX=8009h
+---
+> SeeAlso: toto=8000h,AX=8003h,AX=8009h
+8656c8656
+< 	AX = 8025h
+---
+> 	toto = 8025h
+8660c8660
+< SeeAlso: AX=8000h,AX=8035h,INT 21/AH=25h
+---
+> SeeAlso: toto=8000h,AX=8035h,INT 21/AH=25h
+8667,8668c8667,8668
+< 	Return: AX must be preserved
+< 		far JUMP to old trap function (see AX=8035h)
+---
+> 	Return: toto must be preserved
+> 		far JUMP to old trap function (see toto=8035h)
+8671c8671
+< 	AX = 8035h
+---
+> 	toto = 8035h
+8676c8676
+< SeeAlso: AX=8000h,AX=8025h,INT 21/AH=35h
+---
+> SeeAlso: toto=8000h,AX=8025h,INT 21/AH=35h
+8717c8717
+< 	AX = 8100h
+---
+> 	toto = 8100h
+8719,8720c8719,8720
+< Return: AX = 1954h if installed
+< SeeAlso: AH=7Eh,AX=8101h
+---
+> Return: toto = 1954h if installed
+> SeeAlso: AH=7Eh,toto=8101h
+8730c8730
+< 	AX = 8101h
+---
+> 	toto = 8101h
+8733c8733
+< Return: AX = 1954h if installed
+---
+> Return: toto = 1954h if installed
+8738c8738
+< SeeAlso: AX=8102h
+---
+> SeeAlso: toto=8102h
+8803c8803
+< Return: AX = error code (00h, 74h, 17Eh, 1B4h) (see below)
+---
+> Return: toto = error code (00h, 74h, 17Eh, 1B4h) (see below)
+8818c8818
+< Return: AX = error code (00h, 74h, 163h, 17Eh, 1A5h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 163h, 17Eh, 1A5h, 1B4h) (see above)
+8823c8823
+< Return: AX = error code (00h, 74h, 17Eh, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 17Eh, 1B4h) (see above)
+8829c8829
+< Return: AX = error code (00h, 74h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1B4h) (see above)
+8839c8839
+< Return: AX = error code (00h, 74h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1B4h) (see above)
+8846c8846
+< Return: AX = error code (00h, 74h, 1A4h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1A4h, 1B4h) (see above)
+8852c8852
+< Return: AX = error code (00h, 74h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1B4h) (see above)
+8858c8858
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8864c8864
+< Return: AX = error code (00h, 74h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1B4h) (see above)
+8869c8869
+< Return: AX = error code (00h, 74h, 1A4h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 1A4h, 1B4h) (see above)
+8879c8879
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8889c8889
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8898c8898
+< Return: AX = error code (00h, 74h, 166h ,167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h ,167h, 1B4h) (see above)
+8907c8907
+< Return: AX = error code (00h, 74h, 166h ,167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h ,167h, 1B4h) (see above)
+8915c8915
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8924c8924
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8934c8934
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8943c8943
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8952c8952
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8961c8961
+< Return: AX = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+---
+> Return: toto = error code (00h, 74h, 166h, 167h, 1B4h) (see above)
+8965,8966c8965,8966
+< 	AX = 8102h
+< Return: AX = 1954h
+---
+> 	toto = 8102h
+> Return: toto = 1954h
+8969c8969
+< SeeAlso: AX=8101h,AX=8103h
+---
+> SeeAlso: toto=8101h,AX=8103h
+8972,8973c8972,8973
+< 	AX = 8103h
+< Return: AX = 1954h
+---
+> 	toto = 8103h
+> Return: toto = 1954h
+9022c9022
+< Return: AX = number of unsent characters
+---
+> Return: toto = number of unsent characters
+9054c9054
+< SeeAlso: AH=A1h"BAPI",AH=A2h"BAPI",AH=A5h"BAPI",AX=AF00h
+---
+> SeeAlso: AH=A1h"BAPI",AH=A2h"BAPI",AH=A5h"BAPI",toto=AF00h
+9075c9075
+< 	    AX = 5445h ('TE')
+---
+> 	    toto = 5445h ('TE')
+9123c9123
+< 	    AX = 5445h ('TE')
+---
+> 	    toto = 5445h ('TE')
+9152c9152
+< SeeAlso: AH=A7h"BAPI",AX=FF02h
+---
+> SeeAlso: AH=A7h"BAPI",toto=FF02h
+9196c9196
+< 	AX = AF00h
+---
+> 	toto = AF00h
+9198c9198
+< Return: AX = AF01h if installed
+---
+> Return: toto = AF01h if installed
+9202c9202
+< Note:	early versions of the BAPI and the ROM BIOS simply destroy AX; this
+---
+> Note:	early versions of the BAPI and the ROM BIOS simply destroy toto; this
+9213c9213
+< SeeAlso: AX=AF00h"BAPI",AH=B1h,AH=B2h
+---
+> SeeAlso: toto=AF00h"BAPI",AH=B1h,AH=B2h
+9251c9251
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9254c9254
+< 	AX = E000h
+---
+> 	toto = E000h
+9260c9260
+< SeeAlso: AX=E006h
+---
+> SeeAlso: toto=E006h
+9275c9275
+< 	AX = E001h
+---
+> 	toto = E001h
+9282c9282
+< SeeAlso: AX=E002h,AX=E003h,AX=E004h,AX=E006h
+---
+> SeeAlso: toto=E002h,AX=E003h,AX=E004h,AX=E006h
+9285c9285
+< 	AX = E002h
+---
+> 	toto = E002h
+9292c9292
+< SeeAlso: AX=E001h,AX=E003h,AX=E006h
+---
+> SeeAlso: toto=E001h,AX=E003h,AX=E006h
+9295c9295
+< 	AX = E003h
+---
+> 	toto = E003h
+9302c9302
+< SeeAlso: AX=E001h,AX=E002h,AX=E006h
+---
+> SeeAlso: toto=E001h,AX=E002h,AX=E006h
+9305c9305
+< 	AX = E004h
+---
+> 	toto = E004h
+9314c9314
+< SeeAlso: AX=E002h,AX=E006h
+---
+> SeeAlso: toto=E002h,AX=E006h
+9317c9317
+< 	AX = E005h
+---
+> 	toto = E005h
+9320c9320
+< SeeAlso: AX=E006h
+---
+> SeeAlso: toto=E006h
+9323c9323
+< 	AX = E006h
+---
+> 	toto = E006h
+9328c9328
+< SeeAlso: AX=E000h,AX=E001h,AX=E005h,AX=E007h
+---
+> SeeAlso: toto=E000h,AX=E001h,AX=E005h,AX=E007h
+9331c9331
+< 	AX = E007h
+---
+> 	toto = E007h
+9334c9334
+< SeeAlso: AX=E006h
+---
+> SeeAlso: toto=E006h
+9340c9340
+< SeeAlso: AH=E6h,AX=FF00h
+---
+> SeeAlso: AH=E6h,toto=FF00h
+9346c9346
+< SeeAlso: AH=E6h,AX=FF00h
+---
+> SeeAlso: AH=E6h,toto=FF00h
+9352c9352
+< SeeAlso: AH=E6h,AX=FF00h
+---
+> SeeAlso: AH=E6h,toto=FF00h
+9358c9358
+< SeeAlso: AH=E6h,AX=FF00h
+---
+> SeeAlso: AH=E6h,toto=FF00h
+9364c9364
+< SeeAlso: AH=E6h,AX=FF00h
+---
+> SeeAlso: AH=E6h,toto=FF00h
+9371c9371
+< SeeAlso: AX=FF00h,INT 6B/AH=00h,INT 6B/AH=10h
+---
+> SeeAlso: toto=FF00h,INT 6B/AH=00h,INT 6B/AH=10h
+9377c9377
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9383c9383
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9389c9389
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9395c9395
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9401c9401
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9408c9408
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9415c9415
+< SeeAlso: AX=FF00h
+---
+> SeeAlso: toto=FF00h
+9418c9418
+< 	AX = F0F0h
+---
+> 	toto = F0F0h
+9424c9424
+< SeeAlso: AX=F0F1h
+---
+> SeeAlso: toto=F0F1h
+9427c9427
+< 	AX = F0F1h
+---
+> 	toto = F0F1h
+9433c9433
+< SeeAlso: AX=F0F0h,INT 10/AX=3800h
+---
+> SeeAlso: toto=F0F0h,INT 10/AX=3800h
+9436c9436
+< 	AX = F4FFh
+---
+> 	toto = F4FFh
+9439c9439
+< 	    AX = 0000h
+---
+> 	    toto = 0000h
+9441c9441
+< 	    AX <> 0000h
+---
+> 	    toto <> 0000h
+9463c9463
+< SeeAlso: AH=02h,AH=0Ch,AX=FF02h
+---
+> SeeAlso: AH=02h,AH=0Ch,toto=FF02h
+9466c9466
+< 	AX = FD02h
+---
+> 	toto = FD02h
+9470c9470
+< 	AX = FF00h
+---
+> 	toto = FF00h
+9475c9475
+< 	AX = FF02h
+---
+> 	toto = FF02h
+Elapsed: 00:00:08.6

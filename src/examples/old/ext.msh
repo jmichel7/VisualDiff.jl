@@ -1,0 +1,83 @@
+|  file EXT.MSH
+|              旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴커
+|              � Code for various file extensions �
+|              읕컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴켸
+|
+| things I want to execute
+|
+(current.name execute refresh)extension_exe!
+(extension_exe)extension_com!
+(extension_exe)extension_bat!
+(current.name read#)extension_msh!
+|
+| things I want to browse through or edit
+|
+(current.name pager)extension_doc!
+(extension_doc)extension_me!
+(extension_doc)extension_log!
+(extension_doc)extension_lst!
+(extension_doc)extension_!
+(current.name edit)extension_c!
+(extension_c)extension_rpt!
+(extension_c)extension_h!
+|
+| deal with various archives types: the .zip and .arj have internal support,
+| the other ones have their directory listed with the 'fv' shareware
+| program of V.Buerg
+|
+("fv "current.name&" /r"&execute)extension_arc!
+(extension_arc)extension2_zip!
+(extension_arc)extension_zoo!
+(extension_arc)extension_lzh!
+|
+| TeX, dvi and postscript files, and associated printer files
+|
+("htex386 "current.name&exec)extension_tex!
+("htex386 /ms2000 &lplain "current.name&exec)extension2_tex!
+("htex386 "current.name&exec)extension2_fr!
+("view "current.name&execute)extension_dvi!
+("dvihp "current.name&execute)extension2_dvi!
+(("hp "current.name&execute)with_nomagic)extension_hsc!
+(("copy /B "current.name&" lpt1:"&execute)with_nomagic)extension_hp!
+("c:\\gs\\dos4gw c:\\gs\\gs386 -sDEVICE=tseng -g1024x768 "current.name" >gs.log"&&execute)extension_ps!
+|
+| go-playing programs
+|
+("e:\\mgt\\mgt "current.name&exec)extension_sm!
+("e:\\mgt\\sg2ishi "current.name basename dup ".sm "& swap ".go"&&&exec)extension2_sm!
+("traite "current.name basename&exec"c:\\mgt\\sg2ishi "current.name basename dup ".sm "& swap ".go"&&&exec)extension_mgt!
+("c:\\tmp\\convert\\cos2mgt "current.name dup basename".mgt"&" "swap&&&exec)extension_lib!
+("e:\\goscribe\\goscribe "current.name&(execute)with_nomagic)extension_go!
+|
+| two viewers for .gif files, and .gl, .fli  and .jpg files
+|
+("c:\\gif\vuimg\\vuimg -t2000 -m15 -vc:\\gif\\vuimg\\dvesa *.gif"execute)extension_gif!
+("c:\\util\\qpeg\\qpeg386 "execute)extension_gif!
+(extension_gif)extension_jpg!
+(extension_gif)extension_bmp!
+("grasprt "current.name&(execute)with_magic)extension_gl!
+("play " current.name&execute)extension_fli!
+("play " current.name&execute)extension_flc!
+("d:\\mpg\\vmpeg\\vmpeg "current.name&exec)extension_mpg!
+|
+| support for file from our program "showpic"
+|
+("showpic "current.name"."cutlast drop&execute)extension_pic!
+|
+| various other things...
+|
+("bc "current.name&exec)extension_prj!     |BORLAND BC++ 3.1
+("gwbasic "current.name&exec)extension_bas!
+("remline "current.name&" toto"&exec"mv -v toto "current.name&exec)
+               extension2_bas! |Adapt to Qbasic the gwbasic programs
+("size "current.name&execute)extension_obj!
+("designer "current.name&exec)extension_drw!
+(("gs "current.name&execute)with_magic)extension_c00! |Ghostscript
+(cwd save_cwd!"vp "panel.pattern dirpart current.name&&
+ (dup cmdlist nl&swap&cmdlist!execute)with_magic
+ save_cwd cwd! refresh reinit_mouse)extension_chp! |Xerox Ventura
+(("paradox "current.name&execute)with_magic)extension_sc! |Borland Paradox
+("gap "current.name&exec)extension_g! |gap
+("gapemx "current.name&exec)extension2_g! |gap
+("readmail "current.name&exec)extension_rae!
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

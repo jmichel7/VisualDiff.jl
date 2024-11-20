@@ -1,0 +1,11 @@
+// Example: H36E14 ()
+print "Example: H36E14";
+ei := GetEchoInput();
+SetEchoInput(true);
+C := ReedMullerCode(1, 4);         
+print C;
+S, f := StandardForm(C);
+u := C.1;
+print u;
+print f(u);
+SetEchoInput(ei);

@@ -1,0 +1,10 @@
+{\bf Addendum just above 15.9}\par
+Once we know the unipotent characters of $\GF$, we can easily get all
+characters, using 13.30. Indeed we can take $(\bGd,F^*)$ to be $(\bG,F)$;
+see examples above 13.11.
+Moreover the centralizer of a semi-simple element is a Levi
+subgroup by 2.6, and is isomorphic to a group of
+block-diagonal matrices. If $s$ is rational semi-simple,
+by 4.3 the action of $F$
+on $C_\bG(s)$ permutes blocks of equal size and the smallest power of
+$F$ which fixes a block

@@ -1,0 +1,17 @@
+This is a demo of DELTA's
+Artificial Intelligence ("AI").
+
+ALL ABOUT ME
+
+Harold is my name.
+
+I am 38 years old.
+
+I live at 108 Main Street.
+
+Now try this comparison with
+AI disabled: press F6
+for the Options Menu.
+After toggling the AI 
+Option, press F10 to do 
+a 'recalc'.
