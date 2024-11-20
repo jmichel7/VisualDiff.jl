@@ -13,7 +13,17 @@ function as_ranges(l::AbstractVector{<:Integer})
   join(map(x->x.start<x.stop ? string(x) : string(x.start),res),",")
 end
 
-using PermGroups
+# if exists returns p such that l[p]==l1 otherwise returns nothing
+function Perm(l::AbstractVector,l1::AbstractVector)
+  p=sortperm(l)
+  p1=sortperm(l1)
+  @inbounds if view(l,p)==view(l1,p1) 
+    r=similar(p1)
+@inbounds for (i,v) in enumerate(p1) r[v]=p[i] end
+    r
+  end
+end
+
 # compares lists a and b (whose descriptions are strings na and nb)
 function cmpvec(a,b;na="a",nb="b",pr=print)
   if a==b return end
@@ -22,9 +32,9 @@ function cmpvec(a,b;na="a",nb="b",pr=print)
   end
   if -a==b pr("$na=-$nb\n");return end
   pa=Perm(a,b)
-  if pa!==nothing pr("$na=$nb^",pa,"\n");return end
+  if pa!==nothing pr("$nb=$na[$pa]\n");return end
   pa=Perm(a,-b)
-  if pa!==nothing pr("$na=-$nb^",pa,"\n");return end
+  if pa!==nothing pr("$nb=-$na[$pa]\n");return end
   for j in eachindex(a)
     if a[j]==b[j] continue end
     if a[j]==-b[j] pr("$na[$j]=-$nb[$j]\n");continue end

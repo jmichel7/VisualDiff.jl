@@ -1,14 +1,11 @@
 module Curses
-  using Reexport
-  @reexport using TextUserInterfaces.NCurses
-  using TextUserInterfaces:TextUserInterfaces
-  export stdscr,initscr2, NCurses
   include("export.jl")
+  export stdscr,initscr2, NCurses
   stdscr::Ptr{WINDOW}=0
   
 # actions needed for a fully-functioning curses
 function initscr2()
-  load_ncurses()
+  NCurses.load_ncurses()
   global stdscr=initscr()
   start_color()
   mousemask(ALL_MOUSE_EVENTS|REPORT_MOUSE_POSITION)

@@ -29,3 +29,5 @@ function main(args...)
   else vdiff(names...)
   end
 end
+
+main(ARGS...)
