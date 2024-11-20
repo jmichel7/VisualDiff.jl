@@ -1,0 +1,13 @@
+name = "Vdiff"
+uuid = "a4e6b4e8-4b97-4be9-afa4-72a10a6a8f69"
+authors = ["Jean Michel <jean.michel@imj-prg.fr> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.6.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
