@@ -461,7 +461,7 @@ end
 function browse(vd::Vdir_pick;toplevel=false,flg...)
   p=vd.p
   s=p.s
-  save=Shadepop(s.begx-1,s.begy-1,2+s.rows,s.cols+1,Color.get_att(:BOX))
+  save=Shadepop(s.begx-1,s.begy-1,2+s.rows,s.cols+1)
   fill(vd;flg...)
   check_showfilter(vd)
   c=getch()

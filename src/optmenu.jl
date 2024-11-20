@@ -32,7 +32,7 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
   curs_set(0)
   savedopts=copy(opt)
 # oldaspect=curs_get
-  swin=Shadepop(0,0,height,COLS()-1,Color.get_att(:BOX))
+  swin=Shadepop(0,0,height,COLS()-1)
   s=Scroll_list(stdscr,data;rows=length(data),cols=
        maximum(map(d->length(opt.h[d][:name]),data)),begx=1,begy=1)
   p=Pick_list(s)

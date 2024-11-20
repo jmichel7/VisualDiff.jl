@@ -9,7 +9,7 @@ function ok(msg,q="yn")
   w=min(w,COLS()-3)
   yoff=div(LINES(),2)-1
   xoff=div(COLS()-w-2,2)
-  sav=Shadepop(yoff,xoff,height,w+2,Color.get_att(:BOX))
+  sav=Shadepop(yoff,xoff,height,w+2)
   curs_set(0)
   wmove(stdscr,yoff,xoff);add(stdscr,:BOX)
   center(stdscr,title,w+2)

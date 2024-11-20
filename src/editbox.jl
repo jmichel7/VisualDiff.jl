@@ -2,7 +2,7 @@ function inputbox(title,description,initstr="")
   description=split(par(description,COLS()-7;sep=""),"\n")
   nblines=length(description)
   beg=10
-  s=Shadepop(beg,1,nblines+7,COLS()-3,Color.get_att(:BOX))
+  s=Shadepop(beg,1,nblines+7,COLS()-3)
   wmove(stdscr,beg,1)
   center(stdscr,title,COLS()-4)
   add(stdscr,:NORM)

@@ -79,8 +79,6 @@ end
 
 info2(s::String,i=0)=(wmove(stdscr,getmaxy(stdscr)-1,10+i);addstr(s))
 
-using Unicode
-
 function Offset_browser(b;bopt...)
   s=Scroll_list(stdscr,b;bopt...)
   add_scrollbar(s)
@@ -88,7 +86,7 @@ function Offset_browser(b;bopt...)
     add(s.win,:NORM)
     if i<=length(s)
      l=s.list[i]
-     l=graphemes(l,b.offset+1:length(graphemes(l)))
+     l=Base.Unicode.graphemes(l,b.offset+1:length(Base.Unicode.graphemes(l)))
     else l=""
     end
     attprint(s.win,l,s.width;decor=get(b.d,i),opt...)

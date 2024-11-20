@@ -62,9 +62,9 @@ function Dump(s...)
 end
 
 Base.dump(w::Ptr{WINDOW})=addstr("<$(getbegy(w)),$(getbegx(w)):$(getmaxy(w)),$(getmaxx(w))>")
-includet("Color.jl")
-includet("button.jl")
-includet("shade.jl")
+include("Color.jl")
+include("button.jl")
+include("shade.jl")
 
 function exec(com,dir=".")
   cd(dir)do

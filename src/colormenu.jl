@@ -190,7 +190,7 @@ function colormenu()
   ypos=0
   ls=length(schemes)
   lg=length(colors)+ls+1
-  swin=Shadepop(ypos,1,lg+2,57,Color.get_att(:BOX))
+  swin=Shadepop(ypos,1,lg+2,57)
   curs_set(0) # C_INVIS
   width=max(maximum(s->length(s[:name]),schemes),
             maximum(s->length(s[2][:name]),colors))

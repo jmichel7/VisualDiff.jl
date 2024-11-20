@@ -30,7 +30,7 @@ function werror(s)
   height=3+l
   yoff=div(LINES(),2)-1
   xoff=div(COLS()-w-2,2)
-  save=Shadepop(yoff,xoff,height+1,w+2,Color.get_att(:BOX))
+  save=Shadepop(yoff,xoff,height+1,w+2)
   curs_set(0)
   beep()
   mvadd(stdscr,yoff,xoff+1,:BOX)

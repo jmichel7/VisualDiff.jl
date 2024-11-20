@@ -1,6 +1,6 @@
 function whelp(msg,title)
   oldaspect=curs_set(0)
-  save=Shadepop(0,0,LINES()-2,COLS()-2,Color.get_att(:BOX))
+  save=Shadepop(0,0,LINES()-2,COLS()-2)
   mvadd(stdscr,0,2,:BOX,"Help for the "*title)
   mvadd(stdscr,LINES()-3,2,"Esc to exit")
   p=Scroll_list(stdscr,split(msg,"\n");rows=LINES()-4,cols=COLS()-4,begx=1,begy=1,

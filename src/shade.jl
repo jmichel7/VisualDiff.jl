@@ -40,14 +40,13 @@ struct Shadepop
   x::Int
   y::Int
   aspect::Int
-end
-
-function Shadepop(y,x,height,width,att=Color.get_att(:BOX))
-  cx=getcurx(stdscr);cy=getcury(stdscr);aspect=curs_set(0)
-  save=newwin(height+1,width+1,y,x)
-  overwrite(stdscr,save)
-  shaded_frame(stdscr,y,x,height,width,att)
-  Shadepop(save,Int(cx),Int(cy),Int(aspect))
+  function Shadepop(y,x,height,width;att=Color.get_att(:BOX))
+    cx=getcurx(stdscr);cy=getcury(stdscr);aspect=curs_set(0)
+    save=newwin(height+1,width+1,y,x)
+    overwrite(stdscr,save)
+    shaded_frame(stdscr,y,x,height,width,att)
+    new(save,Int(cx),Int(cy),Int(aspect))
+  end
 end
 
 function restore(w::Shadepop)
