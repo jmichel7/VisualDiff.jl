@@ -1,3 +1,5 @@
+export Shadepop, restore, background
+
 function background()
   add(stdscr,:BG)
   for i in 0:getmaxy(stdscr)

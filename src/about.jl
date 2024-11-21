@@ -27,7 +27,7 @@ function  about()
   i+=2
   for t in eachsplit("""
   github.com/jmichel7/vdiff     © Jean Michel  
-  Julia $VERSION, NCurses, Version 0.1α october 2024
+  Julia $VERSION, NCurses, Version 0.0.1 november 2024
   ""","\n")
     mvadd(stdscr,i,left+1,t)
     i+=1

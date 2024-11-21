@@ -1,16 +1,12 @@
-#def dump(s)
-#  x,y=stdscr.curx,stdscr.cury
-#  stdscr.mvaddstr(lines-5,1,s)
-#  stdscr.setpos(y,x)
-#  stdscr.refresh
-#end
+export Pick_list
 
-# Adds a selection bar to a scroll_list, at @sel_bar
-
+"""
+A `Pick_list` is a `Scroll_list` with a selection bar (at position `sel_bar`).
+"""
 mutable struct Pick_list 
-  s::Scroll_list # s.showentry(i) when i=@sel_bar should mark the selection bar.
+  s::Scroll_list # s.showentry(i) when i==@sel_bar should mark the selection.
   sel_bar::Int # the logical position in the list (where is the selection bar)
-  on_move_bar::Function
+  on_move_bar::Function # action to do when logical position of bar is moved
 end
 
 Pick_list(s::Scroll_list)=Pick_list(s,1,function()end)
@@ -23,7 +19,7 @@ function Base.show(p::Pick_list)
   show(s)
 end
   
-  # move sel_bar by amount and scroll if needed
+# move sel_bar by amount and scroll p.s if needed
 function scroll(p::Pick_list,amount;sync=true) 
   oldptr=p.sel_bar
   s=p.s
@@ -47,9 +43,6 @@ function scroll(p::Pick_list,amount;sync=true)
   disp_entry(s,p.sel_bar)
 end
 
-# def on_move_bar # action to do when logical position of bar is moved
-# end
-
 function move_bar_to(p::Pick_list,newpos) # move sel_bar to newpos
 #   log "move_bar_to(#{newpos}) @sel_bar=#{@sel_bar}\n"
   if newpos==p.sel_bar disp_entry(p.s,p.sel_bar)
@@ -57,7 +50,12 @@ function move_bar_to(p::Pick_list,newpos) # move sel_bar to newpos
   end
 end
 
-# return true if did something else false
+"""
+`do_key(p::Pick_list,key::Integer,factor=1)`
+
+if there is an action to do on `p` when receiving key `key` do it (`factor`
+times) and return `true`. Otherwise return `false`.
+"""
 function do_key(p::Pick_list,key,factor=1) 
   s=p.s
   if key in (KEY_DOWN, KEY_ENTER, KEY_CTRL('J'), 'j') move_bar_to(p,p.sel_bar+factor)
@@ -75,7 +73,12 @@ function do_key(p::Pick_list,key,factor=1)
   true
 end
 
-# if e in list moves there and returns -1, else nil
+"""
+`process_event(p::Pick_list,e::MEVENT)`
+
+if the mouse event `e` occured in the area where the list is displayed move
+the scroll bar there and return -1, otherwise return `nothing`.
+"""
 function process_event(p::Pick_list,e::MEVENT) 
   if haskey(p.s,:sb)
     c=process_event(p.s.sb,e)

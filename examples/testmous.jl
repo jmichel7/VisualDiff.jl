@@ -1,4 +1,6 @@
-includet("../Curses.jl")
+using Vdiff
+using Vdiff.Curses
+
 #initial_im=Ncurses::WINDOW.instance_methods(false)
 #initial_m=Ncurses.methods-Ncurses::WINDOW.methods
 #initial_const=Ncurses.constants
@@ -134,7 +136,7 @@ end
 function show_colors(stdscr)
   printw("colors:\n")
   for i in 0:255
-    add(stdscr,[Color.dos_to_att(0x70)]," ",[Color.dos_to_att(i)],"XX")
+    add(stdscr,[Color.dos_to_att(0x70)," "],[Color.dos_to_att(i),"XX"])
     if i&15==15 printw("\n") end
   end
   attroff(A_BLINK)
@@ -189,7 +191,7 @@ function main()
     elseif c=='k' show_const(curses_keys)
  #  elseif c=='K'  show_keys(my_const,"my")
     elseif c=='a' show_ACS(stdscr)
-    elseif c=='b' about()
+    elseif c=='b' Vdiff.about()
     elseif c=='S' dump(stdscr);printw(" cols=$(COLS()) lines=$(LINES())")
     elseif c=='U' add(stdscr,:MTEXT,"Bro",:MKEY,"w",:MTEXT,"se","   ","F3")
     elseif c=='O' 

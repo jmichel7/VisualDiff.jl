@@ -1,26 +1,39 @@
-# There can be more items than rows, and the list can occupy nbcols>1 columns.
+export Scroll_list, do_key
+
 @ExtObj mutable struct Scroll_list{T}
   win::Ptr{WINDOW}
-  rows::Int # rows in area where to show list
-  cols::Int # how many cols in area of all nbcols where to show list
+  rows::Int # rows of the area where list is shown
+  cols::Int # total columns of the area where list is shown (for all nbcols)
   begx::Int # upper left corner of area
   begy::Int
-  first::Int # the index of the item currently at top left
+  first::Int # the index of the item shown at top left of area
   width::Int # width of items
   nbshown::Int # nb. items shown (nbcols×rows) where also nbcols=cols/width
   showentry::Function
   # showentry(s,i) displays at the current window position  the i-th item 
-  # in the list. When i is outside the range of items displays an empty line.
+  # of list. When i is outside eachindex(list) should display an empty line.
   on_scroll::Function
-  # on_scroll(s) should gather extra actions to be done in case of scroll 
+  # on_scroll(s) gathers extra actions to be done in case of scroll 
   # (such as maintaining a scroll bar).
   list::Vector{T}
 end
 
+@doc """
+This defines a widget, a scrolling list of items of type `T`. The functions
+`showentry` and `on_scroll` are provided by the parent (which, in the Julia
+object model is a struct having a `Scroll_list` as a field).
+""" Scroll_list 
+
 Base.length(s::Scroll_list)=length(s.list)
 
-# :rows, :cols and :nbcols are used to determine where to position 
-# when calling showentry
+"""
+Scroll_list(w,list;rows=getmaxy(w),cols=getmaxx(w),begx=0,begy=0,nbcols=1)
+
+Declares  a `Scroll_list` which shows a scrolling  list in window `w` in an
+area of top left corner `begx,begy` of height `rows` and width `cols` where
+`cols` are divided in `nbcols` logical columns in which to show part of the
+list.
+"""
 function Scroll_list(w,list;rows=getmaxy(w),cols=getmaxx(w),begx=0,begy=0,
   nbcols=1,
   showentry=(s,i)->error("showentry is pure virtual"),
@@ -80,7 +93,12 @@ function Base.show(s::Scroll_list) # shows the whole area
   for i in s.first:s.first+s.nbshown-1 disp_entry(s,i) end
 end
 
-# return true if did something else false
+"""
+`do_key(s::Scroll_list,key::Integer,factor=1)`
+
+if there is an action to do on `s` when receiving key `key` do it (`factor`
+times) and return `true`. Otherwise return `false`.
+"""
 function do_key(s::Scroll_list,key::Integer,factor=1) 
   if key!=Int('G') factor=max(factor,1) end
   if key==KEY_RIGHT scroll(s,factor*s.rows)

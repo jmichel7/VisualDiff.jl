@@ -1,3 +1,5 @@
+export Color, add
+
 # Color representations
 # Symbolic: [bright] fg on bg: black white green blue cyan red magenta yellow
 # Dos:      blink-fg-bold-bg

@@ -1,3 +1,5 @@
+export ok
+
 function ok(msg,q="yn")
   title="do you want to"
   msg*="?"

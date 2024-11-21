@@ -1,10 +1,6 @@
-include("../Curses.jl")
+using Vdiff
+using Vdiff.Curses
 using Dates
-
-#def dump(s)
-#  stdscr.savepos{ mv(lines-5,1);addstr(s)}
-#  stdscr.refresh
-#end
 
 function nbK(n)
   k=1024
@@ -32,7 +28,7 @@ function rls(dir)
   s=Scroll_list(stdscr,map(f->(f,stat(joinpath(dir,f))),readdir(dir));
     rows=div(LINES(),2),cols=COLS()-2-iseven(COLS()),begx=1,begy=1,nbcols=2)
   add_scrollbar(s)
-  save=Shadepop(s.begx-1,s.begy-1,2+s.rows,2+s.cols,Color.get_att(:BOX))
+  save=Shadepop(s.begx-1,s.begy-1,2+s.rows,2+s.cols)
   p=Pick_list(s)
   s.showentry=function(s,i)
     att=i==p.sel_bar ? :BAR : :NORM

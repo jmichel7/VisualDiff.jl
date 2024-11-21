@@ -1,5 +1,11 @@
+export whelp
+
+"""
+`whelp(msg,title)`
+
+Show the help file `msg` (using `printa`) with title `title`.
+"""
 function whelp(msg,title)
-  oldaspect=curs_set(0)
   save=Shadepop(0,0,LINES()-2,COLS()-2)
   mvadd(stdscr,0,2,:BOX,"Help for the "*title)
   mvadd(stdscr,LINES()-3,2,"Esc to exit")
@@ -31,13 +37,13 @@ function whelp(msg,title)
       if !among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED) c=nothing
       elseif e.y!=p.begy+p.rows c=nothing 
       else x=e.x-p.begx
-        if x in 1:11 c=e.bstate==BUTTON1_CLICKED ? 0x1b : nothing
-        elseif x in 14:17 c=KEY_PPAGE
-        elseif x in 19:19 c=KEY_UP
-        elseif x in 22:25 c=KEY_NPAGE
-        elseif x in 27:27 c=KEY_DOWN
-        else c=nothing
-        end
+        c=if x in 1:11 e.bstate==BUTTON1_CLICKED ? 0x1b : nothing
+          elseif x in 14:17 KEY_PPAGE
+          elseif x in 19:19 KEY_UP
+          elseif x in 22:25 KEY_NPAGE
+          elseif x in 27:27 KEY_DOWN
+          else nothing
+          end
       end
       if !isnothing(c) continue end
     elseif c in (0x1b, Int('q'), Int('Q'), KEY_F(10)) break
@@ -45,7 +51,6 @@ function whelp(msg,title)
     end
     c=getch()
   end
-  curs_set(oldaspect)
   restore(save)
   refresh()
 end

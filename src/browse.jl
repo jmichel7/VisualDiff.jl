@@ -1,3 +1,5 @@
+export browse_file
+
 # browse a file with a folding or not browser
 push!(opt.h,:fold=>Dict(:value=>false), 
           :showempty=>Dict(:value=>false), 
@@ -86,7 +88,8 @@ function Offset_browser(b;bopt...)
     add(s.win,:NORM)
     if i<=length(s)
      l=s.list[i]
-     l=Base.Unicode.graphemes(l,b.offset+1:length(Base.Unicode.graphemes(l)))
+     u=collect(Base.Unicode.graphemes(l))
+     l=prod(u[b.offset+1:end])
     else l=""
     end
     attprint(s.win,l,s.width;decor=get(b.d,i),opt...)

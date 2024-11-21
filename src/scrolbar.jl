@@ -1,3 +1,6 @@
+export add_scrollbar
+
+# A scroll bar widget
 mutable struct Scrollbar
   win::Ptr{WINDOW}
   begy::Int # top of scrollbar
@@ -5,10 +8,20 @@ mutable struct Scrollbar
   x::Int    # column of scrollbar
 end
 
-Scrollbar(win;x=win.cols,begy=0,rows=win.rows)=Scrollbar(win,begy,rows,x)
+"""
+`Scrollbar(win;x=win.cols,begy=0,rows=win.rows-begy)`
 
-# handle represents first:first+window-1 
-# whole bar represents 1:length
+defines a scroll bar widget which occupies column `x` of window `win` starting
+at row `y` and occuping `rows` rows.
+"""
+Scrollbar(win;x=win.cols,begy=0,rows=win.rows-begy)=Scrollbar(win,begy,rows,x)
+
+"""
+`show(s::Scrollbar,first,window,barlength)`
+
+Make the scrollbar `s` represent an interval of length `window` starting at
+`first` of a list of length `barlength`
+"""
 function Base.show(s::Scrollbar,first,window,barlength) 
 # werror("$first:$(first+window-1)/$barlength col=$(s.x) rows=$(s.begy):$(s.begy+s.rows-1)")
   e=first+window-1
@@ -40,7 +53,12 @@ function process_event(s::Scrollbar,e)
   end
 end
 
-# add a Scrollbar to a Scroll_list at column sx
+"""
+`add_scrollbar(s::Scroll_list,sx=s.begx+s.cols)`
+
+Add to scroll_list `s` a scroll bar at column `sx` which will be
+updated at each scroll to reflect the visible part of `s.list`.
+"""
 function add_scrollbar(s::Scroll_list,sx=s.begx+s.cols)
   s.sb=Scrollbar(s.win,s.begy,s.rows,sx)
   old_scroll=s.on_scroll

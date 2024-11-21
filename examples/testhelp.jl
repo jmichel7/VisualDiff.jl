@@ -1,19 +1,9 @@
-includet("../Curses.jl")
-
-#def exit_msg(m=nil)
-#  echo
-#  nocbreak
-#  nl
-#  close_screen
-#  print "testall: "+m+"\n" if m
-#  exit
-#end
+using Vdiff
+using Vdiff.Curses
 
 function main(dir=".")
   initscr2()
 # raw
-  noecho()
-  keypad(stdscr,true)
   Color.init(:NORM=>"black on white", 
              :HL=>"red on white", 
              :BOX=>"blue on white", 
@@ -31,8 +21,3 @@ function main(dir=".")
   end
   endwin()
 end
-
-#main(ARGS)
-#exit_msg
-#rescue Exception => e
-#exit_msg("<#{e.message}> in\n#{e.backtrace.join("\n")}")
