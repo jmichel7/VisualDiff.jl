@@ -253,7 +253,8 @@ function copyfile(src,dest;opts...)
     try 
       chown(dest,st.uid, st.gid)
     catch exc
-      if opts[:verbose] opts[:error]["could not set owner of $dest"] end
+      if haskey(opts,:verbose) && opts[:verbose] 
+        opts[:error]["could not set owner of $dest"] end
       try
         chmod(dest,st.mode&0o01777) # clear setuid/setgid
       catch

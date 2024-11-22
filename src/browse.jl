@@ -222,17 +222,18 @@ function binbrowse(name::String,n=20)
   add(w,:NORM);wclear(w)
   list=collect(Iterators.partition(Vector{UInt8}(bs),n))
   s=Scroll_list(w,list)
+  add_scrollbar(s)
   lnowidth=length(string(max(length(bs),n*(LINES()-3))))
   s.showentry=function(s,i)
     waddstr(w,lpad(n*i+1,lnowidth));add(w,:NORM,ACS_(:VLINE))
     if i<=length(s.list)
-    for (k,ch) in enumerate(s.list[i] )
-      wmove(w;x=s.begx+lnowidth-2+3*k)
-      if (ch in 0:31) || (ch in 128:159) 
-        add(w," "*string(ch,base=16,pad=2))
-      else waddstr(w,lpad(Char(ch),3))
+      for (k,ch) in enumerate(s.list[i])
+        wmove(w;x=s.begx+lnowidth-2+3*k)
+        if (ch in 0:31) || (ch in 128:159) 
+          add(w," "*string(ch,base=16,pad=2))
+        else waddstr(w,lpad(Char(ch),3))
+        end
       end
-    end
     end
     clrtocol(w,COLS()-3)
   end
@@ -244,8 +245,9 @@ function binbrowse(name::String,n=20)
       c=process_event(button,e)
       if isnothing(c) continue end
     end
-    do_key(s,c)
-    if c==Int('q') restore(sav); return end
+    if false==do_key(s,c)
+      if c==Int('q') restore(sav); return end
+    end
   end
 end
 
