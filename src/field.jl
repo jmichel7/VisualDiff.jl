@@ -185,10 +185,11 @@ end
 # defined with the help of the above functions.
 # returns fields content on enter, or nothing on esc
 function input(f::Input_field)
+# wrefresh(f.win);werror("before $(getcurx(f.win)) $(getcury(f.win))")
   while true
     c=0
     while true
-      c=getch()
+      c=wgetch(f.win)
 #     infohint("c=$c")
       if !do_key(f,c) break end
     end

@@ -22,7 +22,7 @@ push!(opt.h,
    make comparisons quite slow.",
    :value=>false,:level=>RECOMPUTE_DIFFS),
   :sync_size=>Dict(:name=>"h_sync_size",
-   :shortdesc=>"nr identical items that 'h' algorithm needs find to resync.",
+   :shortdesc=>"number of matched items that 'h' algorithm needs find to resync.",
    :longdesc=>" Contrary to the normal algorithm which finds optimal diffs,
    'h' by default resyncs on 6 equal items. When  'h' gives mediocre output,
    increasing  this value may help.",
@@ -461,7 +461,7 @@ function next_diff(d::AbstractDpick)
   i=d.p.sel_bar
   while i<l && !match(d,i) i=next_line(d,i) end
   while i<l && match(d,i) i=next_line(d,i) end
-  if i==l werror("no further difference") else move_bar_to(d.p,i) end
+  if i==l && match(d,i) werror("no further difference") else move_bar_to(d.p,i) end
 end
 
 function prev_diff(d::AbstractDpick)

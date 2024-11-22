@@ -16,24 +16,25 @@ function initscr2()
 end
 
 leftchar::Int=0
-function getch()
+function wgetch(w::Ptr{WINDOW})
   if !iszero(Curses.leftchar)
     c=Curses.leftchar
     Curses.leftchar=0
     return c
   end
   while true
-    c=NCurses.getch()
+    c=NCurses.wgetch(w)
     if c>0 break end
   end
   if c!=0x1b return c end
-  n=NCurses.getch()
+  n=NCurses.wgetch(w)
   if n<0 return c end
   if Char(n) in 'a':'z' return KEY_ALT(Char(n)-'a'+'A') end
   Curses.leftchar=n
   return 0x1b
 end
-export getch
+getch()=wgetch(stdscr)
+export getch, wgetch
 
 end
 using .Curses

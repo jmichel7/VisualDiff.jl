@@ -1,20 +1,25 @@
 function getinput(win,initstr;getinput=true)
+  height=getmaxy(win)
   if getinput
-    mvadd(win,getmaxy(win)-3,0,:NORM)
+    mvadd(win,height-3,0,:NORM)
     printa(win,
           "Use keys {HL ←}, {HL →}, {HL Ins} and {HL Del} to edit. When finished,")
-    wmove(win,getmaxy(win)-2,0)
+    wmove(win,height-2,0)
     printa(win,"press {HL Enter} to accept the new value or {HL Esc} to abort   ")
   end
-  mvadd(win,getmaxy(win)-1,0,:NORM,"[")
-  mvadd(win,getmaxy(win)-1,getmaxx(win)-1,:NORM,"]")
-  wmove(win,getmaxy(win)-1,1)
-  f=Input_field(win,getmaxx(win)-2;overflow=true)
+  mvadd(win,height-1,0,:NORM,"[")
+  mvadd(win,height-1,getmaxx(win)-1,:NORM,"]")
+  wmove(win,height-1,1)
+  f=Input_field(win,getmaxx(win)-3;overflow=true)
   f.act=c->c!=0 ? c : 0x1b
   add(win,:BOX)
   fclear(f,initstr)
   val=nothing
-  if getinput val=input(f) else enter(f); leave(f) end
+  if getinput val=input(f) 
+   mvadd(win,height-3,0,:NORM);wclrtoeol(win)
+   mvadd(win,height-2,0,:NORM);wclrtoeol(win)
+   wrefresh(win)
+  else enter(f); leave(f) end
   add(win,:NORM)
   val
 end
@@ -56,7 +61,8 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
     if d[:value] isa Bool
       wmove(explwin,height-4,3)
       printa(explwin,"Press {HL Enter} or Double Click to toggle.")
-    else getinput(explwin,string(d[:value]);getinput=false)
+    else 
+      getinput(explwin,string(d[:value]);getinput=false)
       wmove(explwin,height-4,3)
       printa(explwin,"Press {HL Enter} to change the value given below.")
     end
@@ -113,9 +119,9 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
       elseif  val isa Integer
         val=getinput(explwin,string(val))
         if !isnothing(val) && !isempty(val) d[:value]=parse(Int,val) end
-      elseif val isa String 
-	val=getinput(explwin,val)
-        if !isnothing(val) && !isempty(val) d[:value]=val end
+#     elseif val isa String 
+#       val=getinput(explwin,val)
+#       if !isnothing(val) && !isempty(val) d[:value]=val end
       end
     elseif !do_key(p,c) beep()
     end

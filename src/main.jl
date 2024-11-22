@@ -26,7 +26,7 @@ function main(args...)
     end
   end
   if length(names)!=2 println(clihelp)
-  else vdiff(names...)
+  else vdiff(names...;Vdiff.opt...)
   end
 end
 

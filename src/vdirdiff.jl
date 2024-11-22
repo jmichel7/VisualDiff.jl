@@ -661,6 +661,7 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     if newcmp v.cmp='='
     else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
     end
+    move_bar_to(vd.p,vd.p.sel_bar)
 # when "link" then  
 #   if File.readlink(curname(vd,1))==File.readlink(curname(vd,2)) then v.cmp=?= 
 #   else v.cmp=v[0].mtime>v[1].mtime ? ?> : ?<
