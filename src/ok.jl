@@ -13,15 +13,15 @@ function ok(msg,q="yn")
   xoff=div(COLS()-w-2,2)
   sav=Shadepop(yoff,xoff,height,w+2)
   curs_set(0)
-  wmove(stdscr,yoff,xoff);add(stdscr,:BOX)
+  wmove(stdscr,yoff,xoff);add(:BOX)
   center(stdscr,title,w+2)
   msgwin=derwin(stdscr,height-3,w,yoff+1,xoff+1)
-  add(msgwin,:NORM,rpad(msg,w))
+  wadd(msgwin,:NORM,rpad(msg,w))
   pos=1
   while true
     wmove(stdscr,yoff+height-2,xoff+height-3)
     buttons=map(1:length(q))do i
-      if i>1 add(stdscr,:NORM,"  ") end
+      if i>1 add(:NORM,"  ") end
       Button(q[i],[pos==i ? :BAR : :BOX,text[q[i]]])
     end
     c=getch()

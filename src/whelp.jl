@@ -7,24 +7,24 @@ Show the help file `msg` (using `printa`) with title `title`.
 """
 function whelp(msg,title)
   save=Shadepop(0,0,LINES()-2,COLS()-2)
-  mvadd(stdscr,0,2,:BOX,"Help for the "*title)
-  mvadd(stdscr,LINES()-3,2,"Esc to exit")
+  mvadd(0,2,:BOX,"Help for the "*title)
+  mvadd(LINES()-3,2,"Esc to exit")
   p=Scroll_list(stdscr,split(msg,"\n");rows=LINES()-4,cols=COLS()-4,begx=1,begy=1,
     showentry=function(s,i)
-      add(s.win,:NORM)
+      add(:NORM)
       if i<=length(s) printa(s.win,s.list[i]) end
-      clrtocol(s.win,s.begx+s.cols-1)
+      clrtocol(s.begx+s.cols-1)
     end,
     on_scroll=function(s)
-      add(s.win,:BOX)
-      mvwhline(s.win,s.begy+s.rows,s.begx+14,0,14)
-      mvwhline(s.win,s.begy-1,s.begx+s.cols-9,0,9)
+      add(:BOX)
+      mvhline(s.begy+s.rows,s.begx+14,0,14)
+      mvhline(s.begy-1,s.begx+s.cols-9,0,9)
       if s.first>1
-        mvadd(s.win,s.begy+s.rows,s.begx+14,"PgUp",ACS_(:HLINE),ACS_(:UARROW))
-        mvadd(s.win,s.begy-1,s.begx+s.cols-9,"Line $(s.first)")
+        mvadd(s.begy+s.rows,s.begx+14,"PgUp",ACS_(:HLINE),ACS_(:UARROW))
+        mvadd(s.begy-1,s.begx+s.cols-9,"Line $(s.first)")
       end
       if s.first+s.rows<=length(s)
-        mvadd(s.win,s.begy+s.rows,s.begx+22,"PgDn",ACS_(:HLINE),ACS_(:DARROW))
+        mvadd(s.begy+s.rows,s.begx+22,"PgDn",ACS_(:HLINE),ACS_(:DARROW))
       end
     end)
 

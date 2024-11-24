@@ -1,26 +1,26 @@
 function getinput(win,initstr;getinput=true)
   height=getmaxy(win)
   if getinput
-    mvadd(win,height-3,0,:NORM)
+    mvwadd(win,height-3,0,:NORM)
     printa(win,
-          "Use keys {HL ←}, {HL →}, {HL Ins} and {HL Del} to edit. When finished,")
+      "Use keys {HL ←}, {HL →}, {HL Ins} and {HL Del} to edit. When finished,")
     wmove(win,height-2,0)
-    printa(win,"press {HL Enter} to accept the new value or {HL Esc} to abort   ")
+    printa(win,"press {HL Enter} to accept the new value or {HL Esc} to abort")
   end
-  mvadd(win,height-1,0,:NORM,"[")
-  mvadd(win,height-1,getmaxx(win)-1,:NORM,"]")
+  mvwadd(win,height-1,0,:NORM,"[")
+  mvwadd(win,height-1,getmaxx(win)-1,:NORM,"]")
   wmove(win,height-1,1)
   f=Input_field(win,getmaxx(win)-3;overflow=true)
   f.act=c->c!=0 ? c : 0x1b
-  add(win,:BOX)
+  wadd(win,:BOX)
   fclear(f,initstr)
   val=nothing
   if getinput val=input(f) 
-   mvadd(win,height-3,0,:NORM);wclrtoeol(win)
-   mvadd(win,height-2,0,:NORM);wclrtoeol(win)
+   mvwadd(win,height-3,0,:NORM);wclrtoeol(win)
+   mvwadd(win,height-2,0,:NORM);wclrtoeol(win)
    wrefresh(win)
   else enter(f); leave(f) end
-  add(win,:NORM)
+  wadd(win,:NORM)
   val
 end
 
@@ -42,11 +42,11 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
        maximum(map(d->length(opt.h[d][:name]),data)),begx=1,begy=1)
   p=Pick_list(s)
   s.showentry=function(s,i)
-    if opt.h[data[i]][:value]==true add(s.win,:HL,"√",:NORM) 
-    else add(s.win,:NORM," ")
+    if opt.h[data[i]][:value]==true add(:HL,"√",:NORM) 
+    else add(:NORM," ")
     end
     text=opt.h[data[i]][:name]
-    add(s.win,i==p.sel_bar ? :BAR : :BOX,text," "^(s.cols-length(text)))
+    add(i==p.sel_bar ? :BAR : :BOX,text," "^(s.cols-length(text)))
   end
   pwidth=2+s.cols
   explwin=derwin(stdscr,height-2,COLS()-pwidth-3,1,pwidth+1)
@@ -54,7 +54,7 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
     wbkgd(explwin,Color.get_att(:NORM))
     d=opt.h[data[p.sel_bar]]
     sep="\n\n"
-    mvadd(explwin,2,0,par(
+    mvwadd(explwin,2,0,par(
       (d[:value] isa Bool ? "When this option is checked, " : "")*sep*
       d[:shortdesc]*sep*d[:longdesc],COLS()-pwidth-4;sep))
     wclrtobot(explwin)
@@ -69,21 +69,21 @@ data=[:by_par,:ignore_endings,:ignore_blkseq,:ignore_blklin,:ignore_case,
     wrefresh(explwin)
   end
   acts=Button[]
-  mvadd(stdscr,0,pwidth,:BOX,ACS_(:TTEE))
-  mvadd(stdscr,height-1,pwidth,ACS_(:BTEE))
-  for i in 0:height-3 mvadd(stdscr,i+1,pwidth,ACS_(:VLINE)) end
-  mvadd(explwin,0,0,:HL)
+  mvadd(0,pwidth,:BOX,ACS_(:TTEE))
+  mvadd(height-1,pwidth,ACS_(:BTEE))
+  for i in 0:height-3 mvadd(i+1,pwidth,ACS_(:VLINE)) end
+  mvwadd(explwin,0,0,:HL)
   center(explwin,"Explanation of highlighted item")
-  add(explwin,:NORM)
-  mvadd(stdscr,0,6,:BOX,"select option with ")
+  wadd(explwin,:NORM)
+  mvadd(0,6,:BOX,"select option with ")
   push!(acts,Button(KEY_UP,"{HL ↑}"))
   push!(acts,Button(KEY_DOWN,"{HL ↓}"))
-  add(stdscr,"/click")
-  mvadd(stdscr,height-1,6,"type ")
+  add("/click")
+  mvadd(height-1,6,"type ")
   push!(acts,Button(KEY_F(10),"{HL F10}"))
-  add(stdscr," to accept new options or ")
+  add(" to accept new options or ")
   push!(acts,Button(0x1b,"{HL Esc}"))
-  add(stdscr," to abort")
+  add(" to abort")
   show(p)
 # mousemask(BUTTON1_CLICKED|BUTTON1_DOUBLE_CLICKED)
   c=nothing

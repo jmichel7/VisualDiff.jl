@@ -78,9 +78,9 @@ end
 
 function draw(I::Item)
   wmove(stdscr,I.y,I.sx)
-  if I.checked add(stdscr,:MKEY,"√") else add(stdscr," ") end
+  if I.checked add(:MKEY,"√") else add(" ") end
 # add(stdscr,:MTEXT,I.text...)
-  add(stdscr,I.text...)
+  add(I.text...)
 end
 
 function enter(I::Item)
@@ -142,9 +142,9 @@ function enter(m::Menu_head)
                     m.maxlen+3;att=Color.get_att(:MTEXT))
     for i in m.items draw(i) end
     for y in m.lines
-      mvadd(stdscr,y,m.start-1,ACS_(:LTEE))
+      mvadd(y,m.start-1,ACS_(:LTEE))
       hline(0,m.maxlen+1)
-      mvadd(stdscr,y,m.start+m.maxlen+1,ACS_(:RTEE))
+      mvadd(y,m.start+m.maxlen+1,ACS_(:RTEE))
     end
     change(m.items,0)
   end
@@ -190,7 +190,7 @@ end
 function debugc(c::Integer)
   x=getcurx(stdscr)
   y=getcury(stdscr)
-  mvadd(stdscr,LINES()-16,1,"c=$(c)  ")
+  mvadd(LINES()-16,1,"c=$(c)  ")
   refresh()
   wmove(stdscr,y,x)
 end

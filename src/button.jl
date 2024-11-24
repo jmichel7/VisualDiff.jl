@@ -19,7 +19,7 @@ function Button(key::NCurses.jlchtype,text,win=stdscr)
   x=getcurx(win)+getbegx(win)
   y=getcury(win)+getbegy(win)
   if text isa String printa(win,text)
-  elseif text isa Array add(win,text...)
+  elseif text isa Array wadd(win,text...)
   end
   ex=getbegx(win)+getcurx(win)-1
   Button(win,key,x,y,ex)

@@ -50,7 +50,7 @@ function Folding_browser(b;bopt...)
   add_scrollbar(s,COLS()-2)
   bb=Folding_browser(s,0)
   s.showentry=function(s,i)
-    add(s.win,:NORM)
+    add(:NORM)
     if i in eachindex(s.list) 
       l=s.list[i]
       ln=b[l.lno][l.firstch:l.lastch]
@@ -85,7 +85,7 @@ function Offset_browser(b;bopt...)
   s=Scroll_list(stdscr,b;bopt...)
   add_scrollbar(s)
   s.showentry=function(s,i)
-    add(s.win,:NORM)
+    add(:NORM)
     if i<=length(s)
      l=s.list[i]
      u=collect(Base.Unicode.graphemes(l))
@@ -126,21 +126,20 @@ first_on_screen(b::Offset_browser)=b.s.first
 last_on_screen(b::Offset_browser)=min(b.s.first+b.s.nbshown-1,length(b.s))
 
 function add_info(b::AbstractBrowser)
-  info=newwin(1,49,0,31)
   b.indicator=function()
-    mvadd(info,0,0,:BOX," lines ",:HL,string(first_on_screen(b)),
-          :BOX,"--",:HL,string(last_on_screen(b)))
-    if b isa Folding_browser add(info,"[fold]") end
-    add(info,:BOX," modes:",:HL)
-    for (a,c) in [(:showempty,"E"),(:showtabs,"T")]
-      add(info,getproperty(opt,a) ? c : "")
+    mvadd(0,31,:BOX," lines ",:HL,string(first_on_screen(b)),
+          :BOX,"-",:HL,string(last_on_screen(b)))
+    if b isa Folding_browser add(" fold") end
+    add(:HL)
+    for (a,c) in [(:showempty," showempty"),(:showtabs," showtabs")]
+      add(getproperty(opt,a) ? c : "")
     end
-    add(info," ",:BOX," tab=",:HL, string(opt.tabsize),:BOX," ")
+    add(:BOX," tab=",:HL, string(opt.tabsize),:BOX," ")
     if b isa Offset_browser && b.offset>0
-      add(info,:BOX," +",:HL,string(b.offset))
+      add(:BOX," +",:HL,string(b.offset))
     end
-    add(info,:BOX); wclrtoeol(info)
-    wrefresh(info)
+    add(:BOX); clrtoeol()
+    refresh()
   end
   old_scroll=b.s.on_scroll
   b.s.on_scroll=s->(old_scroll(b.s);b.indicator())
@@ -195,7 +194,7 @@ const browserhelp="""
 function re_input(b,forward,factor)
   b.d.re=Regex(inputbox("Regular expression to search"*
                         (forward ? "forward" : "backward")*"for",""))
-  b.d.forward=forwar
+  b.d.forward=forward
   re_search(b,true,factor)
 end
 
@@ -218,24 +217,21 @@ function binbrowse(name::String,n=20)
   sav=Shadepop(0,0,LINES()-1,COLS()-1)
   wmove(stdscr,LINES()-2,3);button=Button(Int('q'),"{HL 'q'} to quit binary browser")
   printnormedpath(0,1,name,LINES()-2)
-  w=derwin(stdscr,LINES()-3,COLS()-3,1,1)
-  add(w,:NORM);wclear(w)
   list=collect(Iterators.partition(Vector{UInt8}(bs),n))
-  s=Scroll_list(w,list)
+  s=Scroll_list(stdscr,list;begx=1,begy=1,rows=LINES()-3,cols=COLS()-3)
   add_scrollbar(s)
   lnowidth=length(string(max(length(bs),n*(LINES()-3))))
   s.showentry=function(s,i)
-    waddstr(w,lpad(n*i+1,lnowidth));add(w,:NORM,ACS_(:VLINE))
+    add(:NORM,lpad(n*i+1,lnowidth),ACS_(:VLINE))
     if i<=length(s.list)
       for (k,ch) in enumerate(s.list[i])
-        wmove(w;x=s.begx+lnowidth-2+3*k)
-        if (ch in 0:31) || (ch in 128:159) 
-          add(w," "*string(ch,base=16,pad=2))
-        else waddstr(w,lpad(Char(ch),3))
+        wmove(stdscr;x=s.begx+lnowidth-2+3*k)
+        if (ch in 0:31) || (ch in 128:159) add(" "*string(ch,base=16,pad=2))
+        else addstr(lpad(Char(ch),3))
         end
       end
     end
-    clrtocol(w,COLS()-3)
+    clrtocol(COLS()-3)
   end
   show(s)
   while true
@@ -243,10 +239,11 @@ function binbrowse(name::String,n=20)
     if c==KEY_MOUSE
       e=getmouse()
       c=process_event(button,e)
+      if isnothing(c) c=process_event(s.sb,e) end
       if isnothing(c) continue end
     end
     if false==do_key(s,c)
-      if c==Int('q') restore(sav); return end
+     if c in (Int('q'),0x1b) restore(sav); return end
     end
   end
 end
@@ -259,8 +256,7 @@ function browse_file(name)
     return
   end
   save=Savewin(stdscr)
-  clear()
-  add(stdscr,:BG);background()
+  background()
   shaded_frame(stdscr;x=0,y=1,height=LINES()-2,width=COLS()-1)
   br=Folding_browser(b;rows=LINES()-4,cols=COLS()-3,begy=2,begx=1)
   bo=Offset_browser(b;rows=LINES()-4,cols=COLS()-3,begy=2,begx=1)

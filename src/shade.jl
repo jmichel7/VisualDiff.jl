@@ -1,18 +1,18 @@
 export Shadepop, restore, background
 
 function background()
-  add(stdscr,:BG)
+  add(:BG)
   for i in 0:getmaxy(stdscr)
     wmove(stdscr,i,0)
-    for j in 0:getmaxx(stdscr) add(stdscr,ACS_(:CKBOARD)) end
+    for j in 0:getmaxx(stdscr) add(ACS_(:CKBOARD)) end
   end
 end
 
 function frame(w,top,left,height,width)
-  mvadd(w,top,left,ACS_(:ULCORNER));whline(w,0,width-2);
-  mvadd(w,top,left+width-1,ACS_(:URCORNER))
-  mvadd(w,top+height-1,left,ACS_(:LLCORNER));whline(w,0,width-2);
-  mvadd(w,top+height-1,left+width-1,ACS_(:LRCORNER))
+  mvwadd(w,top,left,ACS_(:ULCORNER));whline(w,0,width-2);
+  mvwadd(w,top,left+width-1,ACS_(:URCORNER))
+  mvwadd(w,top+height-1,left,ACS_(:LLCORNER));whline(w,0,width-2);
+  mvwadd(w,top+height-1,left+width-1,ACS_(:LRCORNER))
   mvwvline(w,top+1,left+width-1,0,height-2)
   mvwvline(w,top+1,left,0,height-2)
 end

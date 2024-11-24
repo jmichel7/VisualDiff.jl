@@ -34,12 +34,12 @@ function Base.show(s::Scrollbar,first,window,barlength)
   arrow=:HL # global style: color of the arrows
   for i in 0:s.rows-1
     wmove(s.win,i+s.begy,s.x)
-    add(s.win,bar,begh<=i<=endh ? ACS_(:CKBOARD) : ACS_(:VLINE))
+    wadd(s.win,bar,begh<=i<=endh ? ACS_(:CKBOARD) : ACS_(:VLINE))
   end
-  if first!=1 wmove(s.win,s.begy,s.x);add(s.win,arrow,ACS_(:UARROW)) end
+  if first!=1 wmove(s.win,s.begy,s.x);wadd(s.win,arrow,ACS_(:UARROW)) end
   if e<barlength 
     wmove(s.win,s.rows+s.begy-1,s.x)
-    add(s.win,arrow,ACS_(:DARROW))
+    wadd(s.win,arrow,ACS_(:DARROW))
   end
 end
 

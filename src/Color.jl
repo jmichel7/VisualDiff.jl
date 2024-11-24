@@ -1,4 +1,4 @@
-export Color, add
+export Color, add, wadd
 
 # Color representations
 # Symbolic: [bright] fg on bg: black white green blue cyan red magenta yellow
@@ -8,7 +8,7 @@ export Color, add
 module Color
 using ..Curses
 using OrderedCollections: OrderedDict
-export add, mvadd
+export add, mvadd, wadd, mvwadd
 
 const COLORS=[COLOR_BLACK,COLOR_BLUE,COLOR_GREEN,COLOR_CYAN,
     COLOR_RED,COLOR_MAGENTA,COLOR_YELLOW,COLOR_WHITE]
@@ -133,8 +133,8 @@ function inspect(w::Ptr{WINDOW})
  "#<Window:$(getmaxy(w)),$(getmaxx(w)),$(getbegy(w)),$(getbegx(w))>"
 end
 
-# add String, Int/char, Symbol, 
-function add(w::Ptr{WINDOW},a...)
+# wadd String, Int/char, Symbol, 
+function wadd(w::Ptr{WINDOW},a...)
 #   log "add[#{curx},#{cury}](#{a.inspect})#{self.inspect}\n"
   for s in a
     if s isa AbstractString waddstr(w,filter(!=('\0'),s))
@@ -142,7 +142,7 @@ function add(w::Ptr{WINDOW},a...)
     elseif s isa Vector 
 #     wattron(w,Color.get_att(s[1]))
       wattron(w,s[1])
-      for u in s[2:end] add(w,u) end
+      for u in s[2:end] wadd(w,u) end
 #     wattroff(w,Color.get_att(s[1]))
       wattroff(w,s[1])
     elseif s isa Symbol wattron(w,Color.get_att(s))
@@ -150,7 +150,9 @@ function add(w::Ptr{WINDOW},a...)
   end
 end
    
-mvadd(w::Ptr{WINDOW},y::Integer,x::Integer,a...)=(wmove(w,y,x);add(w,a...))
+add(a...)=wadd(stdscr,a...)
+mvwadd(w::Ptr{WINDOW},y::Integer,x::Integer,a...)=(wmove(w,y,x);wadd(w,a...))
+mvadd(y::Integer,x::Integer,a...)=(wmove(stdscr,y,x);add(a...))
 end
 
 using .Color

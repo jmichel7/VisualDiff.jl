@@ -50,8 +50,7 @@ end
 
 function show_meths(stdscr,c,msg)
   if length(c)>0
-    add(stdscr,:BOX," ",msg,":\n",:NORM)
-    add(stdscr,wrap(rpad.(c,10),10))
+    add(:BOX," ",msg,":\n",:NORM,wrap(rpad.(c,10),10))
   end
 end
 
@@ -98,17 +97,17 @@ end
 #end
 
 function show_ACS(stdscr)
-  add(stdscr,:BOX," ACS constants:\n",:NORM)
+  add(:BOX," ACS constants:\n",:NORM)
   col=0
   for k in sort(collect(keys(NCurses.acs_map_dict)))
     if col+12>COLS()
-      add(stdscr,"\n")
+      add("\n")
       col=0 
     end
-    add(stdscr,lpad(k,9),"=",ACS_(k)," ")
+    add(lpad(k,9),"=",ACS_(k)," ")
     col+=12
   end
-  add(stdscr,"\n")
+  add("\n")
 end
 
 function show_chars(stdscr)
@@ -136,33 +135,28 @@ end
 function show_colors(stdscr)
   printw("colors:\n")
   for i in 0:255
-    add(stdscr,[Color.dos_to_att(0x70)," "],[Color.dos_to_att(i),"XX"])
+    add([Color.dos_to_att(0x70)," "],[Color.dos_to_att(i),"XX"])
     if i&15==15 printw("\n") end
   end
   attroff(A_BLINK)
 end
 
 function menu(stdscr)
-  sadd(a...)=Color.add(stdscr,a...)
   curx=getcurx(stdscr)
   cury=getcury(stdscr)
   wmove(stdscr,0,0)
-  sadd(:NORM)
-  sadd("maj=my[")
-  sadd(:BOX,"c",:NORM,"onst")
-  sadd(" ",:BOX,"m",:NORM,"eth")
-  sadd(" ",:BOX,"a",:NORM,"CS")
-  sadd(" ",:BOX,"k",:NORM,"EY")
-  sadd("]")
-  sadd(" c",:BOX,"h",:NORM,"ars")
-  sadd(" c",:BOX,"o",:NORM,"lors")
-  sadd(" ",:BOX,"e",:NORM,"vents") 
-  sadd(" ",:BOX,"q",:NORM,"uit")
-  sadd(" ",:BOX,"O",:NORM,"k")
-  sadd(" a",:BOX,"b",:NORM,"out")
+  add(:NORM,"maj=my[")
+  add(:BOX,"c",:NORM,"onst ",:BOX,"m",:NORM,"eth ",:BOX,"a",:NORM,"CS")
+  add(" ",:BOX,"k",:NORM,"EY]")
+  add(" c",:BOX,"h",:NORM,"ars")
+  add(" c",:BOX,"o",:NORM,"lors")
+  add(" ",:BOX,"e",:NORM,"vents") 
+  add(" ",:BOX,"q",:NORM,"uit")
+  add(" ",:BOX,"O",:NORM,"k")
+  add(" a",:BOX,"b",:NORM,"out")
   clrtoeol()
   wmove(stdscr,cury,curx)
-  sadd(:NORM)
+  add(:NORM)
 end
 
 Base.string(m::MEVENT)="$id:$x,$y,$z:$bstate"
@@ -174,7 +168,7 @@ function main()
              :BAR=>"black on yellow",:BG=>"black on blue",
              :BLACK=>"white on black",:MTEXT=>"bright white on blue",
              :MKEY=>"bright yellow on blue")
-  add(stdscr,:NORM)
+  add(:NORM)
   clear()
   wmove(stdscr,1,0)
   curses_keys=filter(x->startswith("KEY")(string(x)) && !(eval(x) isa Function),names(Curses))
@@ -193,7 +187,7 @@ function main()
     elseif c=='a' show_ACS(stdscr)
     elseif c=='b' Vdiff.about()
     elseif c=='S' dump(stdscr);printw(" cols=$(COLS()) lines=$(LINES())")
-    elseif c=='U' add(stdscr,:MTEXT,"Bro",:MKEY,"w",:MTEXT,"se","   ","F3")
+    elseif c=='U' add(:MTEXT,"Bro",:MKEY,"w",:MTEXT,"se","   ","F3")
     elseif c=='O' 
        background()
        res=ok("testok");printw(repr(Char(res)))

@@ -162,21 +162,21 @@ function Dpickfold(v,n,t)
         else wmove(s.win,getcury(s.win)+d.wd,s.begx)
         end
       end
-      add(s.win,(i==d.p.sel_bar && side==gside) ? :BAR : (p.match ? :NORM : :HL))
+      add((i==d.p.sel_bar && side==gside) ? :BAR : (p.match ? :NORM : :HL))
       if iszero(lno(p,side)) || k>length(p.scrlns[side]) 
-        add(s.win," "^d.lnowidth); 
-        add(s.win,:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
+        add(" "^d.lnowidth); 
+        add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
         attprint(s.win," "^d.textlen,d.textlen;opt...)
       else
         l=p.scrlns[side][k]
-        if l.nth==1 add(s.win,string(lno(p,side),pad=d.lnowidth))
-        else        add(s.win,cpad("--",d.lnowidth))
+        if l.nth==1 add(string(lno(p,side),pad=d.lnowidth))
+        else        add(cpad("--",d.lnowidth))
         end
-        add(s.win,:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
+        add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
         ln=cleanforatt(content(d,p,side))[l.firstch:l.lastch]
         attprint(s.win,ln,d.textlen;:decor=>shift(decors[side],l.firstch-1),opt...)
       end
-      add(s.win,:NORM)
+      add(:NORM)
     end
   end
   d
@@ -211,16 +211,16 @@ function Dpick(v,n,t)
         else wmove(s.win,getcury(s.win)+d.wd,s.begx)
         end
       end
-      add(s.win,(i==d.p.sel_bar && j==gside) ? :BAR : (p.match ? :NORM : :HL))
-      if !iszero(lno(p,j)) add(s.win,string(lno(p,j),pad=d.lnowidth))
-      else add(s.win," "^d.lnowidth)
+      add((i==d.p.sel_bar && j==gside) ? :BAR : (p.match ? :NORM : :HL))
+      if !iszero(lno(p,j)) add(string(lno(p,j),pad=d.lnowidth))
+      else add(" "^d.lnowidth)
       end
-      add(s.win,:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
+      add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
       ln=content(d,p,j)
       ln=ln[nextind(ln,min(d.offset,length(ln))):end]
       cleanforatt(ln)
       attprint(s.win,ln,d.textlen;:offset=>d.offset,:decor=>decors[j],opt...)
-      add(s.win,:NORM)
+      add(:NORM)
     end
   end
   d
@@ -239,8 +239,8 @@ function show_screen(d::AbstractDpick,v)
     d.textlen=d.wd-4-d.lnowidth
     for i in 0:1
       shaded_frame(stdscr,sy-1,sx+i*d.wd,l+2,d.wd-1)
-      mvadd(stdscr,sy-1,sx+1+d.lnowidth+i*d.wd,ACS_(:TTEE))
-      mvadd(stdscr,sy+l,sx+1+d.lnowidth+i*d.wd,ACS_(:BTEE))
+      mvadd(sy-1,sx+1+d.lnowidth+i*d.wd,ACS_(:TTEE))
+      mvadd(sy+l,sx+1+d.lnowidth+i*d.wd,ACS_(:BTEE))
       printnormedpath(sy-1,sx+i*d.wd+1,d.names[i+1],d.wd-3)
     end
   else
@@ -251,8 +251,8 @@ function show_screen(d::AbstractDpick,v)
     d.textlen=COLS()-4-d.lnowidth
     for i in 0:1
       shaded_frame(stdscr,sy-1+i*d.wd,sx,d.wd-1,COLS()-1)
-      mvadd(stdscr,sy-1+i*d.wd,sx+1+d.lnowidth,ACS_(:TTEE))
-      mvadd(stdscr,sy+d.wd-3+i*d.wd,sx+1+d.lnowidth,ACS_(:BTEE))
+      mvadd(sy-1+i*d.wd,sx+1+d.lnowidth,ACS_(:TTEE))
+      mvadd(sy+d.wd-3+i*d.wd,sx+1+d.lnowidth,ACS_(:BTEE))
       printnormedpath(sy-1+i*d.wd,sx+1,d.names[i+1],COLS()-3)
     end
   end
@@ -484,14 +484,14 @@ function check_changes(d::AbstractDpick)
 end
 
 function indicator(d::AbstractDpick)
-  mvadd(stdscr,0,40,:BOX," modes: ",:HL)
-  if opt.fold add(stdscr,"fold ") end
-  if opt.showempty add(stdscr,"showempty ") end
-  if opt.showtabs add(stdscr,"showtabs ") end
-  add(stdscr,:BOX,"tab=",:HL,string(opt.tabsize),:BOX," ")
-  if d isa Dpick && d.offset>0 add(stdscr,:BOX,"+",:HL,string(d.offset)) end
-  add(stdscr,:BOX)
-  clrtocol(stdscr,COLS()-2)
+  mvadd(0,40,:HL)
+  if opt.fold add("fold ") end
+  if opt.showempty add("showempty ") end
+  if opt.showtabs add("showtabs ") end
+  add(:BOX,"tab=",:HL,string(opt.tabsize),:BOX," ")
+  if d isa Dpick && d.offset>0 add(:BOX,"+",:HL,string(d.offset)) end
+  add(:BOX)
+  clrtocol(COLS()-2)
   refresh()
 end
 

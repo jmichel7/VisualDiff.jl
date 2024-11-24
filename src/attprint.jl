@@ -16,7 +16,7 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
 #   log "decor=#{mm.inspect} t=#{t.inspect}\n"
   end
   function checkwrite(c)
-    add(w,string(c))
+    wadd(w,string(c))
     getcurx(w)>max_x
   end
   ptr=1
@@ -24,14 +24,14 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
 #   log "[#{t[ptr].inspect}:#{curx}]"
     if haskey(opt,:decor) && !isempty(mm)
       if mm[mmpos].offset<ptr && mmpos<length(mm) mmpos+=1 end
-      if ptr==mm[mmpos].offset add(w,mm[mmpos].att) end
+      if ptr==mm[mmpos].offset wadd(w,mm[mmpos].att) end
     end
     c=t[ptr]
     if c==0 if checkwrite(c) break end
     elseif c in ('\r','\n') break
     elseif c=='\t'
       tab_att=showtabs ? :TAB : :NORM
-      if showtabs add(w,tab_att) end
+      if showtabs wadd(w,tab_att) end
       if tabsize!=0
         x=getcurx(w)
         for x in x:x+tabsize-x%tabsize-1
@@ -39,19 +39,19 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
 	end
       end
       if checkwrite(' ') break end
-      if showtabs add(w,:NORM) end
+      if showtabs wadd(w,:NORM) end
     elseif checkwrite(c) break
     end
     ptr=nextind(t,ptr)
   end
 # log "[#{curx}]ptr=#{ptr.inspect} "
 #   log "ended\n"
-  if showempty add(w,:EMPTY);clrtocol(w,max_x);add(w,:NORM) 
-  else add(w,:NORM);clrtocol(w,max_x)
+  if showempty wadd(w,:EMPTY);wclrtocol(w,max_x);wadd(w,:NORM) 
+  else wadd(w,:NORM);wclrtocol(w,max_x)
   end
   if haskey(opt,:decor) && !fold
     while mmpos<=length(mm)
-      add(w,mm[mmpos].att)
+      wadd(w,mm[mmpos].att)
       mmpos+=1
     end
   end

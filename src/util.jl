@@ -54,11 +54,12 @@ macro ExtObj(e)
    :(Base.get!(f::Function,o::$T,s::Symbol)=get!(f,getfield(o,:prop),s))))
 end
 
-function clrtocol(w::Ptr{WINDOW},col)
+function wclrtocol(w::Ptr{WINDOW},col)
   cx=getcurx(w)
   waddstr(w," "^max(0,col-cx+1))
   wmove(w;x=cx)
 end
+clrtocol(col)=wclrtocol(stdscr,col)
 
 # e.bstate is among events in x
 among(e::MEVENT,x::Integer)=iszero(e.bstate & ~UInt(x))
@@ -66,12 +67,12 @@ among(e::MEVENT,x::Integer)=iszero(e.bstate & ~UInt(x))
 function Dump(s...)
   x=getcurx(stdscr)
   y=getcury(stdscr)
-  mvadd(stdscr,LINES()-16,1,:NORM,s...)
+  mvadd(LINES()-16,1,:NORM,s...)
   refresh()
   wmove(stdscr,y,x)
 end
 
-Base.dump(w::Ptr{WINDOW})=addstr("<$(getbegy(w)),$(getbegx(w)):$(getmaxy(w)),$(getmaxx(w))>")
+Base.dump(w::Ptr{WINDOW})="win($(getbegy(w)),$(getbegx(w))):($(getmaxy(w)),$(getmaxx(w)))"
 
 function exec(com,dir=".")
   cd(dir)do
@@ -92,8 +93,8 @@ function center(w::Ptr{WINDOW},text::String,width=getmaxx(w)-getcurx(w);rtrunc=f
   x=getcurx(w)
   l=length(text)
   if l>width text=rtrunc ? text[1:width-1] : text[l-width+1:l]
-    if rtrunc add(stdscr,:NORM,text,:BOX,"»")
-    else add(stdscr,:BOX,"«",:NORM,text)
+    if rtrunc add(:NORM,text,:BOX,"»")
+    else add(:BOX,"«",:NORM,text)
     end
   else wmove(w,x=x+div(width-l,2))
     waddstr(w,text)
@@ -114,6 +115,7 @@ function cpad(text::String,width,rtrunc=false)
 end
 
 function werror(s)
+  s=replace(s,r"\n"=>"\\n")
   w=max(length(s),34)
   l=div(w,COLS()-3)
   w=min(w,COLS()-3)
@@ -123,14 +125,14 @@ function werror(s)
   save=Shadepop(yoff,xoff,height+1,w+2)
   curs_set(0)
   beep()
-  mvadd(stdscr,yoff,xoff+1,:BOX)
+  mvadd(yoff,xoff+1,:BOX)
   center(stdscr,"Warning",w)
-  mvadd(stdscr,yoff+height-1,xoff+1,:BAR)
+  mvadd(yoff+height-1,xoff+1,:BAR)
   center(stdscr,"ok",w)
-  mvadd(stdscr,yoff+1,xoff+1,:NORM)
+  mvadd(yoff+1,xoff+1,:NORM)
   if l>0
     for i in 0:l
-      mvadd(stdscr,yoff+1+i,xoff+1,s[w*i+1:min(w*(i+1),length(s))])
+      mvadd(yoff+1+i,xoff+1,s[w*i+1:min(w*(i+1),length(s))])
     end
   else
     addstr(s)
@@ -146,11 +148,11 @@ no '}' output to `w` the string `x` with attribute `ATT`.
 """
 function printa(w::Ptr{WINDOW},s)
   offset=1
-  for m in eachmatch(r"(?!\\)\{([A-Z]*) ([^}]*)\}",s)
-    add(w,s[offset:prevind(s,m.offset)],Symbol(m[1]),m[2],:NORM)
+  for m in eachmatch(r"(?!\\)\{([A-Z]*)\s([^}]*)\}"s,s)
+    wadd(w,s[offset:prevind(s,m.offset)],Symbol(m[1]),m[2],:NORM)
     offset=m.offset+ncodeunits(m.match)
   end
-  if offset<=length(s) add(w,s[offset:end]) end
+  if offset<=length(s) wadd(w,s[offset:end]) end
 end
 
 # reverse part sx:ex of line y
@@ -189,8 +191,8 @@ end #----------------- of Indexed --------------------
 
 function info(start,fin,msg...)
   x=getcurx(stdscr);y=getcury(stdscr)
-  mvadd(stdscr,LINES()-1,start,msg...)
-  clrtocol(stdscr,fin==COLS()-1 ? fin-1 : fin)
+  mvadd(LINES()-1,start,msg...)
+  clrtocol(fin==COLS()-1 ? fin-1 : fin)
   refresh()
   wmove(stdscr,y,x)
 end

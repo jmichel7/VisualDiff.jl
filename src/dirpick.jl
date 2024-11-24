@@ -27,14 +27,14 @@ function Dir_pick(curdir)
   d=Dir_pick(p,curdir,1,18,9,cols-35,maxwidth,0,'N',true)
   d.p.s.showentry=function(s,pos)
     f=pos>length(s.list) ? nothing : s.list[pos]
-    add(s.win,pos==p.sel_bar ? :BAR : :NORM," "^d.tabskip)
-    add(s.win,printfname(f,d.namewidth,d.offset)...)
-    add(s.win,:BOX," "^d.tabskip,ACS_(:VLINE)," "^d.tabskip)
-    add(s.win,pos==p.sel_bar ? :BAR : :NORM)
-    add(s.win,isnothing(f) ? " "^d.szwidth : printsz(f.stat,d.szwidth))
-    add(s.win,:BOX," "^d.tabskip,ACS_(:VLINE)," "^d.tabskip)
-    add(s.win,pos==p.sel_bar ? :BAR : :NORM)
-    add(s.win,isnothing(f) ? " "^d.tmwidth : printtm(f.stat,d.tmwidth))
+    add(pos==p.sel_bar ? :BAR : :NORM," "^d.tabskip)
+    add(printfname(f,d.namewidth,d.offset)...)
+    add(:BOX," "^d.tabskip,ACS_(:VLINE)," "^d.tabskip)
+    add(pos==p.sel_bar ? :BAR : :NORM)
+    add(isnothing(f) ? " "^d.szwidth : printsz(f.stat,d.szwidth))
+    add(:BOX," "^d.tabskip,ACS_(:VLINE)," "^d.tabskip)
+    add(pos==p.sel_bar ? :BAR : :NORM)
+    add(isnothing(f) ? " "^d.tmwidth : printtm(f.stat,d.tmwidth))
   end
   d
 end
@@ -87,12 +87,12 @@ function update_sort(d::Dir_pick,c::Char)
   end
   sort!(d.p.s.list,by=f->by(d.sort,f),rev=!d.sort_up)
   d.p.sel_bar=findfirst(i->d.p.s.list[i].filename==cf,eachindex(d.p.s.list))
-  sdecor(s)=add(stdscr,:HL,s ? ACS_(:DARROW) : ACS_(:UARROW))
-  sdecor()=add(stdscr,:BOX,ACS_(:HLINE))
+  sdecor(s)=add(:HL,s ? ACS_(:DARROW) : ACS_(:UARROW))
+  sdecor()=add(:BOX,ACS_(:HLINE))
   s=d.p.s
   a=s.begx+2*d.tabskip
   b=a+d.namewidth+d.szwidth+2*d.tabskip
-  add(stdscr,:BOX)
+  add(:BOX)
   wmove(stdscr,s.begy+s.rows,a)
   if d.sort=='N' sdecor(d.sort_up) else sdecor() end
   wmove(stdscr,s.begy+s.rows,a+11)
@@ -154,12 +154,12 @@ function dirbrowse(name)
   initdmenu(d)
   a=s.begx+2*d.tabskip
   b=a+d.namewidth+d.szwidth+2*d.tabskip
-  add(stdscr,:BOX)
-  mvadd(stdscr,s.begy-1,a+d.namewidth,ACS_(:TTEE))
-  wmove(stdscr,x=b+1);add(stdscr,ACS_(:TTEE))
-  mvadd(stdscr,s.begy+s.rows,a+d.namewidth,ACS_(:BTEE))
-  wmove(stdscr,x=b+1);add(stdscr,ACS_(:BTEE))
-  mvadd(stdscr,1,s.begx,:BOX)
+  add(:BOX)
+  mvadd(s.begy-1,a+d.namewidth,ACS_(:TTEE))
+  wmove(stdscr,x=b+1);add(ACS_(:TTEE))
+  mvadd(s.begy+s.rows,a+d.namewidth,ACS_(:BTEE))
+  wmove(stdscr,x=b+1);add(ACS_(:BTEE))
+  mvadd(1,s.begx,:BOX)
   printnormedpath(1,s.begx,d.curdir,s.cols-1)
   show(p)
   c=getch()

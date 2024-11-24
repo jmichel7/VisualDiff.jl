@@ -363,34 +363,33 @@ function Vdir_pick(n0,n1;old=nothing)
   s.showentry=function(s,pos)
     d=pos<=length(s.list) ? vd.ppairs[s.list[pos]] : nothing
     hl=(pos==p.sel_bar)
-    wmove(s.win,x=vd.name_column);add(s.win,hl ? :BAR : :NORM)
-    add(s.win,printfname(d,vd.namewidth,vd.offset;norm=hl ? :BAR : :NORM)...)
-    wmove(s.win,x=vd.cmp_column);add(s.win,:HL,Int(isnothing(d) ? ' ' : d.cmp))
+    wmove(s.win,x=vd.name_column);add(hl ? :BAR : :NORM)
+    add(printfname(d,vd.namewidth,vd.offset;norm=hl ? :BAR : :NORM)...)
+    wmove(s.win,x=vd.cmp_column);add(:HL,Int(isnothing(d) ? ' ' : d.cmp))
     for n in 1:2
       hls=(hl && n==gside)
       t=(hl ? "▶" : ACS_(:VLINE))
-      wmove(s.win,x=vd.panes[n]-1);add(s.win,:BOX,t)
-      if hls add(s.win,:BAR)  end
-      if isnothing(d) add(s.win," "^vd.sz_width)
+      wmove(s.win,x=vd.panes[n]-1);add(:BOX,t)
+      if hls add(:BAR)  end
+      if isnothing(d) add(" "^vd.sz_width)
       elseif !isnothing(d[n])
-        if !hls add(s.win,:NORM) end
-	add(s.win,printsz(d[n],vd.sz_width))
+        if !hls add(:NORM) end
+	add(printsz(d[n],vd.sz_width))
       else
-        if !hls add(s.win,:GREY) end
-        add(s.win,cpad("-absent-",vd.sz_width))
+        if !hls add(:GREY) end
+        add(cpad("-absent-",vd.sz_width))
       end
-      if !hls add(s.win,:BOX) end
-      add(s.win,ACS_(:VLINE))
-      if isnothing(d)
-        add(s.win," "^vd.tm_width)
+      if !hls add(:BOX) end
+      add(ACS_(:VLINE))
+      if isnothing(d) add(" "^vd.tm_width)
       elseif !isnothing(d[n])
-        if !hls add(s.win,:NORM) end
-	add(s.win,printtm(d[n],vd.tm_width))
+        if !hls add(:NORM) end
+	add(printtm(d[n],vd.tm_width))
       else
-        if !hls add(s.win,:GREY) end
-        add(s.win,cpad("--",vd.tm_width))
+        if !hls add(:GREY) end
+        add(cpad("--",vd.tm_width))
       end
-      add(s.win,:BOX,t)
+      add(:BOX,t)
     end
   end
   vd
@@ -424,8 +423,8 @@ function preserve_sel_bar(f,vd)
 end
   
 function update_sort(vd::Vdir_pick,c::Char)
-  sdecor(s)=add(stdscr,:HL,s ? ACS_(:DARROW) : ACS_(:UARROW))
-  sdecor()=add(stdscr,:BOX,ACS_(:HLINE))
+  sdecor(s)=add(:HL,s ? ACS_(:DARROW) : ACS_(:UARROW))
+  sdecor()=add(:BOX,ACS_(:HLINE))
   if vd.sort==c vd.sort_up=!vd.sort_up else vd.sort_up=true end
   vd.sort=c
   wmove(stdscr,vd.height,vd.name_column)
@@ -599,14 +598,14 @@ function redraw_panes(vd::Vdir_pick)#;refresh=true)
   if vd.height==0 vd.height=LINES()-3 end
   shaded_frame(stdscr,1,vd.name_column-1,vd.height,3+vd.namewidth)
   vd.p.s.sb.x=vd.name_column-1
-  mvadd(stdscr,1,vd.name_column+4,:BOX,"entry")
+  mvadd(1,vd.name_column+4,:BOX,"entry")
 #   if refresh then on_scroll else init_scroll(@name_column-1) end
 # init_scroll(vd.name_column-1) # necessary if pane_width changed
   for i in 1:2
     shaded_frame(stdscr,1,vd.panes[i]-1,vd.height,vd.pane_width-1)
-    mvadd(stdscr,1,vd.panes[i]+vd.sz_width,:BOX,ACS_(:TTEE))
+    mvadd(1,vd.panes[i]+vd.sz_width,:BOX,ACS_(:TTEE))
     wmove(stdscr,2,vd.panes[i]+vd.sz_width);vline(0,vd.height-2)
-    mvadd(stdscr,vd.height,vd.panes[i]+vd.sz_width,ACS_(:BTEE))
+    mvadd(vd.height,vd.panes[i]+vd.sz_width,ACS_(:BTEE))
     printnormedpath(1,vd.panes[i],vd.name[i],vd.pane_width-3)
   end
   cm=vdmenu

@@ -11,17 +11,11 @@ function nbK(n)
   end
 end
 
-function ltrunc(w,s::String,l)
-  if length(s)<=l wprintw(w,rpad(s,l))
-  else add(w,first(s,l-1));add(w,:HL,"…")
-  end
-end
+ltrunc(s,l)=if length(s)<=l add(rpad(s,l)) else add(first(s,l-1),:HL,"…") end
 
 function rls(dir)
   initscr2()
   cbreak()
-  noecho() 
-  keypad(stdscr,true)
 # mousemask(BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED)
   Color.init(:NORM=>"black on white",:HL=>"bright red on white", 
              :BAR=>"bright yellow on red",:BOX=> "blue on white")
@@ -32,14 +26,14 @@ function rls(dir)
   p=Pick_list(s)
   s.showentry=function(s,i)
     att=i==p.sel_bar ? :BAR : :NORM
-    add(s.win,att)
-    if 0<div(i-s.first,s.rows) add(s.win,ACS_(:VLINE)) end
+    add(att)
+    if 0<div(i-s.first,s.rows) add(ACS_(:VLINE)) end
     if i<=length(s)
       name,ss=s.list[i]
-      ltrunc(s.win,name,s.width-23)
-      add(s.win,:BOX,ACS_(:VLINE),att,nbK(ss.size),:BOX,ACS_(:VLINE))
-      add(s.win,att,Dates.format(unix2datetime(ss.mtime),"dd u yy HH:mm"))
-    else wprintw(s.win," "^s.width)
+      ltrunc(name,s.width-23)
+      add(:BOX,ACS_(:VLINE),att,nbK(ss.size),:BOX,ACS_(:VLINE))
+      add(att,Dates.format(unix2datetime(ss.mtime),"dd u yy HH:mm"))
+    else addstr(" "^s.width)
     end
     wmove(s.win;x=getcurx(s.win)-1) # unneeded if cursor invisible
   end

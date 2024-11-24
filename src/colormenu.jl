@@ -4,19 +4,19 @@ function pickcolor(ypos,color=0)
   c=2+8*6; xpos=min(10,COLS()-c-1)
   save=Shadepop(ypos,xpos,r,c)
   curs_set(0)
-  mvadd(stdscr,ypos+r-1,xpos+1,"Select: ")
+  mvadd(ypos+r-1,xpos+1,"Select: ")
   buttons=[Button(KEY_ENTER,"{HL Enter}")]
   addstr(" or double-click, ")
   push!(buttons,Button(0x1b,"{HL Esc} to quit"))
   s=Scroll_list(stdscr,collect(1:128);rows=r-2,cols=c-1,begy=ypos+1,begx=xpos+1,nbcols=8)
   p=Pick_list(s)
   s.showentry=function(s,i)
-    add(s.win,:BOX,(i==p.sel_bar ? "▶" : " "),[Color.dos_to_att(i-1),"XX"])
-    wattroff(s.win,Color.dos_to_att(i-1))
-    add(s.win,:BOX,(i==p.sel_bar ? "◀" : " "))
+    add(:BOX,(i==p.sel_bar ? "▶" : " "),[Color.dos_to_att(i-1),"XX"])
+    attroff(Color.dos_to_att(i-1))
+    add(:BOX,(i==p.sel_bar ? "◀" : " "))
   end
   p.on_move_bar=function()
-    mvadd(stdscr,s.begy-1,s.begx+1,rpad(Color.dos_to_lit(p.sel_bar-1),25),
+    mvadd(s.begy-1,s.begx+1,rpad(Color.dos_to_lit(p.sel_bar-1),25),
           repr(UInt8(p.sel_bar-1),context=:limit=>true))
   end
   move_bar_to(p,Color.att_to_dos(color)+1)
@@ -201,21 +201,21 @@ function colormenu()
     elseif i==ls+1 text=""
     else text=colors[colorkey(i-ls-1)][:name]
     end
-    add(s.win,i==p.sel_bar ? :BAR : :BOX,text," "^(width-length(text)))
-    if i>ls+1 add(s.win,colorkey(i-ls-1),"x",:NORM) end
+    add(i==p.sel_bar ? :BAR : :BOX,text," "^(width-length(text)))
+    if i>ls+1 add(colorkey(i-ls-1),"x",:NORM) end
   end
   explwin=derwin(stdscr,lg,35,ypos+1,22)
   p.on_move_bar=function()
     wmove(explwin,6,0);wclrtobot(explwin)
     if p.sel_bar<=ls waddstr(explwin,mypar(schemes[p.sel_bar][:desc],35))
-      mvadd(explwin,1,16,"select scheme")
+      mvwadd(explwin,1,16,"select scheme")
     elseif p.sel_bar>ls+1
       color=colors[colorkey(p.sel_bar-ls-1)]
       waddstr(explwin,mypar(color[:desc],35))
-      mvadd(explwin,11,0,:HL)
+      mvwadd(explwin,11,0,:HL)
       center(explwin,"Example")
-      mvadd(explwin,12,0,:NORM,color[:example]...)
-      mvadd(explwin,1,16,"change color ")
+      mvwadd(explwin,12,0,:NORM,color[:example]...)
+      mvwadd(explwin,1,16,"change color ")
     end
     refresh()
     wrefresh(explwin)
@@ -224,21 +224,21 @@ function colormenu()
   function init()
     show(p)
     buttons=[]
-    add(explwin,:NORM)
-    mvadd(stdscr,ypos,5,:BOX,"press ")
+    wadd(explwin,:NORM)
+    mvadd(ypos,5,:BOX,"press ")
     push!(buttons,Button(0x1b,"{HL Esc}"))
-    add(stdscr," or ");push!(buttons,Button(KEY_F(10),"{HL F10}"))
-    add(stdscr," to return")
-    mvadd(explwin,0,0,:NORM,"Select with ")
+    add(" or ");push!(buttons,Button(KEY_F(10),"{HL F10}"))
+    add(" to return")
+    mvwadd(explwin,0,0,:NORM,"Select with ")
     push!(buttons,Button(KEY_UP,"{HL ↑}",explwin))
-    add(explwin,"/")
+    wadd(explwin,"/")
     push!(buttons,Button(KEY_DOWN,"{HL ↓}",explwin))
-    add(explwin,". Press ")
+    wadd(explwin,". Press ")
     push!(buttons,Button(KEY_CTRL('J'),"{HL Enter}",explwin))
-    add(explwin," or\nDouble Click to select scheme")
-    mvadd(explwin,5,0,:HL)
+    wadd(explwin," or\nDouble Click to select scheme")
+    mvwadd(explwin,5,0,:HL)
     center(explwin,"Description")
-    add(explwin,:NORM)
+    wadd(explwin,:NORM)
   end
   init()
   while true

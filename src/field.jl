@@ -50,7 +50,7 @@ end
 
 function fclear(f::Input_field,initial_string=nothing) 
   wmove(f.win,f.firsty,f.firstx)
-  clrtocol(f.win,f.firstx+f.length-1)
+  wclrtocol(f.win,f.firstx+f.length-1)
   f.insert_mode=true
   if initial_string!=nothing
     for c in initial_string faddch(f,c) end
@@ -88,7 +88,7 @@ function showbuf(f::Input_field)
   #dump "showbuf[#{@bufpos+pos}..]."
   save=getcurx(f.win)
   waddstr(f.win, f.buf[f.bufpos+pos(f):min(length(f.buf),f.bufpos+f.length-1)-1])
-  clrtocol(f.win,f.firstx+f.length)
+  wclrtocol(f.win,f.firstx+f.length)
   if f.decor
     wmove(f.win.mv,x=f.firstx-1)
     waddch(f.win,f.bufpos>0 ? "\U00AB" : f.dbeg)
