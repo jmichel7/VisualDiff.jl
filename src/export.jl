@@ -122,13 +122,14 @@ export wattron
 export mvhline
 #mvvline=NCurses.mvvline;export mvvline
 #mvwaddch=NCurses.mvwaddch;export mvwaddch
-#mvwhline=NCurses.mvwhline;export mvwhline
+export mvwhline
 export mvwvline
 #wprintw=NCurses.wprintw;export wprintw
 #printw=NCurses.printw;export printw
 #mvprintw=NCurses.mvprintw;export mvprintw
 #mvwprintw=NCurses.mvwprintw;export mvwprintw
 export addstr
+export mvwaddstr
 export hline
 export vline
 export MEVENT

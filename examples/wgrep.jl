@@ -1,5 +1,5 @@
-include("../Curses.jl")
-using .Curses
+using Vdiff
+using Vdiff.Curses
 
 function wgrep(ARGS)
 initscr2()
@@ -11,10 +11,10 @@ grepbox=newwin(WIN_HEIGHT, WIN_WIDTH, 0, 0)
 keypad(grepbox,true)
 init_pair(3,COLOR_BLUE,COLOR_WHITE)
 wattron(grepbox,COLOR_PAIR(3)) #wattrset(grepbox,COLOR_PAIR(3))
-wborder(grepbox)
+wborder(grepbox,0,0,0,0,0,0,0,0)
 grep=derwin(grepbox,WIN_HEIGHT-2, WIN_WIDTH-2, 1, 1)
 wbkgd(grep,bw)
-pattern=Regex(ARGS[1])
+pattern=ARGS[1]
 for fname in ARGS[2:end]
   line=0
   matched=false
@@ -28,33 +28,33 @@ for fname in ARGS[2:end]
         if !matched
           matched=true
           mvwhline(grepbox,0,2,ACS_(:HLINE),getmaxx(grepbox)-3)
-          mvwprintw(grepbox,0,2,fname)
-          wmove(grepbox,x=getcurx(grepbox)+5);wprintw(grepbox," éàμρ $line")
+          mvwaddstr(grepbox,0,2,fname)
+          wmove(grepbox,x=getcurx(grepbox)+5);waddstr(grepbox," éàμρ $line")
           wclear(grep)
           wmove(grep,0,0)
         end
         pos=1
         for m in eachmatch(pattern,l)
-          wprintw(grep,l[pos:m.offset-1])
+          waddstr(grep,l[pos:m.offset-1])
           wattron(grep,yb) # wattrset(grep,yb)
-          wprintw(grep,m.match)
+          waddstr(grep,m.match)
           wattroff(grep,yb) # wattrset(grep,bw)
           pos=m.offset+ncodeunits(m.match)
         end
         l=l[pos:end]
       elseif !matched continue
       end
-      wprintw(grep,l)#wprintw(grep," "^(getmaxx(grep)-getcurx(grep)-1))
+      waddstr(grep,l)#waddstr(grep," "^(getmaxx(grep)-getcurx(grep)-1))
       if getcury(grep)>=getmaxy(grep)-1
         matched=false
         wrefresh(grep)
         wmove(grep,0,0)
-        mvwprintw(grepbox,0, WIN_WIDTH-16,"Continue?(y/n)")
+        mvwaddstr(grepbox,0, WIN_WIDTH-16,"Continue?(y/n)")
         c=Char(wgetch(grepbox))
         if c in "yY" continue
         elseif c in "nN" break
         elseif c in "qQ" return 
-        else mvwprintw(grepbox,0,1,string(c));wrefresh(grepbox)
+        else mvwaddstr(grepbox,0,1,string(c));wrefresh(grepbox)
         end
       end 
       wmove(grep,getcury(grep)+1,0)
