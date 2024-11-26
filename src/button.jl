@@ -14,7 +14,7 @@ function process_event(b::Button,e)
   end
 end
 
-function Button(key::NCurses.jlchtype,text,win=stdscr)
+function Button(key,text,win=stdscr)
   # printa text at win.curx and associates key
   x=getcurx(win)+getbegx(win)
   y=getcury(win)+getbegy(win)

@@ -99,7 +99,12 @@ end
 function show_ACS(stdscr)
   add(:BOX," ACS constants:\n",:NORM)
   col=0
-  for k in sort(collect(keys(NCurses.acs_map_dict)))
+if Curses.TUI
+  d=NCurses.acs_map_dict
+else
+  d=Curses.acs_map_dict
+end
+  for k in sort(collect(keys(d)))
     if col+12>COLS()
       add("\n")
       col=0 
@@ -112,16 +117,16 @@ end
 
 function show_chars(stdscr)
   function doit()
-    wprintw(stdscr,join(map(i->repr(UInt8(i%16))[end],0:31)," ")*"\n")
+    addstr(join(map(i->repr(UInt8(i%16))[end],0:31)," ")*"\n")
     for i in vcat(32:127,128+32:255)
-     if i&31==0 wprintw(stdscr,repr(UInt8(i>>4))[end:end]) end
-      wprintw(stdscr," "*Char(i))
-      if i&31==31 wprintw(stdscr,"\n") end
+     if i&31==0 addstr(repr(UInt8(i>>4))[end:end]) end
+      addstr(" "*Char(i))
+      if i&31==31 addstr("\n") end
     end
   end
-  wprintw(stdscr,"normal characters:\n  ")
+  addstr("normal characters:\n  ")
   doit()
-  wprintw(stdscr,"ALTCHARSET characters:\n  ")
+  addstr("ALTCHARSET characters:\n  ")
   attron(A_ALTCHARSET)
   doit()
   attroff(A_ALTCHARSET)
@@ -129,14 +134,14 @@ end
 
 function show_const(names)
   n=map(x->"$x=$(repr(UInt16(eval(x))))\t",names)
-  printw(join(n))
+  addstr(join(n))
 end
 
 function show_colors(stdscr)
-  printw("colors:\n")
+  addstr("colors:\n")
   for i in 0:255
     add([Color.dos_to_att(0x70)," "],[Color.dos_to_att(i),"XX"])
-    if i&15==15 printw("\n") end
+    if i&15==15 addstr("\n") end
   end
   attroff(A_BLINK)
 end
@@ -175,7 +180,7 @@ function main()
   while  true
     menu(stdscr)
     c=Char(getch())
-    if c==Char(KEY_MOUSE) printw("$(getmouse())\n")
+    if c==Char(KEY_MOUSE) addstr("$(getmouse())\n")
     elseif c=='q' break
     elseif c=='h' show_chars(stdscr)
   #  when "e".ord then show_events(mask)
@@ -186,25 +191,25 @@ function main()
  #  elseif c=='K'  show_keys(my_const,"my")
     elseif c=='a' show_ACS(stdscr)
     elseif c=='b' Vdiff.about()
-    elseif c=='S' dump(stdscr);printw(" cols=$(COLS()) lines=$(LINES())")
+    elseif c=='S' dump(stdscr);addstr(" cols=$(COLS()) lines=$(LINES())")
     elseif c=='U' add(:MTEXT,"Bro",:MKEY,"w",:MTEXT,"se","   ","F3")
     elseif c=='O' 
        background()
-       res=ok("testok");printw(repr(Char(res)))
+       res=ok("testok");addstr(repr(Char(res)))
   #  when "A".ord then show_ACS(Curses.constants,"my")
   #  when "M".ord then show_methods(my_im,"my Curses::Window instance")
   #             show_methods(Curses.instance_methods(false),"my Curses instance")
   #  when "m".ord then show_methods(initial_m-initial_im,"Curses")
   #     show_methods(initial_im-initial_m,"Curses::Window instance")
   #     show_methods(initial_im&initial_m,"Both")
-  else printw("key=$(repr(UInt16(c)))=0o"*
+  else addstr("key=$(repr(UInt16(c)))=0o"*
               String('0'.+reverse(digits(Int(c);base=8)))*"=$c")
-      if Int(c) in 417:442 printw("=KEY_ALT_('$('A'+Int(c)-417)')\n")
-      elseif Int(c) in 0:25 printw("=KEY_CTRL_('$('A'+Int(c)-1)')\n")
-      elseif Int(c) in 265:274 printw("=KEY_F($(Int(c)-264))\n")
+      if Int(c) in 417:442 addstr("=KEY_ALT_('$('A'+Int(c)-417)')\n")
+      elseif Int(c) in 0:25 addstr("=KEY_CTRL_('$('A'+Int(c)-1)')\n")
+      elseif Int(c) in 265:274 addstr("=KEY_F($(Int(c)-264))\n")
       else p=findfirst(x->Int(c)==eval(x),curses_keys)
-        if !isnothing(p) printw("=$(curses_keys[p])\n")
-        else printw("\n")
+        if !isnothing(p) addstr("=$(curses_keys[p])\n")
+        else addstr("\n")
         end
       end
   #    if k=Curses.constants.grep(/^KEY_/).detect{|k| Curses.module_eval(k.to_s)==c}

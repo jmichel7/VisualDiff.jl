@@ -275,7 +275,7 @@ function Color.add(m::Menu,args...)
   push!(m.heads.v,Menu_head(args...))
 end
 
-NCurses.refresh(m::Menu)=for h in m.heads draw(h.item) end
+Curses.refresh(m::Menu)=for h in m.heads draw(h.item) end
 end
 
 using .Menus
