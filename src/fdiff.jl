@@ -529,7 +529,7 @@ function process_event(d::AbstractDpick,e)
 end
 
 
-function vdifff(a,b)
+function vdifff(a,b;options...)
 #  dd=nil
   initial_bar=1
 #  while true do
@@ -590,6 +590,7 @@ function vdifff(a,b)
     factor=0
     f
   end
+  if haskey(options,:quit) endwin();return end
   c=getch()
   while true
     if Int('0')<=c<=Int('9') factor=10*(factor)+c-Int('0')

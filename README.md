@@ -1,7 +1,8 @@
 # Vdiff
 Visual  and  interactive  comparison  of  two  files  or directories. It is
-written   as  a   console  application   using  the   ncurses  bindings  in
-`TextUserInterfaces` (it is a Julia port of a Ruby app "rdelta").
+written  as a console  application using ncurses  (it is a  Julia port of a
+Ruby app "rdelta"). It can use the ncurses bindings in `TextUserInterfaces` 
+or in `Ncurses`.
 
 To start the application, you can either:
 
@@ -20,5 +21,9 @@ Or from the command line, using the file `main.jl` in the `src` directory:
 ```
 julia main.jl xxx yyy
 ```
+
+The  program  make  upon  first  use  a configuration file `~/.vdiff` whose
+syntax  should be evident, which can be  updated by the options menu within
+`Vdiff`.
 
 [![Build Status](https://github.com/jmichel7/Vdiff.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/jmichel7/Vdiff.jl/actions/workflows/CI.yml?query=branch%3Amain)

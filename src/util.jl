@@ -54,6 +54,8 @@ macro ExtObj(e)
    :(Base.get!(f::Function,o::$T,s::Symbol)=get!(f,getfield(o,:prop),s))))
 end
 
+NCurses.wmove(w;y=getcury(w),x=getcurx(w))=wmove(w,y,x)
+
 function wclrtocol(w::Ptr{WINDOW},col)
   cx=getcurx(w)
   waddstr(w," "^max(0,col-cx+1))
@@ -76,14 +78,11 @@ Base.dump(w::Ptr{WINDOW})="win($(getbegy(w)),$(getbegx(w))):($(getmaxy(w)),$(get
 
 function exec(com,dir=".")
   cd(dir)do
-#   delete the_screen if com==nothing
     def_prog_mode()
     endwin()
     if com==nothing com=ENV["SHELL"] end
     code=success(run(eval(Meta.parse("`"*com*"`"))))
-  # the_screen=new save_screen if com==nothing
     reset_prog_mode()
-  # efns(WARNING_,diag) if(diag)
     refresh()
     if !code werror("failed executing command") end
   end
@@ -155,7 +154,7 @@ function printa(w::Ptr{WINDOW},s)
   if offset<=length(s) wadd(w,s[offset:end]) end
 end
 
-# reverse part sx:ex of line y
+" reverse colors in part sx:ex of line y"
 function reverse_area(y,sx=0,ex=getmaxx(stdscr)-1)
   cx=getcurx(stdscr)
   cy=getcury(stdscr)

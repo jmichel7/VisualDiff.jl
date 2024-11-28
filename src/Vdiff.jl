@@ -28,27 +28,41 @@ include("diffhs.jl")
 include("vdirdiff.jl")
 include("fdiff.jl")
 
+using PrecompileTools: @compile_workload
+
 function vdiff(n0,n1;flg...)
   n0=expanduser(n0); n1=expanduser(n1)
-  for n in (n0,n1) if !ispath(n) error("no such file or directory:$n") end end
   initscr2()
   if LINES()<24 || COLS() <80 
     endwin()
-    error("vdiff needs at least 24 lines and 80 columns: detected $(LINES())x$(COLS())") 
+    println("vdiff needs at least 24 lines and 80 columns: detected $(LINES())x$(COLS())") 
+    return
   end
   Color.init(schemes[1][:value]...) # in case no option file
   read_options(cfgname)
-  if isfile(n0) && isfile(n1) higher_compare(n0,n1;show=true)
-  elseif isdir(n0) && isdir(n1) 
+  if isdir(n0) && isdir(n1) 
     vd=Vdir_pick(n0,n1)
     browse(vd::Vdir_pick;toplevel=true,flg...)
-  elseif isdir(n1) p=joinpath(n1,basename(n0))
-    if !(ispath(p)) error("no such file or directory:$p") end
-    higher_compare(n0,p;show=true)
-  else p=joinpath(n0,basename(n1))
-    if !(ispath(p)) error("no such file or directory:$p") end
-    higher_compare(p,n1;show=true)
+  else
+    if isdir(n1) n1=joinpath(n1,basename(n0))
+    elseif isdir(n0) n0=joinpath(n0,basename(n1))
+    end
+    for n in (n0,n1)
+      if !(ispath(n)) 
+        endwin()
+        println("no such file or directory:$n")
+        return
+      end
+    end
+    higher_compare(n0,n1;show=true,flg...)
   end
   endwin()
 end
+
+@compile_workload begin
+  dir=joinpath(@__DIR__,"..","examples")
+  vdiff(joinpath(dir,"old"),joinpath(dir,"new");quit=true)
+  vdiff(joinpath(dir,"old","aaa"),joinpath(dir,"new","aaa");quit=true)
+end
+
 end

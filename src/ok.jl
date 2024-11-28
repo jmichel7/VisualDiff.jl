@@ -25,7 +25,6 @@ function ok(msg,q="yn")
       Button(q[i],[pos==i ? :BAR : :BOX,text[q[i]]])
     end
     c=getch()
-#   dump "c=<#{'%x' %c}=#{c.chr}>"
     res=
     if c==KEY_MOUSE
       e=getmouse()

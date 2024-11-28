@@ -1,5 +1,5 @@
 module Curses
-  const TUI=false
+  const TUI=true # use TextUserInterfaces instead of Ncurses
   if TUI
     using TextUserInterfaces:TextUserInterfaces
     const NCurses=TextUserInterfaces.NCurses
@@ -125,8 +125,3 @@ export getch, wgetch
 
 end
 using .Curses
-
-if Curses.TUI
-NCurses.wmove(w,i::T1,j::T2) where{T1,T2}=wmove(w,Int(i),Int(j))
-end
-NCurses.wmove(w;y=getcury(w),x=getcurx(w))=wmove(w,y,x)

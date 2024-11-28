@@ -11,7 +11,7 @@ const vdhelp="""
     {HL <} if they differ and the right entry is more recent,
     {HL l} if the entry is present only in the left  directory,  
     {HL r} if the entry is present only in the right directory,
-    {HL ?} if the entries have not yet been completely compared.
+    {HL ?} if the entries have not yet been recursively compared.
   If a name is too wide to be entirely displayed in the central column, the
   keys {HL →} and {HL ←} will scroll right and left that name.
 
@@ -37,10 +37,10 @@ const vdhelp="""
   {HL r}             Toggle between: show/don't show entries only on right.
   {HL >}             Toggle between: show/don't show entries newer on left.
   {HL <}             Toggle between: show/don't show entries newer on right.
-  {HL AltN}          Sort entries alphabetically.
+  {HL AltN}          Sort entries alphabetically. Sorting again reverses order.
   {HL AltE}          Sort entries by extension.
-  {HL AltS}          Sort entries by size (in current column).
-  {HL AltT}          Sort entries by time (in current column).
+  {HL AltS}          Sort entries by size in current column.
+  {HL AltT}          Sort entries by time in current column.
 
              {BOX  Acting on the files in the display: }
 
@@ -60,7 +60,7 @@ const vdhelp="""
              {BOX  Miscellaneous: }
 
   {HL h},{HL F1}          Display this message
-  {HL F9}            Escape to the Shell.
+  {HL x},{HL F9}          Escape to the Shell.
   {HL Esc},{HL q}         Exit this screen.
 
              {BOX  Mouse actions: }
@@ -69,6 +69,7 @@ const vdhelp="""
    Clicking on an entry sets the cursor there. Double-clicking on an entry
    does the same as Enter.  
    You can click on {HL name}, {HL ext}, {HL size} or {HL date} to sort accordingly.
+   The menus are also accessible by {HL Alt}+highlighted letter.
 """
 
 push!(opt.h,
@@ -164,7 +165,7 @@ function stripspace(s)
   end
 end
 
-function higher_compare(n0,n1;show=false)
+function higher_compare(n0,n1;show=false,options...)
   eqsize=filesize(n0)==filesize(n1)
   peq=if opt.onlylength || !eqsize eqsize
   else
@@ -177,7 +178,7 @@ function higher_compare(n0,n1;show=false)
   end
   if show
     if newcmp werror("files are identical")
-    else newcmp=vdifff(n0,n1)
+    else newcmp=vdifff(n0,n1;options...)
     end
   end
   newcmp
@@ -463,6 +464,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
   save=Shadepop(s.begx-1,s.begy-1,2+s.rows,s.cols+1)
   fill(vd;flg...)
   check_showfilter(vd)
+  if haskey(flg,:quit) endwin();return end
   c=getch()
   while true
     if c==KEY_MOUSE
