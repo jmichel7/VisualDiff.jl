@@ -1,4 +1,4 @@
-name = "Vdiff"
+name = "VisualDiff"
 uuid = "a4e6b4e8-4b97-4be9-afa4-72a10a6a8f69"
 authors = ["Jean Michel <jean.michel@imj-prg.fr> and contributors"]
 version = "0.0.1"
