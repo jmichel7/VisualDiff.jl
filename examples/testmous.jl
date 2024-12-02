@@ -1,5 +1,5 @@
-using Vdiff
-using Vdiff.Curses
+using VisualDiff
+using VisualDiff.Curses
 
 #initial_im=Ncurses::WINDOW.instance_methods(false)
 #initial_m=Ncurses.methods-Ncurses::WINDOW.methods
@@ -190,7 +190,7 @@ function main()
     elseif c=='k' show_const(curses_keys)
  #  elseif c=='K'  show_keys(my_const,"my")
     elseif c=='a' show_ACS(stdscr)
-    elseif c=='b' Vdiff.about()
+    elseif c=='b' VisualDiff.about()
     elseif c=='S' dump(stdscr);addstr(" cols=$(COLS()) lines=$(LINES())")
     elseif c=='U' add(:MTEXT,"Bro",:MKEY,"w",:MTEXT,"se","   ","F3")
     elseif c=='O' 

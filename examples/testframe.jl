@@ -1,5 +1,5 @@
-using Vdiff
-using Vdiff.Curses
+using VisualDiff
+using VisualDiff.Curses
 
 function main()
   initscr2()
