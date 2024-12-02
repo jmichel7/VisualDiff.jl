@@ -165,7 +165,7 @@ end
 
 module Indexeds
 export Indexed, prev, next, current, change
-using ..Vdiff: Vdiff
+using ..VisualDiff: VisualDiff
 mutable struct Indexed{T}
   v::Vector{T}
   pos::Int
@@ -178,9 +178,9 @@ Indexed(v::AbstractVector)=Indexed(v,0)
 
 function change(v::Indexed,i)
   if i==v.pos return end
-  if v.pos!=0 Vdiff.leave(current(v)) end
+  if v.pos!=0 VisualDiff.leave(current(v)) end
   v.pos=i
-  if v.pos!=0 Vdiff.Menus.enter(current(v)) end
+  if v.pos!=0 VisualDiff.Menus.enter(current(v)) end
 end
 
 next(v::Indexed)=change(v,v.pos<length(v) ? v.pos+1 : 1)

@@ -1,6 +1,6 @@
-using Vdiff
+using VisualDiff
 using Test
 
-@testset "Vdiff.jl" begin
+@testset "VisualDiff.jl" begin
     # Write your tests here.
 end

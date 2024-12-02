@@ -1,5 +1,4 @@
-module Vdiff
-export vdiff
+module VisualDiff
 include("Curses.jl")
 include("util.jl")
 include("Color.jl")
@@ -31,6 +30,7 @@ include("main.jl")
 
 using PrecompileTools: @compile_workload
 
+export vdiff
 function vdiff(n0,n1;flg...)
   n0=expanduser(n0); n1=expanduser(n1)
   initscr2()
@@ -60,10 +60,10 @@ function vdiff(n0,n1;flg...)
   endwin()
 end
 
-@compile_workload begin
-  dir=joinpath(@__DIR__,"..","examples")
-  vdiff(joinpath(dir,"old"),joinpath(dir,"new");quit=true)
-  vdiff(joinpath(dir,"old","aaa"),joinpath(dir,"new","aaa");quit=true)
-end
+#@compile_workload begin
+#  dir=joinpath(@__DIR__,"..","examples")
+#  vdiff(joinpath(dir,"old"),joinpath(dir,"new");quit=true)
+#  vdiff(joinpath(dir,"old","aaa"),joinpath(dir,"new","aaa");quit=true)
+#end
 
 end

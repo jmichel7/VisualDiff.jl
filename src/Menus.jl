@@ -1,9 +1,9 @@
 module Menus
 using ..Curses
-using ..Vdiff
+using ..VisualDiff
 using ..Color
 using ..Indexeds
-hint::Function=Vdiff.infohint
+hint::Function=VisualDiff.infohint
 export Menu, Item, Menu_head
 
 mutable struct Item
@@ -25,14 +25,14 @@ mutable struct Menu_head
   maxlen::Int
   lines::Vector{Int}
   items::Indexed{Item}
-  save::Vdiff.Shadepop
+  save::VisualDiff.Shadepop
   Menu_head(item::Item,y::Integer)=new(item,y)
 end
 
 struct Menu
   heads::Indexed{Menu_head}
   function Menu(hint)
-    Vdiff.reverse_area(0)
+    VisualDiff.reverse_area(0)
     Menus.hint=hint
     new(Indexed(Menu_head[]))
   end
@@ -85,16 +85,16 @@ end
 
 function enter(I::Item)
   Menus.hint(I.hint)
-  Vdiff.reverse_area(I.y,I.sx,I.sx+I.len)
+  VisualDiff.reverse_area(I.y,I.sx,I.sx+I.len)
 end
 
 function toggle(I::Item)
   I.checked=!I.checked
 end
 
-function Vdiff.leave(I::Item)
+function VisualDiff.leave(I::Item)
   Menus.hint("")
-  Vdiff.reverse_area(I.y,I.sx,I.sx+I.len)
+  VisualDiff.reverse_area(I.y,I.sx,I.sx+I.len)
 end
 
 owns(I::Item,e)=e.x in I.sx:I.sx+I.len && e.y==I.y
@@ -137,7 +137,7 @@ function enter(m::Menu_head)
   curs_set(0)
   enter(m.item)
   if isdefined(m,:items)
-    m.save=Vdiff.Shadepop(m.y+1,m.start-1,
+    m.save=VisualDiff.Shadepop(m.y+1,m.start-1,
                     m.y+length(m.items)+length(m.lines)+2,
                     m.maxlen+3;att=Color.get_att(:MTEXT))
     for i in m.items draw(i) end
@@ -150,12 +150,12 @@ function enter(m::Menu_head)
   end
 end
 
-function Vdiff.leave(m::Menu_head)
+function VisualDiff.leave(m::Menu_head)
   if isdefined(m,:items)
     change(m.items,0) 
-    Vdiff.restore(m.save)
+    VisualDiff.restore(m.save)
   end
-  Vdiff.leave(m.item)
+  VisualDiff.leave(m.item)
 end
 
 function which_item_event(m::Menu_head,e)
@@ -178,10 +178,10 @@ function get_key(m::Menu_head)
   end
 end
 
-function Vdiff.leave(m::Menu)
+function VisualDiff.leave(m::Menu)
   res=get_key(current(m.heads))
   change(m.heads,0)
-# Vdiff.werror("res=$res")
+# VisualDiff.werror("res=$res")
   if res isa Function res()
   elseif !isnothing(res) return res end
   getch()
@@ -202,19 +202,19 @@ function mainloop(m::Menu,event=nothing)
       if event!=nothing e=event; event=nothing else e=getmouse() end
       t=whichhead(m,e) 
       if !isnothing(t)
-        if Vdiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED)
+        if VisualDiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED)
           change(m.heads,t)
           if !isdefined(current(m.heads),:items) && 
-            Vdiff.among(e,BUTTON1_RELEASED|BUTTON1_CLICKED)
-            return Vdiff.leave(m)
+            VisualDiff.among(e,BUTTON1_RELEASED|BUTTON1_CLICKED)
+            return VisualDiff.leave(m)
           end
         end
       elseif isdefined(current(m.heads),:items) && !isnothing(which_item_event(current(m.heads),e))
         i=which_item_event(current(m.heads),e)
-        if Vdiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED)
+        if VisualDiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED)
           change(current(m.heads).items,i)
-          if Vdiff.among(e,BUTTON1_RELEASED|BUTTON1_CLICKED)
-           return Vdiff.leave(m)
+          if VisualDiff.among(e,BUTTON1_RELEASED|BUTTON1_CLICKED)
+           return VisualDiff.leave(m)
           end
         end
       else 
@@ -228,7 +228,7 @@ function mainloop(m::Menu,event=nothing)
     elseif c in (KEY_UP,Int('k'))
       if isdefined(current(m.heads),:items) prev(current(m.heads).items) end
     elseif c in (KEY_CTRL('J'), KEY_ENTER) 
-      return Vdiff.leave(m)
+      return VisualDiff.leave(m)
     elseif c==0x1b
       change(m.heads,0)
       return nothing
@@ -265,8 +265,8 @@ end
 
 # returns an action (which could be mouse key) if the event e was in menu 
 # (the action represents next action to be done), nil otherwise
-function Vdiff.process_event(m::Menu,e)
-  if !(Vdiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED) && 
+function VisualDiff.process_event(m::Menu,e)
+  if !(VisualDiff.among(e,BUTTON1_PRESSED|BUTTON1_RELEASED|BUTTON1_CLICKED) && 
     !isnothing(whichhead(m,e))) return nothing end
   mainloop(m,e)
 end

@@ -1,5 +1,3 @@
-using Vdiff
-
 clihelp="""
 usage:  vdiff [options] f1 f2
 
@@ -18,14 +16,14 @@ function main(args...)
   names=String[]
   for a in args
     if a in ("-h","--help") println(clihelp)
-    elseif a in ("-r","--recur") Vdiff.opt.recur=true
-    elseif a in ("-s","--slow") Vdiff.opt.onlylength=false
-    elseif a in ("-i","--ignore_case") Vdiff.opt.ignore_case=true
-    elseif a in ("-w","--ignore_w") Vdiff.opt.inore_blkseq=true
+    elseif a in ("-r","--recur") VisualDiff.opt.recur=true
+    elseif a in ("-s","--slow") VisualDiff.opt.onlylength=false
+    elseif a in ("-i","--ignore_case") VisualDiff.opt.ignore_case=true
+    elseif a in ("-w","--ignore_w") VisualDiff.opt.inore_blkseq=true
     else push!(names,a)
     end
   end
   if length(names)!=2 println(clihelp)
-  else vdiff(names...;Vdiff.opt...)
+  else vdiff(names...;VisualDiff.opt...)
   end
 end
