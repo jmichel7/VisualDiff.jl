@@ -29,5 +29,3 @@ function main(args...)
   else vdiff(names...;Vdiff.opt...)
   end
 end
-
-main(ARGS...)
