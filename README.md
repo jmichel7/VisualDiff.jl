@@ -17,12 +17,17 @@ where  "xxx" and "yyy" are two files or two directories to compare. In each
 case  you get a window where help is available with "F1" of "h" or from the
 menu.
 
-Or from the command line, using the file `main.jl` in the `src` directory:
+Or from the command line, using the file `vdiff` that you have made executable
+and whose contents are 
 ```
-julia main.jl xxx yyy
+using Vdiff
+Vdiff.main(ARGS...)
 ```
-
-The  program  make  upon  first  use  a configuration file `~/.vdiff` whose
+do then 
+```
+julia vdiff xxx yyy
+```
+The  program upon  first  use  makes a configuration file `~/.vdiff` whose
 syntax  should be evident, which can be  updated by the options menu within
 `Vdiff`.
 

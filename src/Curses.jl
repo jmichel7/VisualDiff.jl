@@ -1,5 +1,5 @@
 module Curses
-  const TUI=true # use TextUserInterfaces instead of Ncurses
+  const TUI=false # if true use TextUserInterfaces instead of Ncurses
   if TUI
     using TextUserInterfaces:TextUserInterfaces
     const NCurses=TextUserInterfaces.NCurses

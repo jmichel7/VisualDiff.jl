@@ -413,16 +413,32 @@ function prev_such(f,vd;retreat=true) # prev with property f
 end
 
 function preserve_sel_bar(f,vd)
-  cur=vd.p.sel_bar<=length(pairs(vd)) ? pairs(vd)[vd.p.sel_bar] : nothing
+  cur=0<vd.p.sel_bar<=length(pairs(vd)) ? pairs(vd)[vd.p.sel_bar] : nothing
+# werror("cur=$(vd.ppairs[cur].filename)")
   f(vd)
-# rng=searchsorted(list,cur,by=i->by(vd.sort,vd.ppairs[i]))
-# vd.p.sel_bar=last(rng)
-  if cur!=nothing cur=findfirst(==(cur),pairs(vd)) end
-  vd.p.sel_bar=isnothing(cur) ? 1 : cur
+  if cur!=nothing
+  rng=searchsorted(pairs(vd),cur;by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
+  vd.p.sel_bar=min(rng.start,length(pairs(vd)))
+  else vd.p.sel_bar=1
+  end
+# werror("rng=$rng")
+# werror("cur=$(vd.ppairs[pairs(vd)[vd.p.sel_bar]].filename)")
   show(vd.p)
   vd.p.s.on_scroll(vd.p.s)
 end
   
+function by(sortp,d::PathPair)
+ (isnothing(d[gside]) ? !myisdir(d[3-gside]) : !myisdir(d[gside]),
+  if sortp=='N' d.filename
+  elseif sortp=='E' 
+    (extension(d),d.filename)
+  elseif sortp=='S' 
+    isnothing(d[gside]) ? (0,d[3-gside].size,d.filename) : (d[gside].size,0,d.filename)
+  elseif sortp=='T' 
+    isnothing(d[gside]) ? (0,d[3-gside].mtime,d.filename) : (d[gside].mtime,0,d.filename)
+  end)
+end
+
 function update_sort(vd::Vdir_pick,c::Char)
   sdecor(s)=add(:HL,s ? ACS_(:DARROW) : ACS_(:UARROW))
   sdecor()=add(:BOX,ACS_(:HLINE))
@@ -438,14 +454,6 @@ function update_sort(vd::Vdir_pick,c::Char)
     wmove(stdscr,vd.height,vd.panes[i]+17)
     if vd.sort=='T' && gside==i sdecor(vd.sort_up) else sdecor() end
   end
-  function by(sortp,d::PathPair)
-   (isnothing(d[gside]) ? !myisdir(d[3-gside]) : !myisdir(d[gside]),
-    if sortp=='N' d.filename
-    elseif sortp=='E' extension(d)
-    elseif sortp=='S' isnothing(d[gside]) ? 0 : d[gside].size
-    elseif sortp=='T' isnothing(d[gside]) ? 0 : d[gside].mtime
-    end)
-  end
   preserve_sel_bar(vd)do vd
     sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
   end
@@ -454,6 +462,7 @@ end
 function check_showfilter(vd::Vdir_pick)
   preserve_sel_bar(vd)do vd
     vd.p.s.list=filter(i->vd.ppairs[i].cmp in show_filter,eachindex(vd.ppairs))
+    sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
   end
   redraw_panes(vd) # namewidth may have changed
 end
@@ -688,6 +697,7 @@ function Base.fill(vd::Vdir_pick;recur=false,flg...)
         deleteat!(pairs(vd),j) 
       end
     end
+    sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
   end
   redraw_panes(vd)
 end

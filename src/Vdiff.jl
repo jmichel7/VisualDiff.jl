@@ -27,6 +27,7 @@ include("dirpick.jl")
 include("diffhs.jl")
 include("vdirdiff.jl")
 include("fdiff.jl")
+include("main.jl")
 
 using PrecompileTools: @compile_workload
 
