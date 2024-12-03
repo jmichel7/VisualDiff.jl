@@ -336,7 +336,7 @@ function Base.copy(d::AbstractDpick,side)
         splice!(d.p.s.list,i:i+m-1-delta,map(j->(line=k,subline=j),1:m))
       end
       move_bar_to(d.p,next_line(d))
-    else delete(d,1-side)
+    else delete(d,3-side)
     end
   end
 end
