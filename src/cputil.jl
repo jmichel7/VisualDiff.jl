@@ -52,7 +52,7 @@ function myrm(src;opts...)
       try
         chmod(src,0o0744) # make writable to delete entries
       catch exc
-        if opts[:verbose] opts[:error]("chmod744: $(exc.message)") end
+        if opts[:verbose] opts[:error]("chmod744: $(exc)") end
       end
       for s in readdir(src)
 #	next if [".",".."].include? s
@@ -74,7 +74,7 @@ function myrm(src;opts...)
       try
       chmod(0o0644,src)
       catch exc
-        if opts[:verbose] opts[:error]("chmod644: $(exc.message)") end
+        if opts[:verbose] opts[:error]("chmod644: $(exc)") end
       end
     end
     rm(src)
@@ -82,7 +82,7 @@ function myrm(src;opts...)
   if !isnothing(opts[:info]) opts[:info]("$fsrc deleted") end
   return ok 
 # rescue SystemCallError => exc
-#   opts[:error]["rm(#{src}): #{exc.message}"]
+#   opts[:error]("rm(#{src}): #{exc}")
 #   return false
 end
 
@@ -152,13 +152,13 @@ function cpmv(src,target;move=false,opts...)
     esrc=isabspath(src) ? src : joinpath(pwd(),src)
     etg=isabspath(target) ? target : joinpath(pwd(),target)
     if esrc==etg
-      opts[:error]["cannot $what $esrc to itself"]
+     opts[:error]("cannot $what $esrc to itself")
       return false
     elseif endswith(esrc,etg)
-       opts[:error]["cannot $what $esrc within itself($etg)"]
+     opts[:error]("cannot $what $esrc within itself($etg)")
        return false
     elseif endswith(etg,esrc)
-      opts[:error]["cannot $what $esrc to its father($etg)"]
+     opts[:error]("cannot $what $esrc to its father($etg)")
       return false
     end
   end
@@ -179,19 +179,19 @@ function cpmv(src,target;move=false,opts...)
         targetdir=dirname(target)
         free=diskstat(ispath(targetdir) ? targetdir : ".").available
       catch exc
-        opts[:error]["freespace: $(exc.msg)"]
+       opts[:error]("freespace: $(exc.msg)")
         free=0
       end
       try
         tgdev=stat(target).device
       catch exc
-        opts[:error]["stat($target): $(exc.msg)"]
+       opts[:error]("stat($target): $(exc.msg)")
         tgdev=0
       end
 # #   log "free=#{nbK(free)} tgtsize=#{nbK(tgtsize)} srcsize=#{nbK(srcsize)}\n"
       if free+tgtsize<srcsize && !(move && tgdev==stat(fsrc).device)
-        opts[:error]["$(nbK(free+tgtsize))=not enough free space on device "*
-                  "$(stat(target).device): to $what $src ($(nbK(srcsize)))"]
+        opts[:error]("$(nbK(free+tgtsize))=not enough free space on device "*
+                     "$(stat(target).device): to $what $src ($(nbK(srcsize)))")
 	return false
       end
       if ispath(target) && !(ok=myrm(target;opts...)&& ok) return ok end
@@ -216,7 +216,7 @@ function cpmv(src,target;move=false,opts...)
       try
         chmod(target,filemode(src)) # now set perms
       catch exc
-        if opts[:verbose] opts[:error]["setting perms: $(exc.msg)"] end
+       if haskey(opts,:verbose) && opts[:verbose] opts[:error]("setting perms: $(exc.msg)") end
       end
       if silent opts[:interactive]=save end
     end
@@ -227,7 +227,7 @@ function cpmv(src,target;move=false,opts...)
   if !isnothing(opts[:info]) opts[:info]("$fsrc $msg to $target") end
   return ok
 # rescue SystemCallError => exc
-#   opts[:error]["#{what} #{src}=>#{target}: #{exc.message}"]
+#   opts[:error]("#{what} #{src}=>#{target}: #{exc}")
 #   return false
 end
 
@@ -244,17 +244,21 @@ function copyfile(src,dest;opts...)
         opts[:infocopy](src,sz)
       end
     end
-    chmod(dest,st.mode)
+    try
+      chmod(dest,st.mode)
+    catch exc
+      opts[:error]("changing mode: $exc")
+    end
     try
       setmtime(dest,st.mtime, st.ctime)
     catch exc
-      opts[:error]["setting time: $exc"]
+      opts[:error]("setting time: $exc")
     end
     try 
       chown(dest,st.uid, st.gid)
     catch exc
       if haskey(opts,:verbose) && opts[:verbose] 
-        opts[:error]["could not set owner of $dest"] end
+        opts[:error]("could not set owner of $dest") end
       try
         chmod(dest,st.mode&0o01777) # clear setuid/setgid
       catch
@@ -262,7 +266,7 @@ function copyfile(src,dest;opts...)
       try
         chmod(dest,st.mode)
       catch
-        opts[:error]["could not set perms on #{dest}"]
+        opts[:error]("could not set perms on #{dest}")
       end
     end
   end
