@@ -5,18 +5,6 @@ rmopts::Dict=Dict(
    :recursive=>true,
    :verbose=>true)
 
-cpopts::Dict=Dict(
-   :error=>werror,
-#  :error=>println,
-   :info=>infohint,
-#  :info=>println,
-   :interactive=>ok,
-#  :interactive=>(t,msg)->(println(msg,"?[",t,"]");readline()[1]),
-   :infocopy=>(n,m)->infohint("$n:$(nbK(m)) copied"),
-#  :infocopy=>(n,m)->println("$n:$(nbK(m)) copied"),
-   :merge=>false,
-   :recursive=>true)
-
 #require 'find'
 #require 'platform'
 #
@@ -37,7 +25,7 @@ function myrm(src;opts...)
     msg*="$fsrc"
     ans=opts[:interactive](msg,isdir(fsrc) ? "ynsgq" : "yngq")
     if ans=='n' return false
-    elseif ans=='g' rmopts[:interactive]=nothing
+    elseif ans=='g' opts[:interactive]=nothing
     elseif ans=='q' return nothing
     end
   else ans='s'
@@ -105,16 +93,22 @@ function dirsize(f)
   size
 end
 
-## opts:
-## :interactive => a proc to ask OK questions
-##  n:no y:yes q:stop g:no more questions s:no more for current dir
-## :recursive => true or false
-## :infocopy[name,size] => A proc to follow progress of individual files copy
-## :info[string] => A proc for verbose reporting (of string)
-## move => true or false
-## :error[string] => a proc to report error conditions
-## :merge => if true do not delete target dirs 
-## return: nil=>stop false=>not everything copied/moved
+cpopts::Dict=Dict(
+   :error=>werror, # :error[string] => a proc to report error conditions
+#  :error=>println,
+   :info=>infohint, # :info[string] => A proc for verbose reporting (of string)
+#  :info=>println,
+   :interactive=>ok, # a proc to ask OK questions or nothing
+#  n:no y:yes q:stop g:no more questions s:no more for current dir
+#  :interactive=>(t,msg)->(println(msg,"?[",t,"]");readline()[1]),
+   :infocopy=>(n,m)->infohint("$n:$(nbK(m)) copied"),
+# :infocopy[name,size] => A proc to follow progress of individual files copy
+#  :infocopy=>(n,m)->println("$n:$(nbK(m)) copied"),
+   :merge=>false, # :merge => if true do not delete target dirs 
+   :recursive=>true)
+
+# opts: one of cpopts or move => true or false
+# return: nil=>stop false=>not everything copied/moved
 function cpmv(src,target;move=false,opts...)
   opts=merge(cpopts,opts)
   ok=true
@@ -129,7 +123,7 @@ function cpmv(src,target;move=false,opts...)
     c=opts[:interactive](msg,isdir(fsrc) ? "ynsgq" : "yngq")
     if c=='n' return false
     elseif c=='q' return nothing
-    elseif c=='g' cpopts[:interactive]=nothing
+    elseif c=='g' opts[:interactive]=nothing
     elseif c=='s' silent=true
     end
   end

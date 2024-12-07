@@ -522,7 +522,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
     elseif c in (Int('c'), KEY_IC)
       if isnothing(current(vd,gside)) beep;c=getch();continue end 
       dest=curname(vd,3-gside)
-      if cpmv(curname(vd),dest;cpopts...)
+      if !(cpmv(curname(vd),dest) in (false,nothing))
         current(vd).cmp='='
         current(vd)[3-gside]=stat(dest)
         check_showfilter(vd)
@@ -531,7 +531,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
       if isnothing(current(vd,gside)) || !isdir(current(vd,gside))
        beep;c=getch();continue 
       end 
-      if cpmv(curname(vd),curname(vd,3-gside);cpopts...,recursive=false)
+      if cpmv(curname(vd),curname(vd,3-gside);recursive=false)
         current(vd)[3-gside]=stat(curname(vd,3-gside))
         disp_entry(s,vd.p.sel_bar)
         next_such(p->p[gside]!==nothing,vd)
