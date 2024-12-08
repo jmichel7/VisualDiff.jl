@@ -88,15 +88,42 @@ function exec(com,dir=".")
   end
 end
 
+"s[1:firstscreen(s,n)] is beginning of s until textwidth exceeds n"
+function firstscreen(s::String,n)
+  w=0
+  res=0
+  for c in s
+    l=textwidth(c)
+    if w+l>n break  end
+    w+=l
+    res=nextind(s,res,1)
+  end
+  res
+end
+
+"beginning of s until textwidth exceeds n"
+function lastscreen(s::String,n)
+  w=0
+  res=ncodeunits(s)+1
+  for c in reverse(s)
+    l=textwidth(c)
+    if w+l>n break  end
+    w+=l
+    res=prevind(s,res,1)
+  end
+  res
+end
+
 function center(w::Ptr{WINDOW},text::String,width=getmaxx(w)-getcurx(w);rtrunc=false)
   x=getcurx(w)
-  l=length(text)
-  if l>width text=rtrunc ? text[1:width-1] : text[l-width+1:l]
+  l=textwidth(text)
+  if l>width text=rtrunc ? text[1:firstscreen(text,width-1)] : 
+                text[lastscreen(text,width-1):end]
     if rtrunc add(:NORM,text,:BOX,"»")
     else add(:BOX,"«",:NORM,text)
     end
   else wmove(w,x=x+div(width-l,2))
-    waddstr(w,text)
+    add(w,:NORM,text)
   end
   wmove(w,x=x+width)
 end
@@ -197,5 +224,5 @@ function info(start,fin,msg...)
 end
 
 infohint=function(s)
-  info(5,COLS()-1,:MKEY,"| ",:MTEXT,s[max(length(s)-COLS()+7,1):end])
+  info(5,COLS()-1,:MKEY,"| ",:MTEXT,s[max(prevind(s,ncodeunits(s),COLS()-7),1):end])
 end

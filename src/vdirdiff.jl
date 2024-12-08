@@ -224,7 +224,7 @@ function compare_files(n0,n1; info::Function=println,probably_equal=false)
     end
     close(a);close(b)
   catch e
-    error("$e doing compare")
+    werror("$e doing compare")
     return false
   end
   newcmp
@@ -658,7 +658,7 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
       try
         fill(son;recur,do_not_stat)
       catch e
-        werror("$e")
+        werror("$e when filling")
       end
     end
     if all(p->p.cmp=='=',son.ppairs) v.cmp='='

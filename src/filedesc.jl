@@ -25,10 +25,10 @@ end
 function printfname(f,namewidth,offset;norm=:NORM)
   if isnothing(f) return [" "^namewidth] end
   n=f.filename
-  l=length(n)
+  l=textwidth(n)
   offset=max(0,min(offset,l-namewidth))
   lo=offset>0
   ro=l>offset+namewidth
-  res=lpad(n[nextind(n,1,offset):prevind(n,min(ncodeunits(n)+1,offset+namewidth+1))],namewidth)
+  res=lpad(n[max(1,firstscreen(n,offset)):firstscreen(n[max(1,firstscreen(n,offset)):end],namewidth)],namewidth)
   lo ? [:BOX,"«",norm,res[nextind(res,1):end]] : ro ? [res[1:prevind(res,lastindex(res))],:BOX,"»",norm] : [res]
 end
