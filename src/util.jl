@@ -224,5 +224,5 @@ function info(start,fin,msg...)
 end
 
 infohint=function(s)
-  info(5,COLS()-1,:MKEY,"| ",:MTEXT,s[max(prevind(s,ncodeunits(s),COLS()-7),1):end])
+ info(5,COLS()-1,:MKEY,"| ",:MTEXT,isempty(s) ? s : s[max(prevind(s,ncodeunits(s),min(COLS()-7,length(s))),1):end])
 end
