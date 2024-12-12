@@ -17,7 +17,7 @@ myisdir(s::Base.Filesystem.StatStruct)=!iszero(s.mode&Base.Filesystem.S_IFDIR)
 using Dates 
 function Base.show(io::IO,f::Filedesc)
   print(io,Base.Filesystem.filemode_string(f.stat.mode)," ",f.stat.size," ",
-      Dates.format(unix2datetime(f.stat.mtime),"dd u yy HH:mm")," ",
+        Dates.format(DateTime(Libc.TmStruct(f.stat.mtime)),"dd u yy HH:MM")," ",
         joinpath(f.dir,f.filename))
 end
 
@@ -26,9 +26,14 @@ function printfname(f,namewidth,offset;norm=:NORM)
   if isnothing(f) return [" "^namewidth] end
   n=f.filename
   l=textwidth(n)
-  offset=max(0,min(offset,l-namewidth))
+  if l<=namewidth return [lpad(n,namewidth)] end
+  offset=min(offset,l-namewidth+1)
+  n=n[max(1,firstscreen(n,offset+1)):end]
+  l-=offset+1
   lo=offset>0
-  ro=l>offset+namewidth
-  res=lpad(n[max(1,firstscreen(n,offset)):firstscreen(n[max(1,firstscreen(n,offset)):end],namewidth)],namewidth)
-  lo ? [:BOX,"«",norm,res[nextind(res,1):end]] : ro ? [res[1:prevind(res,lastindex(res))],:BOX,"»",norm] : [res]
+  ro=l>=namewidth-lo
+  if lo res=[:BOX,"«",norm] else res=[] end
+  push!(res,n[1:firstscreen(n,namewidth-lo-ro)])
+  if ro push!(res,:BOX,"»",norm) end
+  res
 end

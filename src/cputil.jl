@@ -25,7 +25,7 @@ function myrm(src;opts...)
     msg*="$fsrc"
     ans=opts[:interactive](msg,isdir(fsrc) ? "ynsgq" : "yngq")
     if ans=='n' return false
-    elseif ans=='g' opts[:interactive]=nothing
+    elseif ans=='g' opts[:interactive]=rmopts[:interactive]=nothing
     elseif ans=='q' return nothing
     end
   else ans='s'
@@ -123,7 +123,7 @@ function cpmv(src,target;move=false,opts...)
     c=opts[:interactive](msg,isdir(fsrc) ? "ynsgq" : "yngq")
     if c=='n' return false
     elseif c=='q' return nothing
-    elseif c=='g' opts[:interactive]=nothing
+    elseif c=='g' opts[:interactive]=cpopts[:interactive]=nothing
     elseif c=='s' silent=true
     end
   end

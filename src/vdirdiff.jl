@@ -120,9 +120,10 @@ end
 
 function printtm(s,width)
   if isnothing(s) return " "^width  end
-  if width>=18 Dates.format(unix2datetime(s.mtime),"dd u yy HH:mm:SS")
-  elseif width>=15 Dates.format(unix2datetime(s.mtime),"dd u yy HH:mm")
-  else Dates.format(unix2datetime(s.mtime),"dd u yy")
+  d=DateTime(Libc.TmStruct(s.mtime))
+  if width>=18 Dates.format(d,"dd u yy HH:MM:SS")
+  elseif width>=15 Dates.format(d,"dd u yy HH:MM")
+  else Dates.format(d,"dd u yy")
   end
 end
 
@@ -249,17 +250,15 @@ function Base.show(io::IO,f::PathPair)
 end
 
 function extension(p::PathPair)
-  m=match(r"\.([a-zA-Z_]*)",p.filename)
+  m=match(r"\.([a-zA-Z_]*)$",p.filename)
   isnothing(m) ? "" : m[1]
 end
 
 function restat(p::PathPair,names)
   for i in 1:2
-    try
-      p[i]=stat(joinpath(names[i],p.filename))
-    catch exc
-      werror("$exc doing stat")
-      p[i]=nothing
+    n=joinpath(names[i],p.filename)
+    if ispath(n) p[i]=stat(n)
+    else p[i]=nothing
       p.cmp="lr"[i] 
     end
   end
@@ -639,14 +638,13 @@ function redraw_panes(vd::Vdir_pick)#;refresh=true)
   vd.p.s.on_scroll(vd.p.s)
 end
 
-
 function check_current(vd;do_not_stat=false,show=false,recur=false)
   v=current(vd)
   if !do_not_stat restat(v,vd.name) end
   if isnothing(v[1]) || isnothing(v[2]) return end
-  if myisdir(v[1])!= myisdir(v[2])
-    foo(i)=i ? "directory" : "file"
-    werror("$(curname(vd,1)) is a $(foo(myisdir(v[1]))) but $(curname(vd,2)) is a $(foo(myisdir(v[2])))")
+  if myisdir(v[1])!=myisdir(v[2])
+    typ(f)=myisdir(f) ? "directory" : "file"
+    werror("$(curname(vd,1)) is a $(typ(v[1])) but $(curname(vd,2)) is a $(typ(v[2]))")
     return
   end
   if myisdir(v[1])

@@ -1,3 +1,28 @@
+#----------------- Indexed --------------------
+module Indexeds
+export Indexed, prev, next, current, change
+using ..VisualDiff: VisualDiff
+mutable struct Indexed{T}
+  v::Vector{T}
+  pos::Int
+end
+
+Base.iterate(v::Indexed,a...)=iterate(v.v,a...)
+Base.length(v::Indexed)=length(v.v)
+
+Indexed(v::AbstractVector)=Indexed(v,0)
+
+function change(v::Indexed,i)
+  if i==v.pos return end
+  if v.pos!=0 VisualDiff.leave(current(v)) end
+  v.pos=i
+  if v.pos!=0 VisualDiff.Menus.enter(current(v)) end
+end
+
+next(v::Indexed)=change(v,v.pos<length(v) ? v.pos+1 : 1)
+prev(v::Indexed)=change(v,v.pos>1 ? v.pos-1 : length(v))
+current(v::Indexed)=v.v[v.pos]
+end #----------------- of Indexed --------------------
 module Menus
 using ..Curses
 using ..VisualDiff

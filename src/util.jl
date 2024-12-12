@@ -101,7 +101,7 @@ function firstscreen(s::String,n)
   res
 end
 
-"beginning of s until textwidth exceeds n"
+"s[lastscreen(s,n):end] is end of s until textwidth exceeds n"
 function lastscreen(s::String,n)
   w=0
   res=ncodeunits(s)+1
@@ -190,31 +190,6 @@ function reverse_area(y,sx=0,ex=getmaxx(stdscr)-1)
   wmove(stdscr,cy,cx)
 end
 
-module Indexeds
-export Indexed, prev, next, current, change
-using ..VisualDiff: VisualDiff
-mutable struct Indexed{T}
-  v::Vector{T}
-  pos::Int
-end
-
-Base.iterate(v::Indexed,a...)=iterate(v.v,a...)
-Base.length(v::Indexed)=length(v.v)
-
-Indexed(v::AbstractVector)=Indexed(v,0)
-
-function change(v::Indexed,i)
-  if i==v.pos return end
-  if v.pos!=0 VisualDiff.leave(current(v)) end
-  v.pos=i
-  if v.pos!=0 VisualDiff.Menus.enter(current(v)) end
-end
-
-next(v::Indexed)=change(v,v.pos<length(v) ? v.pos+1 : 1)
-prev(v::Indexed)=change(v,v.pos>1 ? v.pos-1 : length(v))
-current(v::Indexed)=v.v[v.pos]
-end #----------------- of Indexed --------------------
-
 function info(start,fin,msg...)
   x=getcurx(stdscr);y=getcury(stdscr)
   mvadd(LINES()-1,start,msg...)
@@ -224,5 +199,5 @@ function info(start,fin,msg...)
 end
 
 infohint=function(s)
- info(5,COLS()-1,:MKEY,"| ",:MTEXT,isempty(s) ? s : s[max(prevind(s,ncodeunits(s),min(COLS()-7,length(s))),1):end])
+  info(5,COLS()-1,:MKEY,"| ",:MTEXT,s[lastscreen(s,COLS()-7):end])
 end
