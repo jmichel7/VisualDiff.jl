@@ -477,7 +477,11 @@ function check_changes(d::AbstractDpick)
       pat,tf=mktemp()
       for p in pairs(d) if lno(p,i)!=0 write(tf,content(d,p,i)) end end
       close(tf)
-      mv(pat,d.names[i];force=true)
+      try
+        mv(pat,d.names[i];force=true)
+      catch e
+        werror("$e writing file $(d.names[i])")
+      end
     end
   end
   all(p->p.match,pairs(d))
