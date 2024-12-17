@@ -230,13 +230,18 @@ BLOCKSIZE::Int=1024*1024*10 #  to go fast
 function copyfile(src,dest;opts...)
   open(src,"r")do r
     st=stat(r)
-    open(dest,"w")do w
-      sz=0
-      while !eof(r)
-        s=read(r,BLOCKSIZE)
-        sz+=write(w,s)
-        opts[:infocopy](src,sz)
+    try
+      open(dest,"w")do w
+        sz=0
+        while !eof(r)
+          s=read(r,BLOCKSIZE)
+          sz+=write(w,s)
+          opts[:infocopy](src,sz)
+        end
       end
+    catch exc
+      opts[:error]("opening $dest: $exc")
+      return false
     end
     try
       chmod(dest,st.mode)
