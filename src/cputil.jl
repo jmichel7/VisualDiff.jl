@@ -52,7 +52,7 @@ function myrm(src;opts...)
     rm(src)
   else
     if iszero(uperm(src)&0x02) # !writable
-      if opts[:interactive] && !opts[:force]
+     if !isnothing(opts[:interactive]) && !opts[:force]
 	msg= "delete $fsrc: it is read-only"
         c=opts[:interactive](msg,"yngq")
         if c in ('n', 'q') return false
