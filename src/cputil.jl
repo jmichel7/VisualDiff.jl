@@ -52,7 +52,7 @@ function myrm(src;opts...)
     rm(src)
   else
     if iszero(uperm(src)&0x02) # !writable
-     if !isnothing(opts[:interactive]) && !opts[:force]
+     if !isnothing(opts[:interactive]) && (!haskey(opts,:force) || !opts[:force])
 	msg= "delete $fsrc: it is read-only"
         c=opts[:interactive](msg,"yngq")
         if c in ('n', 'q') return false
@@ -60,7 +60,7 @@ function myrm(src;opts...)
         end
       end
       try
-      chmod(0o0644,src)
+      chmod(src,0o0644)
       catch exc
         if opts[:verbose] opts[:error]("chmod644: $(exc)") end
       end
