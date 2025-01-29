@@ -4,7 +4,15 @@ struct Filedesc
   stat
 end
 
-Filedesc(n)=Filedesc(basename(n),dirname(n),stat(n))
+function Filedesc(n)
+  s=Base.StatStruct("",0,0,0,0,0,0,0,0,0,0,0.0,0.0)
+  try
+    s=stat(n)
+  catch e
+    werror("$e doing stat($n)")
+  end
+  Filedesc(basename(n),dirname(n),s)
+end
 
 Base.cmp(a::Filedesc,b::Filedesc)=cmp(a.filename,b.filename)
 
