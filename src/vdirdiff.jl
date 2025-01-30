@@ -88,7 +88,7 @@ some small uncertainty in the  correctness of the comparison. This option  can
 :level=>OK)
 )
 
-# sorted arrays -- return 2-tuples (entry,matched) or (entry,nothing)
+# sorted arrays -- return 2-tuples (entry|nothing,entry|nothing)
 function sorted_merge(a::AbstractVector,b::AbstractVector;by=identity)
   i=1;j=1
   res=Tuple{Union{eltype(a),Nothing},Union{eltype(b),Nothing}}[]
@@ -103,32 +103,7 @@ function sorted_merge(a::AbstractVector,b::AbstractVector;by=identity)
   res
 end
 
-function printsz(s,width)
-  if isnothing(s) return " "^width  end
-  res=""
-  if iszero(s.mode&Base.Filesystem.S_IRUSR)
-    width-=1
-    res*="r"
-  end
-# int i=0;if(flg&S_IFSYS)i++;if(flg&S_IFHID)i+=2;
-# if(i){lg--;pos+=sprintf(pos,"%c",(unsigned char)"\0\xb0\xb1\xb2"[i]);}
-  if myisdir(s) res*=lpad("< DIR >",width)
-  else res*=lpad(nbK(s.size),width)
-  end
-  res
-end
-
-function printtm(s,width)
-  if isnothing(s) return " "^width  end
-  d=DateTime(Libc.TmStruct(s.mtime))
-  if width>=18 Dates.format(d,"dd u yy HH:MM:SS")
-  elseif width>=15 Dates.format(d,"dd u yy HH:MM")
-  else Dates.format(d,"dd u yy")
-  end
-end
-
-# a pair of File::Stat f[2], filename and cmp
-# to which can be added son if recursively examining
+# can be added son if recursively examining
 @ExtObj mutable struct PathPair  
   filename::String
   cmp::Char
@@ -136,7 +111,7 @@ end
   PathPair(filename,cmp,f)=new(filename,cmp,f,Dict{Symbol,Any}())
 end
 
-function PathPair(f0,f1)
+function PathPair(f0::Union{Filedesc,Nothing},f1::Union{Filedesc,Nothing})
   hasf0=!isnothing(f0)
   hasf1=!isnothing(f1)
   filename=hasf0 ? f0.filename : f1.filename
@@ -153,7 +128,32 @@ Base.getindex(p::PathPair,i)=p.f[i]
 
 Base.setindex!(p::PathPair,s,i)=p.f=i==1 ? (s,p.f[2]) : p.f=(p.f[1],s)
 
-function stripspace(s)
+function printsz(s::Union{Base.Filesystem.StatStruct,Nothing},width::Integer)
+  if isnothing(s) return " "^width  end
+  res=""
+  if iszero(s.mode&Base.Filesystem.S_IRUSR)
+    width-=1
+    res*="r"
+  end
+# int i=0;if(flg&S_IFSYS)i++;if(flg&S_IFHID)i+=2;
+# if(i){lg--;pos+=sprintf(pos,"%c",(unsigned char)"\0\xb0\xb1\xb2"[i]);}
+  if myisdir(s) res*=lpad("< DIR >",width)
+  else res*=lpad(nbK(s.size),width)
+  end
+  res
+end
+
+function printtm(s::Union{Base.Filesystem.StatStruct,Nothing},width::Integer)
+  if isnothing(s) return " "^width  end
+  d=DateTime(Libc.TmStruct(s.mtime))
+  if width>=18 Dates.format(d,"dd u yy HH:MM:SS")
+  elseif width>=15 Dates.format(d,"dd u yy HH:MM")
+  else Dates.format(d,"dd u yy")
+  end
+end
+
+# suppress initial and final spaces; reduce sequences of spaces to 1
+function stripspace(s::String)
   res=Char[]
   inspace=true
   for c in s
@@ -166,7 +166,7 @@ function stripspace(s)
   end
 end
 
-function higher_compare(n0,n1;show=false,options...)
+function higher_compare(n0::String,n1::String;show=false,options...)
   eqsize=filesize(n0)==filesize(n1)
   peq=if opt.onlylength || !eqsize eqsize
   else
@@ -190,7 +190,8 @@ end
 # ignore_blkseq => ignore differences in whitespace in same line
 # ignore_blklin => ignore blank lines
 # ignore_case => ignore case differences
-function compare_files(n0,n1; info::Function=println,probably_equal=false)
+function compare_files(n0::String,n1::String;info::Function=println,
+                                             probably_equal=false)
   hint(m)=info("$(basename(n0)):$(nbK(m)) compared")
   newcmp=true
   sz=0
@@ -231,7 +232,7 @@ function compare_files(n0,n1; info::Function=println,probably_equal=false)
   newcmp
 end
 
-function list_from_dirs(n1,n2,old=nothing)
+function list_from_dirs(n1::String,n2::String,old::Union{Nothing,Vector{PathPair}}=nothing)
   left,right=map(n->sort!(map(f->Filedesc(joinpath(n,f)),readdir(n))),(n1,n2))
   pairs=map(p->PathPair(p...),sorted_merge(left,right))
   if !isnothing(old) # copy still-valid comparison info from old pairs
@@ -252,16 +253,6 @@ end
 function extension(p::PathPair)
   m=match(r"\.([a-zA-Z_]*)$",p.filename)
   isnothing(m) ? "" : m[1]
-end
-
-function restat(p::PathPair,names)
-  for i in 1:2
-    n=joinpath(names[i],p.filename)
-    if ispath(n) p[i]=stat(n)
-    else p[i]=nothing
-      p.cmp="lr"[i] 
-    end
-  end
 end
 
 global vdmenu::Menu
@@ -306,7 +297,7 @@ function initvdmenu() #setup menu
 end
 
 @ExtObj mutable struct Vdir_pick
-  name::Vector{String}
+  name::Tuple{String,String}
   p::Pick_list
   ppairs::Vector{PathPair}
   namewidth::Int
@@ -354,7 +345,7 @@ function Vdir_pick(n0,n1;old=nothing)
   cmp_column=name_column+namewidth
   sz_width=10
   tm_width=pane_width-sz_width-4
-  vd=Vdir_pick([n0,n1],p,lpairs,namewidth,pane_width,name_column,panes,cmp_column,
+  vd=Vdir_pick((n0,n1),p,lpairs,namewidth,pane_width,name_column,panes,cmp_column,
     sz_width,tm_width,0,Dict{Symbol,Any}())
   vd.height=LINES()-3 
   vd.sort_up=true
@@ -640,7 +631,14 @@ end
 
 function check_current(vd;do_not_stat=false,show=false,recur=false)
   v=current(vd)
-  if !do_not_stat restat(v,vd.name) end
+  if !do_not_stat
+    for i in 1:2
+      n=joinpath(vd.name[i],v.filename)
+      if ispath(n) v[i]=stat(n)
+      else v[i]=nothing;v.cmp="lr"[i] 
+      end
+    end
+  end
   if isnothing(v[1]) || isnothing(v[2]) return end
   if myisdir(v[1])!=myisdir(v[2])
     typ(f)=myisdir(f) ? "directory" : "file"
@@ -662,7 +660,7 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     if all(p->p.cmp=='=',son.ppairs) v.cmp='='
     else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
     end
-    check_showfilter(vd)
+#   check_showfilter(vd)
     v.son=son.ppairs
   else
     newcmp=higher_compare(curname(vd,1),curname(vd,2);show)

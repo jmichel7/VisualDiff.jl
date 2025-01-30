@@ -60,7 +60,7 @@ function vdiff(n0,n1;flg...)
   endwin()
 end
 
-if true
+if false
 @compile_workload begin
   dir=joinpath(@__DIR__,"..","examples")
   vdiff(joinpath(dir,"old"),joinpath(dir,"new");quit=true)

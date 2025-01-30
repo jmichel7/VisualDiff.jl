@@ -537,6 +537,7 @@ function vdifff(a,b;options...)
 #  dd=nil
   initial_bar=1
 #  while true do
+  save=Savewin(stdscr)
   @label recompute_diffs
   try
     t=read.((a,b),String)
@@ -544,7 +545,6 @@ function vdifff(a,b;options...)
     werror("$e reading files $a and $b")
     return
   end
-  save=Savewin(stdscr)
   t=map(splitinlines,t)
 #  Linepair.setfiles(t)
   initvmenu()
@@ -602,8 +602,7 @@ function vdifff(a,b;options...)
       c=process_event(dd,getmouse())
       if c!=-1 && !isnothing(c) continue end
     elseif c in (Int('q'), 0x1b) 
-      restore(save)
-      return check_changes(dd)
+      restore(save);return check_changes(dd)
       #    when ?F.ord then ungetch(KEY_ALT('F')); redo
     elseif c==KEY_CTRL('I') gside=3-gside;show(dd.p)
     elseif c==Int('c') copy(dd,gside)
