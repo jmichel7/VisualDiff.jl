@@ -508,7 +508,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
       if isnothing(current(vd,gside)) || isnothing(current(vd,3-gside))
         beep();c=getch();continue
       end
-      check_current(vd;recur=true,show=false)
+      check_current(vd;recur=true)
     elseif c in (Int('c'), KEY_IC)
       if isnothing(current(vd,gside)) beep;c=getch();continue end 
       dest=curname(vd,3-gside)
@@ -550,15 +550,15 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
       end
     elseif c in (Int('e'),KEY_F(5))
       if isnothing(current(vd,gside)) beep()
-      else exec(make_edit_command(curname(vd),0))
-        check_current(vd;show=false)
+      else exec(make_edit_command(curname(vd),0)) 
+           check_current(vd)
       end
     elseif c in (KEY_F(9), Int('x'))
       exec(nothing,vd.name[gside])
 #     reagain()
     elseif c==Int('v')
       exec(make_edit_both_command(curname(vd,1),curname(vd,2),0,0))
-      check_current(vd;show=false)
+      check_current(vd)
     elseif c==Int('+') next_such(p->p.cmp!='=',vd)
     elseif c==Int('-') prev_such(p->p.cmp!='=',vd)
     elseif c in (KEY_F(6),Int('o'))
@@ -652,28 +652,27 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     if show browse(son;show)
     elseif recur
       try
+        save=Savewin(stdscr)
         fill(son;recur,do_not_stat)
+        restore(save)
       catch e
         werror("$e when filling")
       end
     end
-    if all(p->p.cmp=='=',son.ppairs) v.cmp='='
-    else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
-    end
-#   check_showfilter(vd)
+    newcmp=all(p->p.cmp=='=',son.ppairs)
+    #check_showfilter(vd)
     v.son=son.ppairs
-  else
-    newcmp=higher_compare(curname(vd,1),curname(vd,2);show)
-    if newcmp v.cmp='='
-    else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
-    end
-    move_bar_to(vd.p,vd.p.sel_bar)
+  else newcmp=higher_compare(curname(vd,1),curname(vd,2);show)
 # when "link" then  
 #   if File.readlink(curname(vd,1))==File.readlink(curname(vd,2)) then v.cmp=?= 
 #   else v.cmp=v[0].mtime>v[1].mtime ? ?> : ?<
 #   end
 # else werror("#{v[0].ftype} not implemented")
   end
+  if newcmp v.cmp='='
+  else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
+  end
+  move_bar_to(vd.p,vd.p.sel_bar)
 end
 
 function Base.fill(vd::Vdir_pick;recur=false,flg...)
