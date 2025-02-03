@@ -133,9 +133,16 @@ function printnormedpath(y,x,name,lg)
   center(stdscr,abspath(name),lg)
 end
 
-function cpad(text::String,width,rtrunc=false)
-  l=length(text)
-  if l>width rtrunc ? text[1:width] : text[l-width:l]
+"""
+`cpad(text::String,width;rtrunc=false)`
+
+center `text` on width `width`. When `text` too wide by default keep start
+of `text`; if `rtrunc` keep end of `text`.
+"""
+function cpad(text::String,width;rtrunc=false)
+  l=textwidth(text)
+  if l>width rtrunc ? text[lastscreen(text,width):end] :
+                      text[1:firstscreen(text,width)]
   else " "^div(width-l,2)*text*" "^div(1+width-l,2)
   end
 end

@@ -407,9 +407,10 @@ function preserve_sel_bar(f,vd)
 # werror("cur=$(vd.ppairs[cur].filename)")
   f(vd)
   if cur!=nothing
-  rng=searchsorted(pairs(vd),cur;by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
-  vd.p.sel_bar=min(rng.start,length(pairs(vd)))
-  else vd.p.sel_bar=1
+    rng=searchsorted(pairs(vd),cur;
+                     by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
+    move_bar_to(vd.p,min(rng.start,length(pairs(vd))))
+  else move_bar_to(vd.p,1)
   end
 # werror("rng=$rng")
 # werror("cur=$(vd.ppairs[pairs(vd)[vd.p.sel_bar]].filename)")
@@ -508,7 +509,11 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
       if isnothing(current(vd,gside)) || isnothing(current(vd,3-gside))
         beep();c=getch();continue
       end
-      check_current(vd;recur=true)
+      try
+        check_current(vd;recur=true)
+      catch ex
+       werror("$ex when comparing recursively $(current(vd))")
+      end
     elseif c in (Int('c'), KEY_IC)
       if isnothing(current(vd,gside)) beep;c=getch();continue end 
       dest=curname(vd,3-gside)
@@ -651,26 +656,37 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     son=Vdir_pick(curname(vd,1),curname(vd,2);old=haskey(v,:son) ? v.son : nothing)
     if show browse(son;show)
     elseif recur
-      try
         save=Savewin(stdscr)
+      try
         fill(son;recur,do_not_stat)
-        restore(save)
-      catch e
-        werror("$e when filling")
+      catch ex
+        if ex isa InterruptException && 
+          'y'==ok("comparison of $v interrupted. Interrupt also directory comparison")
+          restore(save)
+          rethrow(ex)
+        end
+   #    werror("$ex when filling")
       end
+      restore(save)
     end
-    newcmp=all(p->p.cmp=='=',son.ppairs)
-    #check_showfilter(vd)
+    became_equal=all(p->p.cmp=='=',son.ppairs)
     v.son=son.ppairs
-  else newcmp=higher_compare(curname(vd,1),curname(vd,2);show)
+  else became_equal=higher_compare(curname(vd,1),curname(vd,2);show)
 # when "link" then  
 #   if File.readlink(curname(vd,1))==File.readlink(curname(vd,2)) then v.cmp=?= 
 #   else v.cmp=v[0].mtime>v[1].mtime ? ?> : ?<
 #   end
 # else werror("#{v[0].ftype} not implemented")
   end
-  if newcmp v.cmp='='
+  if became_equal v.cmp='='
   else v.cmp=v[1].mtime>v[2].mtime ? '>' : '<'
+  end
+  if !(v.cmp in show_filter)
+    j=findfirst(==(current(vd)),vd.ppairs)
+    j=findfirst(==(j),pairs(vd))
+    if isnothing(j) werror("$(current(vd)) $j") end
+    deleteat!(pairs(vd),j)
+    Base.show(vd.p.s)
   end
   move_bar_to(vd.p,vd.p.sel_bar)
 end
@@ -682,15 +698,13 @@ function Base.fill(vd::Vdir_pick;recur=false,flg...)
       if p.cmp!='?' continue end
       j=findfirst(==(i),pairs(vd))
       move_bar_to(vd.p,j)
-  #   try 
+#     try 
       check_current(vd;do_not_stat=true,recur)
-  #   catch Interrupt
-  #     raise Interrupt if ?y==ok("comparison of "+current.filename+
-  #" interrupted. Interrupt also directory comparison")
-  #   end
-      if !isnothing(current(vd)) && !(current(vd).cmp in show_filter) 
-        deleteat!(pairs(vd),j) 
-      end
+#     catch ex
+#       if ex isa InterruptException && 'y'==ok("comparison of $(current.filename) interrupted. Interrupt also directory comparison")
+#         return
+#       end
+#     end
     end
     sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
   end
