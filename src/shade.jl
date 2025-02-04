@@ -60,15 +60,20 @@ end
 struct Savewin
   save::Ptr{WINDOW}
   win::Ptr{WINDOW}
+  x::Int
+  y::Int
+  aspect::Int
 end
 
 function Savewin(win)
+  x=getcurx(stdscr);y=getcury(stdscr);aspect=curs_set(0)
   save=newwin(getmaxy(win),getmaxx(win),getbegy(win),getbegx(win))
   overwrite(win,save)
-  Savewin(save,win)
+  Savewin(save,win,x,y,aspect)
 end
 
 function restore(w::Savewin)
   overwrite(w.save,w.win)
+  wmove(stdscr,w.y,w.x);curs_set(w.aspect)
   delwin(w.save)
 end

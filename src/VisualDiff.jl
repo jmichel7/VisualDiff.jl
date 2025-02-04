@@ -42,8 +42,7 @@ function vdiff(n0,n1;flg...)
   Color.init(schemes[1][:value]...) # in case no option file
   read_options(cfgname)
   if isdir(n0) && isdir(n1) 
-    vd=Vdir_pick(n0,n1)
-    browse(vd::Vdir_pick;toplevel=true,flg...)
+    browse(n0,n1;toplevel=true,flg...)
   else
     if isdir(n1) n1=joinpath(n1,basename(n0))
     elseif isdir(n0) n0=joinpath(n0,basename(n1))
@@ -60,7 +59,7 @@ function vdiff(n0,n1;flg...)
   endwin()
 end
 
-if true
+if false
 @compile_workload begin
   dir=joinpath(@__DIR__,"..","examples")
   vdiff(joinpath(dir,"old"),joinpath(dir,"new");quit=true)

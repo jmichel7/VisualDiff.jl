@@ -88,21 +88,6 @@ some small uncertainty in the  correctness of the comparison. This option  can
 :level=>OK)
 )
 
-# sorted arrays -- return 2-tuples (entry|nothing,entry|nothing)
-function sorted_merge(a::AbstractVector,b::AbstractVector;by=identity)
-  i=1;j=1
-  res=Tuple{Union{eltype(a),Nothing},Union{eltype(b),Nothing}}[]
-  while i<=length(a) && j<=length(b)
-    if by(a[i])<by(b[j]) push!(res,(a[i],nothing));i+=1
-    elseif by(a[i])>by(b[j]) push!(res,(nothing,b[j]));j+=1
-    else push!(res,(a[i],b[j]));i+=1;j+=1
-    end
-  end
-  while i<=length(a) push!(res,(a[i],nothing));i+=1 end
-  while j<=length(b) push!(res,(nothing,b[j]));j+=1 end
-  res
-end
-
 # can be added son if recursively examining
 @ExtObj mutable struct PathPair  
   filename::String
@@ -232,15 +217,35 @@ function compare_files(n0::String,n1::String;info::Function=println,
   newcmp
 end
 
-function list_from_dirs(n1::String,n2::String,old::Union{Nothing,Vector{PathPair}}=nothing)
+# sorted arrays -- return 2-tuples (entry|nothing,entry|nothing)
+function merge_sorted(a::AbstractVector,b::AbstractVector;by=identity)
+  i=1;j=1
+  res=Tuple{Union{eltype(a),Nothing},Union{eltype(b),Nothing}}[]
+  while i<=length(a) && j<=length(b)
+    if by(a[i])<by(b[j]) push!(res,(a[i],nothing));i+=1
+    elseif by(a[i])>by(b[j]) push!(res,(nothing,b[j]));j+=1
+    else push!(res,(a[i],b[j]));i+=1;j+=1
+    end
+  end
+  while i<=length(a) push!(res,(a[i],nothing));i+=1 end
+  while j<=length(b) push!(res,(nothing,b[j]));j+=1 end
+  res
+end
+
+" returns a Vector{PathPair} from two dirs"
+function pairs_from_dirs(n1::String,n2::String)
   left,right=map(n->sort!(map(f->Filedesc(joinpath(n,f)),readdir(n))),(n1,n2))
-  pairs=map(p->PathPair(p...),sorted_merge(left,right))
-  if !isnothing(old) # copy still-valid comparison info from old pairs
-    for (n,o) in sorted_merge(pairs,old;by=x->x.filename)
-      if !isnothing(o) && n.cmp=='?' && o[1]==n[1] && o[2]==n[2]
-        n.cmp=o.cmp
-        if haskey(o,:son) n.son=o.son end
-      end
+  map(p->PathPair(p...),merge_sorted(left,right))
+end
+
+" returns a Vector{PathPair} from two dirs"
+function pairs_from_dirs(n1::String,n2::String,old::Vector{PathPair})
+  pairs=pairs_from_dirs(n1,n2)
+  # copy still-valid comparison info from old pairs
+  for (n,o) in merge_sorted(pairs,old;by=x->x.filename)
+    if !isnothing(o) && n.cmp=='?' && o[1]==n[1] && o[2]==n[2]
+      n.cmp=o.cmp
+      if haskey(o,:son) n.son=o.son end
     end
   end
   pairs
@@ -308,6 +313,9 @@ end
   sz_width::Int
   tm_width::Int
   offset::Int
+  height::Int
+  sort_up::Bool
+  sort::Char
 end
 
 function Base.dump(vd::Vdir_pick)
@@ -329,31 +337,28 @@ function curname(vd,s=gside)
   joinpath(vd.name[s],current(vd).filename)
 end
 
-function Vdir_pick(n0,n1;old=nothing)
+function Vdir_pick(n0,n1;old=nothing,recur=false)
   initvdmenu()
-  lpairs=list_from_dirs(n0,n1,old)
-  s=Scroll_list(stdscr,collect(eachindex(lpairs));rows=LINES()-5,cols=COLS()-2,
+  ppairs=isnothing(old) ? pairs_from_dirs(n0,n1) : pairs_from_dirs(n0,n1,old)
+  s=Scroll_list(stdscr,collect(eachindex(ppairs));rows=LINES()-5,cols=COLS()-2,
                 begy=2,begx=1)
-  p=Pick_list(s)
-  namewidth=max(12,maximum(map(x->textwidth(x.filename),lpairs);init=0))
+  shaded_frame(stdscr,s.begx-1,s.begy-1,2+s.rows,s.cols+1)
+  namewidth=max(12,maximum(map(x->textwidth(x.filename),ppairs);init=0))
   pane_width=32 # width of a panel including shade
   if namewidth+4>COLS()-2*pane_width pane_width=29 end
-  panes=[1,1+COLS()-pane_width] # starts of panes
   namewidth=min(namewidth,COLS()-2*pane_width-4)
   name_column=min(1+pane_width+div(COLS()-2*pane_width-4-namewidth,2),
                   COLS()-namewidth-pane_width-3)
-  cmp_column=name_column+namewidth
-  sz_width=10
-  tm_width=pane_width-sz_width-4
-  vd=Vdir_pick((n0,n1),p,lpairs,namewidth,pane_width,name_column,panes,cmp_column,
-    sz_width,tm_width,0,Dict{Symbol,Any}())
-  vd.height=LINES()-3 
-  vd.sort_up=true
-  vd.sort='N'
+  # name, p, ppairs, namewidth, pane_width, name_column, panes,
+  # cmp_column, sz_width, tm_width, offset, height, sort_up, sort
+  vd=Vdir_pick((n0,n1),Pick_list(s),ppairs,namewidth,pane_width,name_column,
+               [1,1+COLS()-pane_width], # starts of panes
+               name_column+namewidth,10,pane_width-14,0,LINES()-3,true,'N',
+               Dict{Symbol,Any}())
   add_scrollbar(s,vd.name_column-1)
   s.showentry=function(s,pos)
     d=pos<=length(s.list) ? vd.ppairs[s.list[pos]] : nothing
-    hl=(pos==p.sel_bar)
+    hl=(pos==vd.p.sel_bar)
     wmove(s.win,x=vd.name_column);add(hl ? :BAR : :NORM)
     add(printfname(d,vd.namewidth,vd.offset;norm=hl ? :BAR : :NORM)...)
     wmove(s.win,x=vd.cmp_column);add(:HL,Int(isnothing(d) ? ' ' : d.cmp))
@@ -383,6 +388,23 @@ function Vdir_pick(n0,n1;old=nothing)
       add(:BOX,t)
     end
   end
+  preserve_sel_bar(vd)do vd
+    for (i,p) in enumerate(vd.ppairs)
+  #   werror("$i:$p")
+      if p.cmp!='?' continue end
+      j=findfirst(==(i),pairs(vd))
+      move_bar_to(vd.p,j)
+#     try 
+      check_current(vd;do_not_stat=true,recur)
+#     catch ex
+#       if ex isa InterruptException && 'y'==ok("comparison of $(current.filename) interrupted. Interrupt also directory comparison")
+#         return
+#       end
+#     end
+    end
+    sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
+  end
+  redraw_panes(vd)
   vd
 end
 
@@ -418,7 +440,7 @@ function preserve_sel_bar(f,vd)
   vd.p.s.on_scroll(vd.p.s)
 end
   
-function by(sortp,d::PathPair)
+function by(sortp::Char,d::PathPair)
  (isnothing(d[gside]) ? !myisdir(d[3-gside]) : !myisdir(d[gside]),
   if sortp=='N' d.filename
   elseif sortp=='E' 
@@ -458,13 +480,12 @@ function check_showfilter(vd::Vdir_pick)
   redraw_panes(vd) # namewidth may have changed
 end
    
-function browse(vd::Vdir_pick;toplevel=false,flg...)
-  p=vd.p
-  s=p.s
-  save=Shadepop(s.begx-1,s.begy-1,2+s.rows,s.cols+1)
-  fill(vd;flg...)
+function browse(n0,n1,old=nothing;toplevel=false,flg...)
+  save=Savewin(stdscr)
+  vd=Vdir_pick(n0,n1;old,recur=haskey(flg,:recur) ? flg.recur : false)
   check_showfilter(vd)
   if haskey(flg,:quit) endwin();return end
+  p=vd.p
   c=getch()
   while true
     if c==KEY_MOUSE
@@ -475,7 +496,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
     elseif c in (Int('h'),KEY_F(1)) whelp(vdhelp,"directory comparison screen")
     elseif c==KEY_CTRL('I')
       global gside=3-gside
-      disp_entry(s,p.sel_bar)
+      move_bar_to(p,p.sel_bar)
     elseif c==KEY_RIGHT vd.offset+=1;show(p)
     elseif c==KEY_LEFT if vd.offset>0 vd.offset-=1;show(p) end
     elseif c in (KEY_ALT('E'),KEY_ALT('N'),KEY_ALT('T'),KEY_ALT('S'))
@@ -528,7 +549,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
       end 
       if cpmv(curname(vd),curname(vd,3-gside);recursive=false)
         current(vd)[3-gside]=stat(curname(vd,3-gside))
-        disp_entry(s,vd.p.sel_bar)
+        move_bar_to(p,p.sel_bar)
         next_such(p->p[gside]!==nothing,vd)
         prev_such(p->p[gside]!==nothing,vd;retreat=false)
       end
@@ -539,7 +560,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
         current(vd)[gside]=nothing
         if !isnothing(current(vd,3-gside))
           current(vd).cmp="rl"[gside]
-          disp_entry(s,vd.p.sel_bar)
+          move_bar_to(p,p.sel_bar)
           next_such(p->p[gside]!==nothing,vd)
  	else
           del=pairs(vd)[p.sel_bar]
@@ -585,7 +606,7 @@ function browse(vd::Vdir_pick;toplevel=false,flg...)
     c=getch()
   end
   restore(save)
-  return vd
+  vd
 end
 
 # redraw panes and dependent menu items
@@ -653,12 +674,13 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
   if myisdir(v[1])
     if !show && !recur return end
     infohint(v.filename)
-    son=Vdir_pick(curname(vd,1),curname(vd,2);old=haskey(v,:son) ? v.son : nothing)
-    if show browse(son;show)
+    old=haskey(v,:son) ? v.son : nothing
+    if show 
+      son=browse(curname(vd,1),curname(vd,2), old;show)
     elseif recur
-        save=Savewin(stdscr)
+      save=Savewin(stdscr)
       try
-        fill(son;recur,do_not_stat)
+        son=Vdir_pick(curname(vd,1),curname(vd,2);old,recur)
       catch ex
         if ex isa InterruptException && 
           'y'==ok("comparison of $v interrupted. Interrupt also directory comparison")
@@ -689,26 +711,6 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     Base.show(vd.p.s)
   end
   move_bar_to(vd.p,vd.p.sel_bar)
-end
-
-function Base.fill(vd::Vdir_pick;recur=false,flg...)
-  preserve_sel_bar(vd)do vd
-    for (i,p) in enumerate(vd.ppairs)
-  #   werror("$i:$p")
-      if p.cmp!='?' continue end
-      j=findfirst(==(i),pairs(vd))
-      move_bar_to(vd.p,j)
-#     try 
-      check_current(vd;do_not_stat=true,recur)
-#     catch ex
-#       if ex isa InterruptException && 'y'==ok("comparison of $(current.filename) interrupted. Interrupt also directory comparison")
-#         return
-#       end
-#     end
-    end
-    sort!(pairs(vd),by=i->by(vd.sort,vd.ppairs[i]),rev=!vd.sort_up)
-  end
-  redraw_panes(vd)
 end
 
 # nothing did nothing
