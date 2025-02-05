@@ -482,7 +482,7 @@ end
    
 function browse(n0,n1,old=nothing;toplevel=false,flg...)
   save=Savewin(stdscr)
-  vd=Vdir_pick(n0,n1;old,recur=haskey(flg,:recur) ? flg.recur : false)
+  vd=Vdir_pick(n0,n1;old,recur=haskey(flg,:recur) ? flg[:recur] : false)
   check_showfilter(vd)
   if haskey(flg,:quit) endwin();return end
   p=vd.p
