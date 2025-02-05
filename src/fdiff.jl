@@ -477,6 +477,7 @@ function check_changes(d::AbstractDpick)
       pat,tf=mktemp()
       for p in pairs(d) if lno(p,i)!=0 write(tf,content(d,p,i)) end end
       close(tf)
+      chmod(pat,stat(d.names[i]).mode)
       try
         mv(pat,d.names[i];force=true)
       catch e
@@ -543,7 +544,7 @@ function vdifff(a,b;options...)
     t=read.((a,b),String)
   catch e
     werror("$e reading files $a and $b")
-    return
+    return false
   end
   t=map(splitinlines,t)
 #  Linepair.setfiles(t)
