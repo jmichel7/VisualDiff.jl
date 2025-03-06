@@ -249,7 +249,13 @@ function binbrowse(name::String,n=20)
 end
 
 function browse_file(name)
-  b=map(s->filter(!=('\0'),s),split(read(name,String),"\n"))
+  try
+    s=read(name,String)
+  catch e
+    werror("$e")
+    return
+  end
+  b=map(s->filter(!=('\0'),s),split(s,"\n"))
   if sum(s->count(!isvalid,s),b)>2*length(b)
     werror("$name is a binary file; using binary browser")
     binbrowse(name)

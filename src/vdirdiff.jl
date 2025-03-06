@@ -152,7 +152,13 @@ function stripspace(s::String)
 end
 
 function higher_compare(n0::String,n1::String;show=false,options...)
-  eqsize=filesize(n0)==filesize(n1)
+  eqsize=
+  try
+    filesize(n0)==filesize(n1)
+  catch e
+    werror("$e")
+    return false
+  end
   peq=if opt.onlylength || !eqsize eqsize
   else
     t=abs(round(Int,mtime(n0))-round(Int,mtime(n1)))
