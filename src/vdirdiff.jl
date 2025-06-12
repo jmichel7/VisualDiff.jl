@@ -96,17 +96,57 @@ some small uncertainty in the  correctness of the comparison. This option  can
   PathPair(filename,cmp,f)=new(filename,cmp,f,Dict{Symbol,Any}())
 end
 
-function PathPair(f0::Union{Filedesc,Nothing},f1::Union{Filedesc,Nothing})
+function PathPair(d0::String,f0::Union{String,Nothing},
+                  d1::String,f1::Union{String,Nothing})
   hasf0=!isnothing(f0)
   hasf1=!isnothing(f1)
-  filename=hasf0 ? f0.filename : f1.filename
+  if hasf0
+    filename=f0
+    stat0=stat(joinpath(d0,f0))
+  end
+  if hasf1
+    filename=f1
+    stat1=stat(joinpath(d1,f1))
+  end
   if hasf0 && hasf1
-    if isdir(f0)!=isdir(f1) cmp=f0.stat.mtime>f1.stat.mtime ? '>' : '<'
+    if myisdir(stat0)!=myisdir(stat1) cmp=stat0.mtime>stat1.mtime ? '>' : '<'
     else cmp='?'
     end
   else cmp=hasf0 ? 'l' : 'r'
   end
-  PathPair(filename,cmp,(hasf0 ? f0.stat : nothing,hasf1 ? f1.stat : nothing))
+  PathPair(filename,cmp,(hasf0 ? stat0 : nothing,hasf1 ? stat1 : nothing))
+end
+
+# sorted arrays -- return 2-tuples (entry|nothing,entry|nothing)
+function merge_sorted(a::AbstractVector,b::AbstractVector;by=identity)
+  i=1;j=1
+  res=Tuple{Union{eltype(a),Nothing},Union{eltype(b),Nothing}}[]
+  while i<=length(a) && j<=length(b)
+    if by(a[i])<by(b[j]) push!(res,(a[i],nothing));i+=1
+    elseif by(a[i])>by(b[j]) push!(res,(nothing,b[j]));j+=1
+    else push!(res,(a[i],b[j]));i+=1;j+=1
+    end
+  end
+  while i<=length(a) push!(res,(a[i],nothing));i+=1 end
+  while j<=length(b) push!(res,(nothing,b[j]));j+=1 end
+  res
+end
+
+" returns a Vector{PathPair} from two dirs and use old info"
+function pairs_from_dirs(dir1::String,dir2::String,old)
+  left=sort!(readdir(dir1))
+  right=sort!(readdir(dir2))
+  pairs=map(x->PathPair(dir1,x[1],dir2,x[2]),merge_sorted(left,right))
+  if isnothing(old) return pairs end
+  sort!(old;by=x->x.filename)
+  # copy still-valid comparison info from old pairs
+  for (n,o) in merge_sorted(pairs,old;by=x->x.filename)
+    if !isnothing(o) && n.cmp=='?' && o[1]==n[1] && o[2]==n[2]
+      n.cmp=o.cmp
+      if haskey(o,:son) n.son=o.son end
+    end
+  end
+  pairs
 end
 
 Base.getindex(p::PathPair,i)=p.f[i]
@@ -222,40 +262,6 @@ function compare_files(n0::String,n1::String;info::Function=println,
   end
   newcmp
 end
-
-# sorted arrays -- return 2-tuples (entry|nothing,entry|nothing)
-function merge_sorted(a::AbstractVector,b::AbstractVector;by=identity)
-  i=1;j=1
-  res=Tuple{Union{eltype(a),Nothing},Union{eltype(b),Nothing}}[]
-  while i<=length(a) && j<=length(b)
-    if by(a[i])<by(b[j]) push!(res,(a[i],nothing));i+=1
-    elseif by(a[i])>by(b[j]) push!(res,(nothing,b[j]));j+=1
-    else push!(res,(a[i],b[j]));i+=1;j+=1
-    end
-  end
-  while i<=length(a) push!(res,(a[i],nothing));i+=1 end
-  while j<=length(b) push!(res,(nothing,b[j]));j+=1 end
-  res
-end
-
-" returns a Vector{PathPair} from two dirs"
-function pairs_from_dirs(n1::String,n2::String)
-  left,right=map(n->sort!(map(f->Filedesc(joinpath(n,f)),readdir(n))),(n1,n2))
-  map(p->PathPair(p...),merge_sorted(left,right))
-end
-
-" returns a Vector{PathPair} from two dirs"
-function pairs_from_dirs(n1::String,n2::String,old::Vector{PathPair})
-  pairs=pairs_from_dirs(n1,n2)
-  # copy still-valid comparison info from old pairs
-  for (n,o) in merge_sorted(pairs,old;by=x->x.filename)
-    if !isnothing(o) && n.cmp=='?' && o[1]==n[1] && o[2]==n[2]
-      n.cmp=o.cmp
-      if haskey(o,:son) n.son=o.son end
-    end
-  end
-  pairs
-end
  
 function Base.show(io::IO,f::PathPair)
   print(io,"(",join(map(x->isnothing(x) ? "-" : myisdir(x) ? 'D' : 'F',f.f),""),f.cmp,")",f.filename)
@@ -345,7 +351,7 @@ end
 
 function Vdir_pick(n0,n1;old=nothing,recur=false)
   initvdmenu()
-  ppairs=isnothing(old) ? pairs_from_dirs(n0,n1) : pairs_from_dirs(n0,n1,old)
+  ppairs=pairs_from_dirs(n0,n1,old)
   s=Scroll_list(stdscr,collect(eachindex(ppairs));rows=LINES()-5,cols=COLS()-2,
                 begy=2,begx=1)
   shaded_frame(stdscr,s.begx-1,s.begy-1,2+s.rows,s.cols+1)

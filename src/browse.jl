@@ -249,6 +249,7 @@ function binbrowse(name::String,n=20)
 end
 
 function browse_file(name)
+  s=""
   try
     s=read(name,String)
   catch e

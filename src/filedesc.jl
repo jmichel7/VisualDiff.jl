@@ -16,7 +16,7 @@ end
 
 Base.cmp(a::Filedesc,b::Filedesc)=cmp(a.filename,b.filename)
 
-Base.isless(a::Filedesc,b::Filedesc)=isless(a.filename,b.filename)
+Base.isless(a::Filedesc,b::Filedesc)=cmp(a,b)==-1
 
 Base.isdir(a::Filedesc)=myisdir(a.stat)
 
