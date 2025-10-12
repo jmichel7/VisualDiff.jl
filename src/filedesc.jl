@@ -5,7 +5,9 @@ struct Filedesc
 end
 
 function Filedesc(n)
-  s=Base.StatStruct("",0,0,0,0,0,0,0,0,0,0,0.0,0.0)
+  if VERSION.minor>11 s=Base.StatStruct("",0,0,0,0,0,0,0,0,0,0,0.0,0.0,0)
+  else s=Base.StatStruct("",0,0,0,0,0,0,0,0,0,0,0.0,0.0)
+  end
   try
     s=stat(n)
   catch e
