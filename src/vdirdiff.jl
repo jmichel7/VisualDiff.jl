@@ -100,13 +100,24 @@ function PathPair(d0::String,f0::Union{String,Nothing},
                   d1::String,f1::Union{String,Nothing})
   hasf0=!isnothing(f0)
   hasf1=!isnothing(f1)
+  stat0=stat1=nothing
   if hasf0
     filename=f0
-    stat0=stat(joinpath(d0,f0))
+    try
+      stat0=stat(joinpath(d0,f0))
+    catch e
+      werror("$e")
+      return PathPair(filename,cmp,(nothing,nothing))
+    end
   end
   if hasf1
     filename=f1
-    stat1=stat(joinpath(d1,f1))
+    try
+      stat1=stat(joinpath(d1,f1))
+    catch e
+      werror("$e")
+      return PathPair(filename,cmp,(nothing,nothing))
+    end
   end
   if hasf0 && hasf1
     if myisdir(stat0)!=myisdir(stat1) cmp=stat0.mtime>stat1.mtime ? '>' : '<'
