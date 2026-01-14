@@ -186,7 +186,6 @@ function dirbrowse(name)
     elseif c in (KEY_DC, Int('d'))
       if length(p.s)==0 beep()
       else names=curname(d)
-        statbuf=stat(names)
         if myrm(names;rmopts) deleteat!(p.s.list,p.sel_bar) end
         show(p)
       end

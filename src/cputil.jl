@@ -146,13 +146,13 @@ function cpmv(src,target;move=false,opts...)
     esrc=isabspath(src) ? src : joinpath(pwd(),src)
     etg=isabspath(target) ? target : joinpath(pwd(),target)
     if esrc==etg
-     opts[:error]("cannot $what $esrc to itself")
+      opts[:error]("cannot $what $esrc to itself")
       return false
     elseif endswith(esrc,etg)
-     opts[:error]("cannot $what $esrc within itself($etg)")
-       return false
+      opts[:error]("cannot $what $esrc within itself($etg)")
+      return false
     elseif endswith(etg,esrc)
-     opts[:error]("cannot $what $esrc to its father($etg)")
+      opts[:error]("cannot $what $esrc to its father($etg)")
       return false
     end
   end
@@ -173,13 +173,13 @@ function cpmv(src,target;move=false,opts...)
         targetdir=dirname(target)
         free=diskstat(ispath(targetdir) ? targetdir : ".").available
       catch exc
-       opts[:error]("freespace: $(exc.msg)")
+        opts[:error]("freespace: $(exc.msg)")
         free=0
       end
       try
         tgdev=stat(target).device
       catch exc
-       opts[:error]("stat($target): $(exc.msg)")
+        opts[:error]("stat($target): $(exc.msg)")
         tgdev=0
       end
 # #   log "free=#{nbK(free)} tgtsize=#{nbK(tgtsize)} srcsize=#{nbK(srcsize)}\n"
@@ -210,7 +210,9 @@ function cpmv(src,target;move=false,opts...)
       try
         chmod(target,filemode(src)) # now set perms
       catch exc
-       if haskey(opts,:verbose) && opts[:verbose] opts[:error]("setting perms: $(exc.msg)") end
+        if haskey(opts,:verbose) && opts[:verbose] 
+          opts[:error]("setting perms: $(exc.msg)")
+        end
       end
       if silent opts[:interactive]=save end
     end
@@ -280,13 +282,13 @@ function setmtime(path::AbstractString,
   req = Libc.malloc(_sizeof_uv_fs)
   try
     if follow_symlinks
-        ret = ccall(:uv_fs_utime, Cint,
-            (Ptr{Cvoid}, Ptr{Cvoid}, Cstring, Cdouble, Cdouble, Ptr{Cvoid}),
-            C_NULL, req, path, ctime, mtime, C_NULL)
+      ret = ccall(:uv_fs_utime, Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cstring, Cdouble, Cdouble, Ptr{Cvoid}),
+        C_NULL, req, path, ctime, mtime, C_NULL)
     else
-        ret = ccall(:uv_fs_lutime, Cint,
-            (Ptr{Cvoid}, Ptr{Cvoid}, Cstring, Cdouble, Cdouble, Ptr{Cvoid}),
-            C_NULL, req, path, ctime, mtime, C_NULL)
+      ret = ccall(:uv_fs_lutime, Cint,
+        (Ptr{Cvoid}, Ptr{Cvoid}, Cstring, Cdouble, Cdouble, Ptr{Cvoid}),
+        C_NULL, req, path, ctime, mtime, C_NULL)
     end
     ccall(:uv_fs_req_cleanup, Cvoid, (Ptr{Cvoid},), req)
     ret < 0 && uv_error("utime($(repr(path)))", ret)

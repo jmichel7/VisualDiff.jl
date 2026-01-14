@@ -539,7 +539,7 @@ function browse(n0,n1,old=nothing;toplevel=false,flg...)
     elseif c==KEY_F(4)
       if '=' in show_filter show_filter="<>?" else show_filter="=lr<>?" end
       check_showfilter(vd)
-    elseif c==KEY_F(3)
+    elseif c==KEY_F(3) || c==Int('b')
       if isnothing(current(vd,gside)) beep();c=getch();continue end
       if myisdir(current(vd,gside)) dirbrowse(curname(vd))
       else browse_file(curname(vd))
