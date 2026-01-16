@@ -47,7 +47,7 @@ const vdhelp="""
   {HL Enter}         Compare the current entries, or, if the other entry is
                  absent, browse the current entry.
   {HL R}             Recursively compare the current directory entries.
-  {HL F3}            Browse the current entry.
+  {HL F3},{HL b}          Browse the current entry.
   {HL Del},{HL d}         Delete the current entry.
   {HL c}             Copy the current entry to the other directory. 
   {HL C}             Copy non-recursively the current entry to the other 
