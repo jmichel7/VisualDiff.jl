@@ -120,7 +120,7 @@ function PathPair(d0::String,f0::Union{String,Nothing},
     end
   end
   if hasf0 && hasf1
-    if myisdir(stat0)!=myisdir(stat1) cmp=stat0.mtime>stat1.mtime ? '>' : '<'
+    if isdir(stat0)!=isdir(stat1) cmp=stat0.mtime>stat1.mtime ? '>' : '<'
     else cmp='?'
     end
   else cmp=hasf0 ? 'l' : 'r'
@@ -173,7 +173,7 @@ function printsz(s::Union{Base.Filesystem.StatStruct,Nothing},width::Integer)
   end
 # int i=0;if(flg&S_IFSYS)i++;if(flg&S_IFHID)i+=2;
 # if(i){lg--;pos+=sprintf(pos,"%c",(unsigned char)"\0\xb0\xb1\xb2"[i]);}
-  if myisdir(s) res*=lpad("< DIR >",width)
+  if isdir(s) res*=lpad("< DIR >",width)
   else res*=lpad(nbK(s.size),width)
   end
   res
@@ -275,7 +275,7 @@ function compare_files(n0::String,n1::String;info::Function=println,
 end
  
 function Base.show(io::IO,f::PathPair)
-  print(io,"(",join(map(x->isnothing(x) ? "-" : myisdir(x) ? 'D' : 'F',f.f),""),f.cmp,")",f.filename)
+  print(io,"(",join(map(x->isnothing(x) ? "-" : isdir(x) ? 'D' : 'F',f.f),""),f.cmp,")",f.filename)
 end
 
 function extension(p::PathPair)
@@ -464,7 +464,7 @@ function preserve_sel_bar(f,vd)
 end
   
 function by(sortp::Char,d::PathPair)
- (isnothing(d[gside]) ? !myisdir(d[3-gside]) : !myisdir(d[gside]),
+ (isnothing(d[gside]) ? !isdir(d[3-gside]) : !isdir(d[gside]),
   if sortp=='N' d.filename
   elseif sortp=='E' 
     (extension(d),d.filename)
@@ -541,7 +541,7 @@ function browse(n0,n1,old=nothing;toplevel=false,flg...)
       check_showfilter(vd)
     elseif c==KEY_F(3) || c==Int('b')
       if isnothing(current(vd,gside)) beep();c=getch();continue end
-      if myisdir(current(vd,gside)) dirbrowse(curname(vd))
+      if isdir(current(vd,gside)) dirbrowse(curname(vd))
       else browse_file(curname(vd))
       end
     elseif c in (KEY_ENTER , KEY_CTRL('J'))
@@ -689,12 +689,12 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
     end
   end
   if isnothing(v[1]) || isnothing(v[2]) return end
-  if myisdir(v[1])!=myisdir(v[2])
-    typ(f)=myisdir(f) ? "directory" : "file"
+  if isdir(v[1])!=isdir(v[2])
+    typ(f)=isdir(f) ? "directory" : "file"
     werror("$(curname(vd,1)) is a $(typ(v[1])) but $(curname(vd,2)) is a $(typ(v[2]))")
     return
   end
-  if myisdir(v[1])
+  if isdir(v[1])
     if !show && !recur return end
     infohint(v.filename)
     old=haskey(v,:son) ? v.son : nothing
@@ -709,6 +709,8 @@ function check_current(vd;do_not_stat=false,show=false,recur=false)
           'y'==ok("comparison of $v interrupted. Interrupt also directory comparison")
           restore(save)
           rethrow(ex)
+        else
+          endwin(); @show ex
         end
    #    werror("$ex when filling")
       end

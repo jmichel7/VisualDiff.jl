@@ -20,9 +20,7 @@ Base.cmp(a::Filedesc,b::Filedesc)=cmp(a.filename,b.filename)
 
 Base.isless(a::Filedesc,b::Filedesc)=cmp(a,b)==-1
 
-Base.isdir(a::Filedesc)=myisdir(a.stat)
-
-myisdir(s::Base.Filesystem.StatStruct)=!iszero(s.mode&Base.Filesystem.S_IFDIR)
+Base.isdir(a::Filedesc)=isdir(a.stat)
 
 using Dates 
 function Base.show(io::IO,f::Filedesc)
