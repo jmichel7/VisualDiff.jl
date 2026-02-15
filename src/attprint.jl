@@ -12,6 +12,7 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
   max_x=getcurx(w)+maxout-1
   if haskey(opt,:decor)
     mm=opt[:decor]
+    offset=opt[:offset]
     mmpos=1
 #   log "decor=#{mm.inspect} t=#{t.inspect}\n"
   end
@@ -23,8 +24,8 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
   while ptr<=ncodeunits(t)
 #   log "[#{t[ptr].inspect}:#{curx}]"
     if haskey(opt,:decor) && !isempty(mm)
-      if mm[mmpos].offset<ptr && mmpos<length(mm) mmpos+=1 end
-      if ptr==mm[mmpos].offset wadd(w,mm[mmpos].att) end
+      if mm[mmpos].offset<ptr+offset && mmpos<length(mm) mmpos+=1 end
+      if ptr+offset==mm[mmpos].offset wadd(w,mm[mmpos].att) end
     end
     c=t[ptr]
     if c==0 if checkwrite(c) break end
