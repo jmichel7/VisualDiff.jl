@@ -167,7 +167,7 @@ Base.setindex!(p::PathPair,s,i)=p.f=i==1 ? (s,p.f[2]) : p.f=(p.f[1],s)
 function printsz(s::Union{Base.Filesystem.StatStruct,Nothing},width::Integer)
   if isnothing(s) return " "^width  end
   res=""
-  if iszero(s.mode&Base.Filesystem.S_IRUSR)
+  if iszero(s.mode&Base.Filesystem.S_IRUSR) # owner canot read
     width-=1
     res*="r"
   end

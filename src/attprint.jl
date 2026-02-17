@@ -14,6 +14,8 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
     mm=opt[:decor]
     offset=opt[:offset]
     mmpos=1
+    while mmpos<length(mm) && mm[mmpos+1].offset<=offset  mmpos+=1 end
+    wadd(w,mm[mmpos].att)
 #   log "decor=#{mm.inspect} t=#{t.inspect}\n"
   end
   function checkwrite(c)

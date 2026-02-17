@@ -49,7 +49,7 @@ push!(opt.h,
    :longdesc=>"",
    :value=>false,:level=>RECOMPUTE_DIFFS))
 
-function cleanforatt(s::String)
+function normalize_endlines(s::String)
   s=replace(s,r"\r\n"=>"\n")
   replace(s,r"\r"=>"\n")
 end
@@ -72,17 +72,19 @@ Linepair()=Linepair((0=>1,0=>2),true, Dict{Symbol,Any}())
 
 abstract type AbstractDpick end
 
+# enrich p with decor by comparing lines
 function decor(d::AbstractDpick,p::Linepair)
   if haskey(p,:d) return p.d end
   if p.match return p.d=fill([Decor(1,:NORM)],2) end
   if 0==lno(p,1) || 0==lno(p,2) return p.d=fill([Decor(1,:HL)],2) end
   a=content(d,p,1)
   b=content(d,p,2)
-  p.d=line_diff(cleanforatt(a),cleanforatt(b))
-#   log showd(a.cleanforatt,p.d[0])+"\n"+showd(b,p.d[1])+"\n"
+  p.d=line_diff(normalize_endlines(a),normalize_endlines(b))
+#   log showd(a.normalize_endlines,p.d[0])+"\n"+showd(b,p.d[1])+"\n"
   p.d
 end
 
+# copy side to other. Return by how long longest subline changed
 function Base.copy(p::Linepair,side)
   p.l=(p.l[side],p.l[side])
   p.match=true
@@ -94,13 +96,15 @@ function Base.copy(p::Linepair,side)
   end
 end
 
+# delete side. Return by how long longest subline changed
 function delete(p::Linepair,side)
-  p.l=side==1 ? (0=>0,p.l[3-side]) : (p.l[3-side],0=>0)
+  p.l=side==1 ? (0=>0,p.l[2]) : (p.l[1],0=>0)
   p.match=false
   delete!(p,:d)
   if haskey(p,:scrlns)
     old=maximum(length.(p.scrlns))
-    p.scrlns=side==1 ? (empty(p.scrlns[side]),p.scrlns[3-side]) : (p.scrlns[3-side],empty(p.scrlns[side]))
+    p.scrlns=side==1 ? (empty(p.scrlns[1]),p.scrlns[2]) : 
+                       (p.scrlns[1],empty(p.scrlns[2]))
     return maximum(length.(p.scrlns))-old
   end
 end
@@ -129,7 +133,7 @@ function Dpickfold(v,n,t)
   show_screen(d,list)
   for (i,p) in enumerate(v)
     p.scrlns=ntuple(2)do j
-      ln=cleanforatt(content(d,p,j))
+      ln=normalize_endlines(content(d,p,j))
       lines=Scrln[]
       if !isempty(ln)
         start=1; nth=1; res=1
@@ -173,7 +177,7 @@ function Dpickfold(v,n,t)
         else        add(cpad("--",d.lnowidth))
         end
         add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
-        ln=cleanforatt(content(d,p,side))[l.firstch:l.lastch]
+        ln=normalize_endlines(content(d,p,side))[l.firstch:l.lastch]
         attprint(s.win,ln,d.textlen;:decor=>shift(decors[side],l.firstch-1),opt...)
       end
       add(:NORM)
@@ -218,7 +222,7 @@ function Dpick(v,n,t)
       add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
       ln=content(d,p,j)
       ln=ln[nextind(ln,min(d.offset,length(ln))):end]
-      cleanforatt(ln)
+      normalize_endlines(ln)
       attprint(s.win,ln,d.textlen;:offset=>d.offset,:decor=>decors[j],opt...)
       add(:NORM)
     end
@@ -283,11 +287,7 @@ function nearestline(d::AbstractDpick,side,near=d.p.sel_bar)
 end
 
 # at what screenline is line n of gside
-function screenline(d::Dpick,n)
-  for i in eachindex(pairs(d)) if lno_at_scrln(d,i,gside)==n return i end end
-  d.p.sel_bar
-end
-function screenline(d::Dpickfold,n)
+function screenline(d::AbstractDpick,n)
   for i in eachindex(d.p.s.list) if lno_at_scrln(d,i,gside)==n return i end end
   d.p.sel_bar
 end
