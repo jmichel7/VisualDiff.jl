@@ -12,7 +12,7 @@ function attprint(w::Ptr{WINDOW},t::AbstractString,maxout::Integer;
   max_x=getcurx(w)+maxout-1
   if haskey(opt,:decor)
     mm=opt[:decor]
-    offset=opt[:offset]
+    if haskey(opt,:offset) offset=opt[:offset] else offset=0 end
     mmpos=1
     while mmpos<length(mm) && mm[mmpos+1].offset<=offset  mmpos+=1 end
     wadd(w,mm[mmpos].att)
