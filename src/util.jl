@@ -80,8 +80,14 @@ function exec(com,dir=".")
   cd(dir)do
     def_prog_mode()
     endwin()
+    code=false
     if com==nothing com=ENV["SHELL"] end
-    code=success(run(eval(Meta.parse("`"*com*"`"))))
+    try
+       code=success(run(eval(Meta.parse("`"*com*"`"))))
+    catch exc
+      werror(string(exc))
+      code=false
+    end
     reset_prog_mode()
     refresh()
     if !code werror("failed executing command") end
