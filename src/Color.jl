@@ -14,10 +14,14 @@ const COLORS=[COLOR_BLACK,COLOR_BLUE,COLOR_GREEN,COLOR_CYAN,
     COLOR_RED,COLOR_MAGENTA,COLOR_YELLOW,COLOR_WHITE]
 atts::OrderedDict{Symbol,Int}=OrderedDict{Symbol,Int}()
 
-function init(a::Pair{Symbol,String}...)
+function init()
   for f in 0:7, b in 0:7
     if b+f!=0 init_pair(b*8+f,COLORS[f+1],COLORS[b+1]) end
   end
+end
+
+function init(a::Pair{Symbol,String}...)
+  init()
   for (n,c) in a
     att=lit_to_att(c)
     atts[n]=att
@@ -25,9 +29,7 @@ function init(a::Pair{Symbol,String}...)
 end
 
 function init(a::String...)
-  for f in 0:7, b in 0:7
-    if b+f!=0 init_pair(b*8+f,COLORS[f+1],COLORS[b+1]) end
-  end
+  init()
   cnt=0
   for c in a
     att=lit_to_att(c)

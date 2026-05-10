@@ -221,8 +221,10 @@ function Dpick(v,n,t)
       end
       add(:BOX,i==d.p.sel_bar ? "▶" : ACS_(:VLINE))
       ln=content(d,p,j)
-      ln=ln[nextind(ln,min(d.offset,length(ln))):end]
       normalize_endlines(ln)
+      if !isempty(ln)
+        ln=ln[nextind(ln,1,min(d.offset,length(ln))):end]
+      end
       attprint(s.win,ln,d.textlen;:offset=>d.offset,:decor=>decors[j],opt...)
       add(:NORM)
     end
@@ -273,7 +275,7 @@ Base.pairs(d::Dpick)=d.p.s.list
 pair_at_scrln(d::Dpick,i)=pairs(d)[i]
 pair_at_scrln(d::Dpickfold,i)=pairs(d)[d.p.s.list[i].line]
 lno_at_scrln(d::AbstractDpick,i,side)=i>length(d.p.s) ? 0 : lno(pair_at_scrln(d,i),side)
-# line of d at linepair p side j (or "" if absent line)
+"`content(d,p,j)`: line of d at linepair p side j (or \"\" if absent line)"
 function content(d::AbstractDpick,p::Linepair,j)
   lno(p,j)==0 ? "" : d.contents[p.l[j][2]][lno(p,j)]
 end
@@ -304,8 +306,8 @@ function do_key(d::Dpick,key,factor=1)
     maximum(map(i->length(content(d,pairs(d)[d.p.sel_bar],i)),1:2))-d.textlen))
   elseif key in (KEY_RIGHT, Int('l')) set_offset(d,d.offset+factor)
   elseif key==KEY_LEFT set_offset(d,d.offset-factor)
-  elseif key==KEY_CTRL_RIGHT set_offset(d.offset+10*factor)
-  elseif key==KEY_CTRL_LEFT set_offset(d.offset-10*factor)
+  elseif key==KEY_CTRL_RIGHT set_offset(d,d.offset+10*factor)
+  elseif key==KEY_CTRL_LEFT set_offset(d,d.offset-10*factor)
   else return do_key(d.p,key,factor)
   end
   true
@@ -603,7 +605,9 @@ function vdifff(a,b;options...)
       c=process_event(dd,getmouse())
       if c!=-1 && !isnothing(c) continue end
     elseif c in (Int('q'), 0x1b) 
-      restore(save);return check_changes(dd)
+      if !haskey(options,:toplevel) || 'y'==ok("leave vdiff")
+        restore(save);return check_changes(dd)
+      end
       #    when ?F.ord then ungetch(KEY_ALT('F')); redo
     elseif c==KEY_CTRL('I') gside=3-gside;show(dd.p)
     elseif c==Int('c') copy(dd,gside)

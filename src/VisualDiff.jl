@@ -44,8 +44,8 @@ function vdiff(n0,n1;flg...)
   if isdir(n0) && isdir(n1) 
     browse(n0,n1;toplevel=true,flg...)
   else
-    if isdir(n1) n1=joinpath(n1,basename(n0))
-    elseif isdir(n0) n0=joinpath(n0,basename(n1))
+    if isdir(n1) && ispath(n0) n1=joinpath(n1,basename(n0))
+    elseif isdir(n0) && ispath(n1) n0=joinpath(n0,basename(n1))
     end
     for n in (n0,n1)
       if !(ispath(n)) 
@@ -54,7 +54,7 @@ function vdiff(n0,n1;flg...)
         return
       end
     end
-    higher_compare(n0,n1;show=true,flg...)
+    higher_compare(n0,n1;show=true,toplevel=true,flg...)
   end
   endwin()
 end
