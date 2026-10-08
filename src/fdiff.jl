@@ -468,7 +468,7 @@ end
 
 function prev_diff(d::AbstractDpick)
   i=d.p.sel_bar
-  while i>=0 && !match(d,i) i-=1 end
+  while i>0 && !match(d,i) i-=1 end
   while i>0 && match(d,i) i-=1 end
   if i<=0 werror("no previous difference") else move_bar_to(d.p,i) end
 end
